@@ -55,6 +55,12 @@ public class AceEditor extends HTML {
 			$wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId);
 	}-*/;
 	
+	/**
+	 * Set the theme.
+	 * 
+	 * @param theme the theme (one of the values in the {@link AceEditorTheme}
+	 *              enumeration)
+	 */
 	public void setTheme(AceEditorTheme theme) {
 		setThemeByName(theme.getName());
 	}
