@@ -20,8 +20,38 @@
 
 package edu.ycp.cs.dh.acegwt.client.ace;
 
+/**
+ * Enumeration for ACE editor modes.
+ * Note that the corresponding .js file must be loaded
+ * before a mode can be set.
+ */
 public enum AceEditorMode {
-	JAVA("java");
+	/** C/C++. */
+	C_CPP("c_cpp"),
+	/** Coffee. */
+	COFFEE("coffee"),
+	/** C#. */
+	CSHARP("csharp"),
+	/** CSS. */
+	CSS("css"),
+	/** HTML. */
+	HTML("html"),
+	/** JAVA. */
+	JAVA("java"),
+	/** Javascript. */
+	JAVASCRIPT("javascript"),
+	/** Perl. *.
+	PERL("perl"),
+	/** PHP. */
+	PHP("php"),
+	/** Python. */
+	PYTHON("python"),
+	/** Ruby. */
+	RUBY("ruby"),
+	/** SVG. */
+	SVG("svg"),
+	/** XML. */
+	XML("xml");
 	
 	private final String name;
 	
@@ -29,6 +59,9 @@ public enum AceEditorMode {
 		this.name = name;
 	}
 	
+	/**
+	 * @return mode name (e.g., "java" for Java mode)
+	 */
 	public String getName() {
 		return name;
 	}
