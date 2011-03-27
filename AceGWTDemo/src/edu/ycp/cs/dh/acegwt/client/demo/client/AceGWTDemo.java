@@ -43,7 +43,7 @@ public class AceGWTDemo implements EntryPoint {
 		editor1.setMode(AceEditorMode.JAVA);
 		
 		editor2.startEditor();
-		editor2.setTheme(AceEditorTheme.ECLIPSE);
+		editor2.setTheme(AceEditorTheme.TWILIGHT);
 		editor2.setMode(AceEditorMode.PERL);
 	}
 }
