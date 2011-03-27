@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
+import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -31,7 +32,7 @@ public class AceGWTDemo implements EntryPoint {
 		RootPanel.get().add(mainPanel);
 		
 		editor.startEditor(); // must be called before calling setTheme/setMode/etc.
-		editor.setTheme("eclipse");
+		editor.setTheme(AceEditorTheme.ECLIPSE);
 		editor.setMode(AceEditorMode.JAVA);
 	}
 }

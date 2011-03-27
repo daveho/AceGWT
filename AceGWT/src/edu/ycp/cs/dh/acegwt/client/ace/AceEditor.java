@@ -55,12 +55,16 @@ public class AceEditor extends HTML {
 			$wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId);
 	}-*/;
 	
+	public void setTheme(AceEditorTheme theme) {
+		setThemeByName(theme.getName());
+	}
+	
 	/**
-	 * Set the theme.
+	 * Set the theme by name.
 	 * 
 	 * @param themeName the theme name (e.g., "twilight")
 	 */
-	public native void setTheme(String themeName) /*-{
+	public native void setThemeByName(String themeName) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.setTheme("ace/theme/" + themeName);
 	}-*/;
@@ -71,10 +75,17 @@ public class AceEditor extends HTML {
 	 * @param mode the mode (one of the values in the
 	 *             {@link AceEditorMode} enumeration)
 	 */
-	public native void setMode(AceEditorMode mode) /*-{
-		//setModeImpl(editor, "ace/mode/" + mode.getName());
+	public void setMode(AceEditorMode mode) {
+		setModeByName(mode.getName());
+	}
+	
+	/**
+	 * Set the mode by name.
+	 * 
+	 * @param shortModeName name of mode (e.g., "eclipse")
+	 */
+	public native void setModeByName(String shortModeName) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-		var shortModeName = mode.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode::name;
 		var modeName = "ace/mode/" + shortModeName;
 		var TheMode = $wnd.require(modeName).Mode;
 		editor.getSession().setMode(new TheMode());
