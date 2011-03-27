@@ -13,26 +13,37 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class AceGWTDemo implements EntryPoint {
-	private AceEditor editor;
+	private AceEditor editor1;
+	private AceEditor editor2;
 	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		editor = new AceEditor();
-		editor.setWidth("600px");
-		editor.setHeight("400px");
+		editor1 = new AceEditor();
+		editor1.setWidth("600px");
+		editor1.setHeight("300px");
+		
+		editor2 = new AceEditor();
+		editor2.setWidth("600px");
+		editor2.setHeight("300px");
 		
 		VerticalPanel mainPanel = new VerticalPanel();
 		mainPanel.setWidth("100%");
 		mainPanel.add(new Label("Label above!"));
-		mainPanel.add(editor);
+		mainPanel.add(editor1);
+		mainPanel.add(new Label("Label between!"));
+		mainPanel.add(editor2);
 		mainPanel.add(new Label("Label below!"));
 		
 		RootPanel.get().add(mainPanel);
 		
-		editor.startEditor(); // must be called before calling setTheme/setMode/etc.
-		editor.setTheme(AceEditorTheme.ECLIPSE);
-		editor.setMode(AceEditorMode.JAVA);
+		editor1.startEditor(); // must be called before calling setTheme/setMode/etc.
+		editor1.setTheme(AceEditorTheme.ECLIPSE);
+		editor1.setMode(AceEditorMode.JAVA);
+		
+		editor2.startEditor();
+		editor2.setTheme(AceEditorTheme.ECLIPSE);
+		editor2.setMode(AceEditorMode.PERL);
 	}
 }

@@ -40,7 +40,7 @@ public enum AceEditorMode {
 	JAVA("java"),
 	/** Javascript. */
 	JAVASCRIPT("javascript"),
-	/** Perl. *.
+	/** Perl. */
 	PERL("perl"),
 	/** PHP. */
 	PHP("php"),
