@@ -21,6 +21,7 @@
 package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 
 /**
@@ -28,7 +29,7 @@ import com.google.gwt.user.client.ui.HTML;
  * 
  * @see <a href="http://ace.ajax.org/">Ajax.org Code Editor</a>
  */
-public class AceEditor extends HTML {
+public class AceEditor extends Composite {
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
 	
@@ -42,7 +43,9 @@ public class AceEditor extends HTML {
 	public AceEditor() {
 		elementId = "_aceGWT" + nextId;
 		nextId++;
-		setHTML("<div style=\"width: 100%; height: 100%;\" id=\"" + elementId + "\"></div>");
+		
+		HTML html = new HTML("<div style=\"width: 100%; height: 100%;\" id=\"" + elementId + "\"></div>");
+		initWidget(html);
 	}
 	
 	/**
