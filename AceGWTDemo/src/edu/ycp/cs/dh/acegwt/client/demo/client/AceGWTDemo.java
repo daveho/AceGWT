@@ -134,6 +134,17 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(gotoLineTextBox);
 		buttonPanel.add(gotoLineButton);
 		
+		// checkbox to set whether or not horizontal scrollbar is always visible
+		final CheckBox hScrollBarAlwaysVisibleBox = new CheckBox("H scrollbar always visible");
+		hScrollBarAlwaysVisibleBox.setValue(true);
+		hScrollBarAlwaysVisibleBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.setHScrollBarAlwaysVisible(hScrollBarAlwaysVisibleBox.getValue());
+			}
+		});
+		buttonPanel.add(hScrollBarAlwaysVisibleBox);
+		
 		mainPanel.add(buttonPanel);
 		
 		mainPanel.add(editor2);

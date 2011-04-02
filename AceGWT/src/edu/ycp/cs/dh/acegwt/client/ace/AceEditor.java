@@ -207,4 +207,15 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.gotoLine(line);
 	}-*/;
+
+	/**
+	 * Set whether or not the horizontal scrollbar is always visible.
+	 * 
+	 * @param hScrollBarAlwaysVisible true if the horizontal scrollbar is always
+	 *                                visible, false if it is hidden when not needed
+	 */
+	public native void setHScrollBarAlwaysVisible(boolean hScrollBarAlwaysVisible) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.renderer.setHScrollBarAlwaysVisible(hScrollBarAlwaysVisible);
+	}-*/;
 }
