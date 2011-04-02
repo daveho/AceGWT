@@ -197,4 +197,14 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setTabSize(tabSize);
 	}-*/;
+	
+	/**
+	 * Go to given line.
+	 * 
+	 * @param line the line to go to
+	 */
+	public native void gotoLine(int line) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.gotoLine(line);
+	}-*/;
 }

@@ -84,6 +84,7 @@ public class AceGWTDemo implements EntryPoint {
 		// Create some buttons for testing various editor APIs
 		HorizontalPanel buttonPanel = new HorizontalPanel();
 		
+		// Add button to insert text at current cursor position
 		Button insertTextButton = new Button("Insert");
 		insertTextButton.addClickHandler(new ClickHandler() {
 			@Override
@@ -94,6 +95,7 @@ public class AceGWTDemo implements EntryPoint {
 		});
 		buttonPanel.add(insertTextButton);
 		
+		// Add check box to enable/disable soft tabs
 		final CheckBox softTabsBox = new CheckBox("Soft tabs");
 		softTabsBox.setValue(true); // I think soft tabs is the default
 		softTabsBox.addClickHandler(new ClickHandler() {
@@ -104,6 +106,7 @@ public class AceGWTDemo implements EntryPoint {
 		});
 		buttonPanel.add(softTabsBox);
 		
+		// add text box and button to set tab size
 		final TextBox tabSizeTextBox = new TextBox();
 		tabSizeTextBox.setWidth("4em");
 		Button setTabSizeButton = new Button("Set tab size");
@@ -116,6 +119,20 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(new InlineLabel("Tab size: "));
 		buttonPanel.add(tabSizeTextBox);
 		buttonPanel.add(setTabSizeButton);
+		
+		// add text box and button to go to a given line
+		final TextBox gotoLineTextBox = new TextBox();
+		gotoLineTextBox.setWidth("4em");
+		Button gotoLineButton = new Button("Go to line");
+		gotoLineButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.gotoLine(Integer.parseInt(gotoLineTextBox.getText()));
+			}
+		});
+		buttonPanel.add(new InlineLabel("Go to line: "));
+		buttonPanel.add(gotoLineTextBox);
+		buttonPanel.add(gotoLineButton);
 		
 		mainPanel.add(buttonPanel);
 		
