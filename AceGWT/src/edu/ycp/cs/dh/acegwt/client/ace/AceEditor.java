@@ -151,6 +151,11 @@ public class AceEditor extends Composite {
 		editor.insert(text);
 	}-*/;
 	
+	/**
+	 * Get the current cursor position.
+	 * 
+	 * @return the current cursor position
+	 */
 	public native AceEditorCursorPosition getCursorPosition() /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var pos = editor.getCursorPosition();
