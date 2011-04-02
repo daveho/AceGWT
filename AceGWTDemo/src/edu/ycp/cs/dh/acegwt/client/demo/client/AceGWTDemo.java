@@ -1,6 +1,10 @@
 package edu.ycp.cs.dh.acegwt.client.demo.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -32,7 +36,22 @@ public class AceGWTDemo implements EntryPoint {
 		mainPanel.setWidth("100%");
 		mainPanel.add(new Label("Label above!"));
 		mainPanel.add(editor1);
-		mainPanel.add(new Label("Label between!"));
+		//mainPanel.add(new Label("Label between!"));
+		
+		// Create some buttons for testing various editor APIs
+		HorizontalPanel buttonPanel = new HorizontalPanel();
+		Button insertTextButton = new Button("Insert");
+		insertTextButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.insertAtCursor("inserted text!");
+			}
+		});
+		
+		buttonPanel.add(insertTextButton);
+		
+		mainPanel.add(buttonPanel);
+		
 		mainPanel.add(editor2);
 		mainPanel.add(new Label("Label below!"));
 		

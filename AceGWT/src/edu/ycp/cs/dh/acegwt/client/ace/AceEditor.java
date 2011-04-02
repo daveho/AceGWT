@@ -140,4 +140,14 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setValue(text);
 	}-*/;
+	
+	/**
+	 * Insert given text at the cursor.
+	 * 
+	 * @param text text to insert at the cursor
+	 */
+	public native void insertAtCursor(String text) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.insert(text);
+	}-*/;
 }
