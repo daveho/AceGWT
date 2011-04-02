@@ -150,4 +150,14 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.insert(text);
 	}-*/;
+	
+	public native AceEditorCursorPosition getCursorPosition() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var pos = editor.getCursorPosition();
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::getCursorPositionImpl(DD)(pos.row, pos.column);
+	}-*/;
+	
+	private AceEditorCursorPosition getCursorPositionImpl(double row, double column) {
+		return new AceEditorCursorPosition((int) row, (int) column);
+	}
 }

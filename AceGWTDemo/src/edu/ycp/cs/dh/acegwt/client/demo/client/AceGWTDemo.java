@@ -3,6 +3,7 @@ package edu.ycp.cs.dh.acegwt.client.demo.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -44,6 +45,7 @@ public class AceGWTDemo implements EntryPoint {
 		insertTextButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
+				Window.alert("Cursor at: " + editor1.getCursorPosition());
 				editor1.insertAtCursor("inserted text!");
 			}
 		});
