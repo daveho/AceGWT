@@ -135,7 +135,7 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(gotoLineButton);
 		
 		// checkbox to set whether or not horizontal scrollbar is always visible
-		final CheckBox hScrollBarAlwaysVisibleBox = new CheckBox("H scrollbar always visible");
+		final CheckBox hScrollBarAlwaysVisibleBox = new CheckBox("H scrollbar: ");
 		hScrollBarAlwaysVisibleBox.setValue(true);
 		hScrollBarAlwaysVisibleBox.addClickHandler(new ClickHandler() {
 			@Override
@@ -144,6 +144,17 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(hScrollBarAlwaysVisibleBox);
+		
+		// checkbox to show/hide gutter
+		final CheckBox showGutterBox = new CheckBox("Show gutter: ");
+		showGutterBox.setValue(true);
+		showGutterBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.setShowGutter(showGutterBox.getValue());
+			}
+		});
+		buttonPanel.add(showGutterBox);
 		
 		mainPanel.add(buttonPanel);
 		

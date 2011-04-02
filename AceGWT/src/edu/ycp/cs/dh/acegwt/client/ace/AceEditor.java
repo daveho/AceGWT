@@ -218,4 +218,14 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setHScrollBarAlwaysVisible(hScrollBarAlwaysVisible);
 	}-*/;
+	
+	/**
+	 * Se whether or not the gutter is shown.
+	 * 
+	 * @param showGutter true if the gutter should be shown, false if it should be hidden
+	 */
+	public native void setShowGutter(boolean showGutter) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.renderer.setShowGutter(showGutter);
+	}-*/;
 }
