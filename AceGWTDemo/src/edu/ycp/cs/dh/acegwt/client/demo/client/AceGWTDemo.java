@@ -2,6 +2,8 @@ package edu.ycp.cs.dh.acegwt.client.demo.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -11,6 +13,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
@@ -50,6 +53,7 @@ public class AceGWTDemo implements EntryPoint {
 		
 		// Create some buttons for testing various editor APIs
 		HorizontalPanel buttonPanel = new HorizontalPanel();
+		
 		Button insertTextButton = new Button("Insert");
 		insertTextButton.addClickHandler(new ClickHandler() {
 			@Override
@@ -59,6 +63,7 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(insertTextButton);
+		
 		final CheckBox softTabsBox = new CheckBox("Soft tabs");
 		softTabsBox.setValue(true); // I think soft tabs is the default
 		softTabsBox.addClickHandler(new ClickHandler() {
@@ -68,6 +73,19 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(softTabsBox);
+		
+		final TextBox tabSizeTextBox = new TextBox();
+		tabSizeTextBox.setWidth("4em");
+		Button setTabSizeButton = new Button("Set tab size");
+		setTabSizeButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.setTabSize(Integer.parseInt(tabSizeTextBox.getText()));
+			}
+		});
+		buttonPanel.add(new InlineLabel("Tab size: "));
+		buttonPanel.add(tabSizeTextBox);
+		buttonPanel.add(setTabSizeButton);
 		
 		mainPanel.add(buttonPanel);
 		

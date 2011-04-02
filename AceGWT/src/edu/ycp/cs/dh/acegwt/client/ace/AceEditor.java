@@ -187,4 +187,14 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setUseSoftTabs(useSoftTabs);
 	}-*/;
+	
+	/**
+	 * Set tab size.  (Default is 4.)
+	 * 
+	 * @param tabSize the tab size to set
+	 */
+	public native void setTabSize(int tabSize) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().setTabSize(tabSize);
+	}-*/;
 }
