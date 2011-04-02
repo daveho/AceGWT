@@ -30,19 +30,52 @@ public class AceGWTDemo implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		// create first AceEditor widget
 		editor1 = new AceEditor();
 		editor1.setWidth("600px");
 		editor1.setHeight("300px");
 		
+		// create second AceEditor widget
 		editor2 = new AceEditor();
 		editor2.setWidth("600px");
 		editor2.setHeight("300px");
 		
+		// build the UI
+		buildUI();
+		
+		// start the first editor and set its theme and mode
+		editor1.startEditor(); // must be called before calling setTheme/setMode/etc.
+		editor1.setTheme(AceEditorTheme.ECLIPSE);
+		editor1.setMode(AceEditorMode.JAVA);
+		
+		// use cursor position change events to keep a label updated
+		// with the current row/col
+		editor1.addOnCursorPositionChangeHandler(new AceEditorCallback() {
+			@Override
+			public void invokeAceCallback(JavaScriptObject obj) {
+				updateEditor1CursorPosition();
+			}
+		});
+		updateEditor1CursorPosition(); // initial update
+		
+		// start the second editor and set its theme and mode
+		editor2.startEditor();
+		editor2.setTheme(AceEditorTheme.TWILIGHT);
+		editor2.setMode(AceEditorMode.PERL);
+	}
+
+	/**
+	 * This method builds the UI.
+	 * It creates UI widgets that exercise most/all of the AceEditor methods,
+	 * so it's a bit of a kitchen sink.
+	 */
+	private void buildUI() {
 		VerticalPanel mainPanel = new VerticalPanel();
 		mainPanel.setWidth("100%");
+		
 		mainPanel.add(new Label("Label above!"));
+		
 		mainPanel.add(editor1);
-		//mainPanel.add(new Label("Label between!"));
 		
 		// Label to display current row/column
 		rowColLabel = new InlineLabel("");
@@ -90,22 +123,6 @@ public class AceGWTDemo implements EntryPoint {
 		mainPanel.add(new Label("Label below!"));
 		
 		RootPanel.get().add(mainPanel);
-		
-		editor1.startEditor(); // must be called before calling setTheme/setMode/etc.
-		editor1.setTheme(AceEditorTheme.ECLIPSE);
-		editor1.setMode(AceEditorMode.JAVA);
-		
-		editor1.addOnCursorPositionChangeHandler(new AceEditorCallback() {
-			@Override
-			public void invokeAceCallback(JavaScriptObject obj) {
-				updateEditor1CursorPosition();
-			}
-		});
-		updateEditor1CursorPosition(); // initial update
-		
-		editor2.startEditor();
-		editor2.setTheme(AceEditorTheme.TWILIGHT);
-		editor2.setMode(AceEditorMode.PERL);
 	}
 
 	private void updateEditor1CursorPosition() {
