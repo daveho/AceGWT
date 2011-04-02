@@ -177,4 +177,14 @@ public class AceEditor extends Composite {
 	private AceEditorCursorPosition getCursorPositionImpl(double row, double column) {
 		return new AceEditorCursorPosition((int) row, (int) column);
 	}
+	
+	/**
+	 * Set whether or not soft tabs should be used.
+	 * 
+	 * @param useSoftTabs true if soft tabs should be used, false otherwise
+	 */
+	public native void setUseSoftTabs(boolean useSoftTabs) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().setUseSoftTabs(useSoftTabs);
+	}-*/;
 }

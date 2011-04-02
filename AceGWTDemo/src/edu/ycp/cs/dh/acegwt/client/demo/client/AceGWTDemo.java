@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
@@ -57,8 +58,16 @@ public class AceGWTDemo implements EntryPoint {
 				editor1.insertAtCursor("inserted text!");
 			}
 		});
-		
 		buttonPanel.add(insertTextButton);
+		final CheckBox softTabsBox = new CheckBox("Soft tabs");
+		softTabsBox.setValue(true); // I think soft tabs is the default
+		softTabsBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.setUseSoftTabs(softTabsBox.getValue());
+			}
+		});
+		buttonPanel.add(softTabsBox);
 		
 		mainPanel.add(buttonPanel);
 		
