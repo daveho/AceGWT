@@ -228,4 +228,15 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setShowGutter(showGutter);
 	}-*/;
+	
+	/**
+	 * Set or unset read-only mode.
+	 * 
+	 * @param readOnly true if editor should be set to readonly, false if the
+	 *                 editor should be set to read-write
+	 */
+	public native void setReadOnly(boolean readOnly) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.setReadOnly(readOnly);
+	}-*/;
 }

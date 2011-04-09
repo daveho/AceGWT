@@ -156,6 +156,17 @@ public class AceGWTDemo implements EntryPoint {
 		});
 		buttonPanel.add(showGutterBox);
 		
+		// checkbox to set/unset readonly mode
+		final CheckBox readOnlyBox = new CheckBox("Read only: ");
+		readOnlyBox.setValue(false);
+		readOnlyBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.setReadOnly(readOnlyBox.getValue());
+			}
+		});
+		buttonPanel.add(readOnlyBox);
+		
 		mainPanel.add(buttonPanel);
 		
 		mainPanel.add(editor2);
