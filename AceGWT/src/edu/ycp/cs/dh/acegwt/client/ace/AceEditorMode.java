@@ -28,28 +28,56 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 public enum AceEditorMode {
 	/** C/C++. */
 	C_CPP("c_cpp"),
+	/** Clojure. */
+	CLOJURE("clojure"),
 	/** Coffee. */
 	COFFEE("coffee"),
+	/** ColdFusion. */
+	COLDFUSION("coldfusion"),
 	/** C#. */
 	CSHARP("csharp"),
 	/** CSS. */
 	CSS("css"),
+	/** Groovy. */
+	GROOVY("groovy"),
 	/** HTML. */
 	HTML("html"),
 	/** JAVA. */
 	JAVA("java"),
 	/** Javascript. */
 	JAVASCRIPT("javascript"),
+	/** JSON. */
+	JSON("json"),
+	/** LaTeX. */
+	LATEX("latex"),
+	/** Lua. */
+	LUA("lua"),
+	/** Markdown. */
+	MARKDOWN("markdown"),
+	/** OCaml. */
+	OCAML("ocaml"),
 	/** Perl. */
 	PERL("perl"),
 	/** PHP. */
 	PHP("php"),
+	/** PowerShell. */
+	POWERSHELL("powershell"),
 	/** Python. */
 	PYTHON("python"),
 	/** Ruby. */
 	RUBY("ruby"),
+	/** Scad. */
+	SCAD("scad"),
+	/** Scala. */
+	SCALA("scala"),
+	/** SCSS. */
+	SCSS("scss"),
+	/** SQL. */
+	SQL("sql"),
 	/** SVG. */
 	SVG("svg"),
+	/** Textile. */
+	TEXTILE("textile"),
 	/** XML. */
 	XML("xml");
 	

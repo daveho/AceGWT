@@ -29,6 +29,7 @@ public enum AceEditorTheme {
 	CLOUDS("clouds"),
 	CLOUDS_MIDNIGHT("clouds_midnight"),
 	COBALT("cobalt"),
+	CRIMSON_EDITOR("crimson_editor"),
 	DAWN("dawn"),
 	ECLIPSE("eclipse"),
 	IDLE_FINGERS("idle_fingers"),
@@ -38,6 +39,14 @@ public enum AceEditorTheme {
 	MONO_INDUSTRIAL("mono_industrial"),
 	MONOKAI("monokai"),
 	PASTEL_ON_DARK("pastel_on_dark"),
+	SOLARIZED_DARK("solarized_dark"),
+	SOLARIZED_LIGHT("solarized_light"),
+	TEXTMATE("textmate"),
+	TOMORROW_NIGHT_BLUE("tomorrow_night_blue"),
+	TOMORROW_NIGHT_BRIGHT("tomorrow_night_bright"),
+	TOMORROW_NIGHT_EIGHTIES("tomorrow_night_eighties"),
+	TOMORROW_NIGHT("tomorrow_night"),
+	TOMORROW("tomorrow"),
 	TWILIGHT("twilight"),
 	VIBRANT_INK("vibrant_ink");
 	
