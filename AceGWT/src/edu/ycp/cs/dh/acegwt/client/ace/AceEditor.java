@@ -239,4 +239,14 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.setReadOnly(readOnly);
 	}-*/;
+	
+	/**
+	 * Set or unset the visibility of the print margin.
+	 * 
+	 * @param showPrintMargin true if the print margin should be shown, false otherwise
+	 */
+	public native void setShowPrintMargin(boolean showPrintMargin) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.renderer.setShowPrintMargin(showPrintMargin);
+	}-*/;
 }

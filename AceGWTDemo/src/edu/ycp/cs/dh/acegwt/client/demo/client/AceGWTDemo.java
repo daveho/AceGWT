@@ -32,12 +32,12 @@ public class AceGWTDemo implements EntryPoint {
 	public void onModuleLoad() {
 		// create first AceEditor widget
 		editor1 = new AceEditor();
-		editor1.setWidth("600px");
+		editor1.setWidth("800px");
 		editor1.setHeight("300px");
 		
 		// create second AceEditor widget
 		editor2 = new AceEditor();
-		editor2.setWidth("600px");
+		editor2.setWidth("800px");
 		editor2.setHeight("300px");
 		
 		// build the UI
@@ -166,6 +166,17 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(readOnlyBox);
+		
+		// checkbox to show/hide print margin
+		final CheckBox showPrintMarginBox = new CheckBox("Show print margin: ");
+		showPrintMarginBox.setValue(true);
+		showPrintMarginBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.setShowPrintMargin(showPrintMarginBox.getValue());
+			}
+		});
+		buttonPanel.add(showPrintMarginBox);
 		
 		mainPanel.add(buttonPanel);
 		
