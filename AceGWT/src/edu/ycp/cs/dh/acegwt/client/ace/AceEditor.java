@@ -50,12 +50,20 @@ public class AceEditor extends Composite {
 	
 	/**
 	 * Call this method to start the editor.
-	 * Make sure that the widget has been attached to the page
+	 * Make sure that the widget has been attached to the DOM tree
 	 * before calling this method.
 	 */
 	public native void startEditor() /*-{
-		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor =
+		var editor =
 			$wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor = editor;
+
+		// I have been noticing sporadic failures of the editor
+		// to display properly and receive key/mouse events.
+		// Try to force the editor to resize and display itself fully.  See:
+		//    https://groups.google.com/group/ace-discuss/browse_thread/thread/237262b521dcea33
+		editor.resize();
+		editor.focus();
 	}-*/;
 	
 	/**
