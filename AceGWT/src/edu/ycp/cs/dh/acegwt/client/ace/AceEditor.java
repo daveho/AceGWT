@@ -62,7 +62,22 @@ public class AceEditor extends Composite {
 		// to display properly and receive key/mouse events.
 		// Try to force the editor to resize and display itself fully.  See:
 		//    https://groups.google.com/group/ace-discuss/browse_thread/thread/237262b521dcea33
-		editor.resize();
+		//editor.resize();
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::redisplay();
+	}-*/;
+	
+	/**
+	 * Call this to force the editor contents to be redisplayed.
+	 * There seems to be a problem when an AceEditor is embedded in a LayoutPanel:
+	 * the editor contents don't appear, and it refuses to accept focus
+	 * and mouse events, until the browser window is resized.
+	 * Calling this method works around the problem by forcing
+	 * the underlying editor to redisplay itself fully. (?)
+	 */
+	public native void redisplay() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.renderer.onResize(true);
+		editor.renderer.updateFull();
 		editor.focus();
 	}-*/;
 	
