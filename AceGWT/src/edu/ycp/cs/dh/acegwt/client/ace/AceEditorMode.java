@@ -40,6 +40,8 @@ public enum AceEditorMode {
 	CSS("css"),
 	/** Groovy. */
 	GROOVY("groovy"),
+	/** Haxe. */
+	HAXE("haxe"),
 	/** HTML. */
 	HTML("html"),
 	/** JAVA. */
