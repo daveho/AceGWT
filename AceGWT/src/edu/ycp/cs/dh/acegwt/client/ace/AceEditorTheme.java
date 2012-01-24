@@ -26,11 +26,13 @@ package edu.ycp.cs.dh.acegwt.client.ace;
  * before a theme can be set.
  */
 public enum AceEditorTheme {
+	CHROME("chrome"),
 	CLOUDS("clouds"),
 	CLOUDS_MIDNIGHT("clouds_midnight"),
 	COBALT("cobalt"),
 	CRIMSON_EDITOR("crimson_editor"),
 	DAWN("dawn"),
+	DREAMWEAVER("dreamweaver"),
 	ECLIPSE("eclipse"),
 	IDLE_FINGERS("idle_fingers"),
 	KR_THEME("kr_theme"),

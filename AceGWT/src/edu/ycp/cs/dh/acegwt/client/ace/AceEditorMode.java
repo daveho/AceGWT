@@ -60,6 +60,8 @@ public enum AceEditorMode {
 	OCAML("ocaml"),
 	/** Perl. */
 	PERL("perl"),
+	/** PgSQL. */
+	PGSQL("pgsql"),
 	/** PHP. */
 	PHP("php"),
 	/** PowerShell. */
