@@ -38,13 +38,53 @@ public class AceEditor extends Composite {
 	private JavaScriptObject editor;
 	
 	/**
-	 * Constructor.
+	 * This constructor will only work if the <code>.ace_editor</code>
+	 * CSS class is set with <code>position: relative !important;</code>.
+	 * A better idea is to use the {@link AceEditor#AceEditor(boolean)}
+	 * constructor and pass it the value <code>true</code>; this will
+	 * work without any changes to the <code>.ace_editor</code> class.
 	 */
+	@Deprecated
 	public AceEditor() {
+		this(false);
+	}
+	
+	/**
+	 * Preferred constructor.
+	 * You should pass <code>true</code> to this constructor,
+	 * unless you did something special to redefine the <code>.ace_editor</code>
+	 * CSS class.
+	 * 
+	 * @param positionAbsolute true if the <code>.ace_editor</code> CSS class
+	 *        is set with <code>position: absolute;</code>, which is
+	 *        the default; false if <code>.ace_editor</code> is set to
+	 *        use <code>position: relative;</code>
+	 */
+	public AceEditor(boolean positionAbsolute) {
 		elementId = "_aceGWT" + nextId;
 		nextId++;
 		
-		HTML html = new HTML("<div style=\"width: 100%; height: 100%;\" id=\"" + elementId + "\"></div>");
+		HTML html;
+		
+		if (!positionAbsolute) {
+			// Create a single div with width/height 100% with the generated
+			// element id.  The ACE editor will replace this div.
+			// Note that the .ace_editor style must be set with
+			// "position: relative !important;" for this this to work.
+			html = new HTML("<div style=\"width: 100%; height: 100%;\" id=\"" + elementId + "\"></div>");
+		} else {
+			// Create a div with "position: relative;" that will expand to fill its parent.
+			// Then nest a div with the generated element id inside it.
+			// The ACE editor will replace the inner div.  Because ACE defaults
+			// to absolute positioning, we can set left/right/top/bottom to 0,
+			// causing ACE to completely expand to fill the outer div.
+			html = new HTML(
+					"<div style=\"width: 100%; height: 100%; position: relative;\">" +
+					"<div style=\"top: 0px; bottom: 0px; left: 0px; right: 0px;\" id=\"" + elementId + "\"></div>" +
+					"</div>"
+					);
+		}
+		
 		initWidget(html);
 	}
 	
