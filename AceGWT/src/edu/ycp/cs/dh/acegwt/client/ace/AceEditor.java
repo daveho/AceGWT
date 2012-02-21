@@ -1,4 +1,4 @@
-// Copyright (c) 2011 David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2011-2012, David H. Hovemeyer <david.hovemeyer@gmail.com>
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,14 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.RequiresResize;
 
 /**
  * A GWT widget for the Ajax.org Code Editor (ACE).
  * 
  * @see <a href="http://ace.ajax.org/">Ajax.org Code Editor</a>
  */
-public class AceEditor extends Composite {
+public class AceEditor extends Composite implements RequiresResize {
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
 	
@@ -312,4 +313,12 @@ public class AceEditor extends Composite {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setShowPrintMargin(showPrintMargin);
 	}-*/;
+	
+	/* (non-Javadoc)
+	 * @see com.google.gwt.user.client.ui.ResizeComposite#onResize()
+	 */
+	@Override
+	public void onResize() {
+		redisplay();
+	}
 }
