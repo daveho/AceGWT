@@ -374,6 +374,17 @@ public class AceEditor extends Composite implements RequiresResize {
 	  annotations = JavaScriptObject.createArray().cast();
 	}
 	
+  /**
+   * Removes commands, that may not me required, from the editor
+   * 
+   * @param command to be removed, one of
+   *          "gotoline", "findnext", "findprevious", "find", "replace", "replaceall"
+   */
+  public native void removeCommand(String command) /*-{
+    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+    editor.commands.removeCommand(command);
+  }-*/;
+
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.ResizeComposite#onResize()
 	 */
