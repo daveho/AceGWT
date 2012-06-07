@@ -38,9 +38,9 @@ public class AceEditor extends Composite implements RequiresResize {
 	private final String elementId;
 
 	private JavaScriptObject editor;
-	
+
   private JsArray<AceAnnotation> annotations = JavaScriptObject.createArray().cast();
-	
+
 	/**
 	 * This constructor will only work if the <code>.ace_editor</code>
 	 * CSS class is set with <code>position: relative !important;</code>.
@@ -318,7 +318,7 @@ public class AceEditor extends Composite implements RequiresResize {
 
 	/**
 	 * Set or unset highlighting of currently selected word.
-	 * 
+	 *
 	 * @param highlightSelectedWord true to highlight currently selected word, false otherwise
 	 */
 	public native void setHighlightSelectedWord(boolean highlightSelectedWord) /*-{
@@ -335,52 +335,63 @@ public class AceEditor extends Composite implements RequiresResize {
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setShowPrintMargin(showPrintMargin);
 	}-*/;
-	
+
 	/**
-	 * Adds an annotation to a the local <code>annotations</code> JsArray<AceAnnotation>, but does not set it on the editor
-	 * 
+	 * Add an annotation to a the local <code>annotations</code> JsArray<AceAnnotation>, but does not set it on the editor
+	 *
 	 * @param row to which the annotation should be added
 	 * @param column to which the annotation applies
 	 * @param text to display as a tooltip with the annotation
-	 * @param type one of "error", "warning" or "information" (which determines the icon shown)
+	 * @param type to be displayed (one of the values in the
+   *             {@link AceAnnotationType} enumeration)
 	 */
-	public void addAnnotation(int row, int column, String text, String type) {
-	  annotations.push(AceAnnotation.create(row, column, text, type));
+	public void addAnnotation(final int row, final int column, final String text, final AceAnnotationType type) {
+	  annotations.push(AceAnnotation.create(row, column, text, type.getName()));
 	}
 
 	/**
-	 * Sets any annotations which have been added via <code>addAnnotation</code> on the editor
+	 * Set any annotations which have been added via <code>addAnnotation</code> on the editor
 	 */
 	public native void setAnnotations() /*-{
 	  var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 	  var annotations = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::annotations;
 	  editor.getSession().setAnnotations(annotations);
 	}-*/;
-	
-	
+
+
   /**
-   * Clears any annotations from the editor and resets the local <code>annotations</code> JsArray<AceAnnotation>
+   * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray<AceAnnotation>
    */
 	public native void clearAnnotations() /*-{
 	  var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
     editor.getSession().clearAnnotations();
     this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::resetAnnotations();
 	}-*/;
-	
+
 	/**
-	 * Resets any annotations in the local <code>annotations</code> JsArray<AceAnnotation>
+	 * Reset any annotations in the local <code>annotations</code> JsArray<AceAnnotation>
 	 */
 	private void resetAnnotations() {
 	  annotations = JavaScriptObject.createArray().cast();
 	}
-	
+
+	/**
+   * Remove a command from the editor.
+   *
+   * @param command the command (one of the values in the
+   *             {@link AceCommand} enumeration)
+   */
+  public void removeCommand(final AceCommand command) {
+    removeCommandByName(command.getName());
+  }
+
   /**
-   * Removes commands, that may not me required, from the editor
-   * 
+   * Remove commands, that may not me required, from the editor
+   *
    * @param command to be removed, one of
    *          "gotoline", "findnext", "findprevious", "find", "replace", "replaceall"
    */
-  public native void removeCommand(String command) /*-{
+  public native void removeCommandByName(String command) /*-{
     var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
     editor.commands.removeCommand(command);
   }-*/;
