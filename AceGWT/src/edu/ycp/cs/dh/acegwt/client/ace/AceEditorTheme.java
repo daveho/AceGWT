@@ -34,6 +34,7 @@ public enum AceEditorTheme {
 	DAWN("dawn"),
 	DREAMWEAVER("dreamweaver"),
 	ECLIPSE("eclipse"),
+	GITHUB("github"),
 	IDLE_FINGERS("idle_fingers"),
 	KR_THEME("kr_theme"),
 	MERBIVORE("merbivore"),

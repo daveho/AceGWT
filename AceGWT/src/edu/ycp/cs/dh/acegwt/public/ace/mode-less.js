@@ -20,6 +20,7 @@
  *
  * Contributor(s):
  *      Fabian Jakobs <fabian AT ajax DOT org>
+ *      John Roepke <john AT justjohn DOT us>
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -35,18 +36,18 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define('ace/mode/scss', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/tokenizer', 'ace/mode/scss_highlight_rules', 'ace/mode/matching_brace_outdent', 'ace/mode/folding/cstyle'], function(require, exports, module) {
+define('ace/mode/less', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/tokenizer', 'ace/mode/less_highlight_rules', 'ace/mode/matching_brace_outdent', 'ace/mode/folding/cstyle'], function(require, exports, module) {
 
 
 var oop = require("../lib/oop");
 var TextMode = require("./text").Mode;
 var Tokenizer = require("../tokenizer").Tokenizer;
-var ScssHighlightRules = require("./scss_highlight_rules").ScssHighlightRules;
+var LessHighlightRules = require("./less_highlight_rules").LessHighlightRules;
 var MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutdent;
 var CStyleFoldMode = require("./folding/cstyle").FoldMode;
 
 var Mode = function() {
-    this.$tokenizer = new Tokenizer(new ScssHighlightRules().getRules(), "i");
+    this.$tokenizer = new Tokenizer(new LessHighlightRules().getRules(), "i");
     this.$outdent = new MatchingBraceOutdent();
     this.foldingRules = new CStyleFoldMode();
 };
@@ -85,14 +86,14 @@ exports.Mode = Mode;
 
 });
 
-define('ace/mode/scss_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/lib/lang', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
+define('ace/mode/less_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/lib/lang', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
 
 
 var oop = require("../lib/oop");
 var lang = require("../lib/lang");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
-var ScssHighlightRules = function() {
+var LessHighlightRules = function() {
     
     var properties = lang.arrayToMap( (function () {
 
@@ -165,11 +166,10 @@ var ScssHighlightRules = function() {
 
 
     var functions = lang.arrayToMap(
-        ("hsl|hsla|rgb|rgba|url|attr|counter|counters|abs|adjust_color|adjust_hue|" +
-         "alpha|join|blue|ceil|change_color|comparable|complement|darken|desaturate|" + 
-         "floor|grayscale|green|hue|if|invert|join|length|lighten|lightness|mix|" + 
-         "nth|opacify|opacity|percentage|quote|red|round|saturate|saturation|" +
-         "scale_color|transparentize|type_of|unit|unitless|unqoute").split("|")
+        ("hsl|hsla|rgb|rgba|url|attr|counter|counters|lighten|darken|saturate|" +
+        "desaturate|fadein|fadeout|fade|spin|mix|hue|saturation|lightness|" +
+        "alpha|round|ceil|floor|percentage|color|iscolor|isnumber|isstring|" +
+        "iskeyword|isurl|ispixel|ispercentage|isem").split("|")
     );
 
     var constants = lang.arrayToMap(
@@ -202,8 +202,10 @@ var ScssHighlightRules = function() {
     );
     
     var keywords = lang.arrayToMap(
-        ("@mixin|@extend|@include|@import|@media|@debug|@warn|@if|@for|@each|@while|@else|@font-face|@-webkit-keyframes|if|and|!default|module|def|end|declare").split("|")
-    )
+        ("@mixin|@extend|@include|@import|@media|@debug|@warn|@if|@for|@each|" +
+        "@while|@else|@font-face|@-webkit-keyframes|if|and|!default|module|" +
+        "def|end|declare|when|not|and").split("|")
+    );
     
     var tags = lang.arrayToMap(
         ("a|abbr|acronym|address|applet|area|article|aside|audio|b|base|basefont|bdo|" + 
@@ -240,18 +242,8 @@ var ScssHighlightRules = function() {
                 token : "string", // single line
                 regex : '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]'
             }, {
-                token : "string", // multi line string start
-                merge : true,
-                regex : '["].*\\\\$',
-                next : "qqstring"
-            }, {
                 token : "string", // single line
                 regex : "['](?:(?:\\\\.)|(?:[^'\\\\]))*?[']"
-            }, {
-                token : "string", // multi line string start
-                merge : true,
-                regex : "['].*\\\\$",
-                next : "qstring"
             }, {
                 token : "constant.numeric",
                 regex : numRe + "(?:em|ex|px|cm|mm|in|pt|pc|deg|rad|grad|ms|s|hz|khz|%)"
@@ -266,9 +258,17 @@ var ScssHighlightRules = function() {
                 regex : numRe
             }, {
                 token : function(value) {
+                    if (keywords.hasOwnProperty(value))
+                        return "keyword";
+                    else
+                        return "variable";
+                },
+                regex : "@[a-z0-9_\\-@]*\\b"
+            }, {
+                token : function(value) {
                     if (properties.hasOwnProperty(value.toLowerCase()))
                         return "support.type";
-                    if (keywords.hasOwnProperty(value))
+                    else if (keywords.hasOwnProperty(value))
                         return "keyword";
                     else if (constants.hasOwnProperty(value))
                         return "constant.language";
@@ -282,9 +282,6 @@ var ScssHighlightRules = function() {
                         return "text";
                 },
                 regex : "\\-?[@a-z_][@a-z0-9_\\-]*"
-            }, {
-                token : "variable",
-                regex : "[a-z_\\-$][a-z0-9_\\-$]*\\b"
             }, {
                 token: "variable.language",
                 regex: "#[a-z0-9-_]+"
@@ -321,35 +318,13 @@ var ScssHighlightRules = function() {
                 merge : true,
                 regex : ".+"
             }
-        ],
-        "qqstring" : [
-            {
-                token : "string",
-                regex : '(?:(?:\\\\.)|(?:[^"\\\\]))*?"',
-                next : "start"
-            }, {
-                token : "string",
-                merge : true,
-                regex : '.+'
-            }
-        ],
-        "qstring" : [
-            {
-                token : "string",
-                regex : "(?:(?:\\\\.)|(?:[^'\\\\]))*?'",
-                next : "start"
-            }, {
-                token : "string",
-                merge : true,
-                regex : '.+'
-            }
         ]
     };
 };
 
-oop.inherits(ScssHighlightRules, TextHighlightRules);
+oop.inherits(LessHighlightRules, TextHighlightRules);
 
-exports.ScssHighlightRules = ScssHighlightRules;
+exports.LessHighlightRules = LessHighlightRules;
 
 });
 

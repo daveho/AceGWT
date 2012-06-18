@@ -26,6 +26,8 @@ package edu.ycp.cs.dh.acegwt.client.ace;
  * before a mode can be set.
  */
 public enum AceEditorMode {
+	/** c9search */
+	C9SEARCH("c9search"),
 	/** C/C++. */
 	C_CPP("c_cpp"),
 	/** Clojure. */
@@ -38,6 +40,10 @@ public enum AceEditorMode {
 	CSHARP("csharp"),
 	/** CSS. */
 	CSS("css"),
+	/** Diff. */
+	DIFF("diff"),
+	/** Go (http://golang.org/). */
+	GOLANG("golang"),
 	/** Groovy. */
 	GROOVY("groovy"),
 	/** Haxe. */
@@ -50,10 +56,18 @@ public enum AceEditorMode {
 	JAVASCRIPT("javascript"),
 	/** JSON. */
 	JSON("json"),
+	/** JSX. */
+	JSX("jsx"),
 	/** LaTeX. */
 	LATEX("latex"),
+	/** Less. */
+	LESS("less"),
+	/** Liquid. */
+	LIQUID("liquid"),
 	/** Lua. */
 	LUA("lua"),
+	/** Luapage. */
+	LUAPAGE("luapage"),
 	/** Markdown. */
 	MARKDOWN("markdown"),
 	/** OCaml. */
@@ -76,14 +90,22 @@ public enum AceEditorMode {
 	SCALA("scala"),
 	/** SCSS. */
 	SCSS("scss"),
+	/** Sh (Bourne shell). */
+	SH("sh"),
 	/** SQL. */
 	SQL("sql"),
 	/** SVG. */
 	SVG("svg"),
 	/** Textile. */
 	TEXTILE("textile"),
+	/** Text. */
+	TEXT("text"),
 	/** XML. */
-	XML("xml");
+	XML("xml"),
+	/** XQuery. */
+	XQUERY("xquery"),
+	/** YAML. */
+	YAML("yaml");
 	
 	private final String name;
 	
