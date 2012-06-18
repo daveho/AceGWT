@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.ycp.cs.dh.acegwt.client.ace.AceAnnotationType;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
@@ -25,6 +26,13 @@ public class AceGWTDemo implements EntryPoint {
 	private AceEditor editor1;
 	private AceEditor editor2;
 	private InlineLabel rowColLabel;
+	
+	private static final String JAVA_TEXT =
+			"public class Hello {\n" +
+			"\tpublic static void main(String[] args) {\n" +
+			"\t\tSystem.out.println(\"Hello, world!\");\n" +
+			"\t}\n" +
+			"}\n";
 	
 	/**
 	 * This is the entry point method.
@@ -57,6 +65,14 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		updateEditor1CursorPosition(); // initial update
+		
+		// set some initial text in editor 1
+		editor1.setText(JAVA_TEXT);
+		
+		// add some annotations
+		editor1.addAnnotation(0, 1, "What's up?", AceAnnotationType.WARNING);
+		editor1.addAnnotation(2, 1, "This code is lame", AceAnnotationType.ERROR);
+		editor1.setAnnotations();
 		
 		// start the second editor and set its theme and mode
 		editor2.startEditor();
