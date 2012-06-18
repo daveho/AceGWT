@@ -322,8 +322,8 @@ public class AceEditor extends Composite implements RequiresResize {
 	 * @param highlightSelectedWord true to highlight currently selected word, false otherwise
 	 */
 	public native void setHighlightSelectedWord(boolean highlightSelectedWord) /*-{
-	  var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-    editor.setHighlightSelectedWord(highlightSelectedWord);
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.setHighlightSelectedWord(highlightSelectedWord);
 	}-*/;
 
 	/**
@@ -343,58 +343,58 @@ public class AceEditor extends Composite implements RequiresResize {
 	 * @param column to which the annotation applies
 	 * @param text to display as a tooltip with the annotation
 	 * @param type to be displayed (one of the values in the
-   *             {@link AceAnnotationType} enumeration)
+	 *             {@link AceAnnotationType} enumeration)
 	 */
 	public void addAnnotation(final int row, final int column, final String text, final AceAnnotationType type) {
-	  annotations.push(AceAnnotation.create(row, column, text, type.getName()));
+		annotations.push(AceAnnotation.create(row, column, text, type.getName()));
 	}
 
 	/**
 	 * Set any annotations which have been added via <code>addAnnotation</code> on the editor
 	 */
 	public native void setAnnotations() /*-{
-	  var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-	  var annotations = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::annotations;
-	  editor.getSession().setAnnotations(annotations);
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var annotations = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::annotations;
+		editor.getSession().setAnnotations(annotations);
 	}-*/;
 
 
-  /**
-   * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray<AceAnnotation>
-   */
+	/**
+	 * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray<AceAnnotation>
+	 */
 	public native void clearAnnotations() /*-{
-	  var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-    editor.getSession().clearAnnotations();
-    this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::resetAnnotations();
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().clearAnnotations();
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::resetAnnotations();
 	}-*/;
 
 	/**
 	 * Reset any annotations in the local <code>annotations</code> JsArray<AceAnnotation>
 	 */
 	private void resetAnnotations() {
-	  annotations = JavaScriptObject.createArray().cast();
+		annotations = JavaScriptObject.createArray().cast();
 	}
 
 	/**
-   * Remove a command from the editor.
-   *
-   * @param command the command (one of the values in the
-   *             {@link AceCommand} enumeration)
-   */
-  public void removeCommand(final AceCommand command) {
-    removeCommandByName(command.getName());
-  }
+	 * Remove a command from the editor.
+	 *
+	 * @param command the command (one of the values in the
+	 *             {@link AceCommand} enumeration)
+	 */
+	public void removeCommand(final AceCommand command) {
+		removeCommandByName(command.getName());
+	}
 
-  /**
-   * Remove commands, that may not me required, from the editor
-   *
-   * @param command to be removed, one of
-   *          "gotoline", "findnext", "findprevious", "find", "replace", "replaceall"
-   */
-  public native void removeCommandByName(String command) /*-{
-    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-    editor.commands.removeCommand(command);
-  }-*/;
+	/**
+	 * Remove commands, that may not me required, from the editor
+	 *
+	 * @param command to be removed, one of
+	 *          "gotoline", "findnext", "findprevious", "find", "replace", "replaceall"
+	 */
+	public native void removeCommandByName(String command) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.commands.removeCommand(command);
+	}-*/;
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.ResizeComposite#onResize()
