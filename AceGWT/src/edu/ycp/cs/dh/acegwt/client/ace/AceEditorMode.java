@@ -26,10 +26,12 @@ package edu.ycp.cs.dh.acegwt.client.ace;
  * before a mode can be set.
  */
 public enum AceEditorMode {
-	/** c9search */
-	C9SEARCH("c9search"),
+	/** ASCIIDOC. */
+	ASCIIDOC("asciidoc"),
 	/** C/C++. */
 	C_CPP("c_cpp"),
+	/** c9search */
+	C9SEARCH("c9search"),
 	/** Clojure. */
 	CLOJURE("clojure"),
 	/** Coffee. */
@@ -42,6 +44,8 @@ public enum AceEditorMode {
 	CSS("css"),
 	/** Diff. */
 	DIFF("diff"),
+	/** Glsl. */
+	GLSL("glsl"),
 	/** Go (http://golang.org/). */
 	GOLANG("golang"),
 	/** Groovy. */
@@ -50,12 +54,16 @@ public enum AceEditorMode {
 	HAXE("haxe"),
 	/** HTML. */
 	HTML("html"),
+	/** JADE. */
+	JADE("jade"),
 	/** JAVA. */
 	JAVA("java"),
 	/** Javascript. */
 	JAVASCRIPT("javascript"),
 	/** JSON. */
 	JSON("json"),
+	/** JSP. */
+	JSP("jsp"),
 	/** JSX. */
 	JSX("jsx"),
 	/** LaTeX. */
@@ -96,10 +104,14 @@ public enum AceEditorMode {
 	SQL("sql"),
 	/** SVG. */
 	SVG("svg"),
-	/** Textile. */
-	TEXTILE("textile"),
+	/** Tcl. */
+	TCL("tcl"),
 	/** Text. */
 	TEXT("text"),
+	/** Textile. */
+	TEXTILE("textile"),
+	/** TypeScript. */
+	TYPESCRIPT("typescript"),
 	/** XML. */
 	XML("xml"),
 	/** XQuery. */
