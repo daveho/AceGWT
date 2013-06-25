@@ -39,30 +39,26 @@ public class AceEditor extends Composite implements RequiresResize {
 
 	private JavaScriptObject editor;
 
-  private JsArray<AceAnnotation> annotations = JavaScriptObject.createArray().cast();
-
-	/**
-	 * This constructor will only work if the <code>.ace_editor</code>
-	 * CSS class is set with <code>position: relative !important;</code>.
-	 * A better idea is to use the {@link AceEditor#AceEditor(boolean)}
-	 * constructor and pass it the value <code>true</code>; this will
-	 * work without any changes to the <code>.ace_editor</code> class.
-	 */
-	@Deprecated
-	public AceEditor() {
-		this(false);
-	}
+	private JsArray<AceAnnotation> annotations = JavaScriptObject.createArray().cast();
 
 	/**
 	 * Preferred constructor.
-	 * You should pass <code>true</code> to this constructor,
-	 * unless you did something special to redefine the <code>.ace_editor</code>
-	 * CSS class.
+	 */
+	public AceEditor() {
+		this(true);
+	}
+
+	/**
+	 * Constructor allowing the old-style initialization where it is
+	 * assumed that the <code>.ace_editor</code> CSS class is set
+	 * to <code>position: relative;</code>.  Don't use this
+	 * constructor unless you did something special to redefine the
+	 * <code>.ace_editor</code> CSS class.
 	 *
 	 * @param positionAbsolute true if the <code>.ace_editor</code> CSS class
 	 *        is set with <code>position: absolute;</code>, which is
-	 *        the default; false if <code>.ace_editor</code> is set to
-	 *        use <code>position: relative;</code>
+	 *        the default in the Ace CSS rules; false if <code>.ace_editor</code>
+	 *        is set to use <code>position: relative;</code>
 	 */
 	public AceEditor(final boolean positionAbsolute) {
 		elementId = "_aceGWT" + nextId;
@@ -130,8 +126,8 @@ public class AceEditor extends Composite implements RequiresResize {
 	 * Cleans up the entire editor.
 	 */
 	public native void destroy() /*-{
-	  var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-    editor.destroy();
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.destroy();
 	}-*/;
 
 	/**

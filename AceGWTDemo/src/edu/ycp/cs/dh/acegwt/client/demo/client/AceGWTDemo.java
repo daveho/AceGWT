@@ -39,12 +39,12 @@ public class AceGWTDemo implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		// create first AceEditor widget
-		editor1 = new AceEditor(true);
+		editor1 = new AceEditor();
 		editor1.setWidth("800px");
 		editor1.setHeight("300px");
 		
 		// create second AceEditor widget
-		editor2 = new AceEditor(true);
+		editor2 = new AceEditor();
 		editor2.setWidth("800px");
 		editor2.setHeight("300px");
 		
