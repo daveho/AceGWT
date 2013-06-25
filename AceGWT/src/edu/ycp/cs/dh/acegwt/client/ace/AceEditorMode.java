@@ -26,14 +26,28 @@ package edu.ycp.cs.dh.acegwt.client.ace;
  * before a mode can be set.
  */
 public enum AceEditorMode {
+	/** ABAP (Advanced Business Application Programming). */
+	ABAP("abap"),
+	/** Actionscript. */
+	ACTIONSCRIPT("actionscript"),
+	/** Ada. */
+	ADA("ada"),
 	/** ASCIIDOC. */
 	ASCIIDOC("asciidoc"),
-	/** C/C++. */
-	C_CPP("c_cpp"),
+	/** Assembly (x86). */
+	ASSEMBLY_X86("assembly_x86"),
+	/** Auto Hotkey. */
+	AUTOHOTKEY("autohotkey"),
+	/** Batch file. */
+	BATCHFILE("batchfile"),
 	/** c9search */
 	C9SEARCH("c9search"),
+	/** C/C++. */
+	C_CPP("c_cpp"),
 	/** Clojure. */
 	CLOJURE("clojure"),
+	/** COBOL. */
+	COBOL("cobol"),
 	/** Coffee. */
 	COFFEE("coffee"),
 	/** ColdFusion. */
@@ -42,44 +56,98 @@ public enum AceEditorMode {
 	CSHARP("csharp"),
 	/** CSS. */
 	CSS("css"),
+	/* Curly. */
+	CURLY("curly"),
+	/** Dart. */
+	DART("Dart"),
 	/** Diff. */
 	DIFF("diff"),
-	/** Glsl. */
+	/** Django. */
+	DJANGO("django"),
+	/** D. */
+	D("d"),
+	/** Dot. */
+	DOT("dot"),
+	/** EJS (Embedded Javascript). */
+	EJS("ejs"),
+	/** Erlang. */
+	ERLANG("erlang"),
+	/** Forth. */
+	FORTH("forth"),
+	/** FTL. */
+	FTL("ftl"),
+	/** GLSL (OpenGL Shading Language). */
 	GLSL("glsl"),
 	/** Go (http://golang.org/). */
 	GOLANG("golang"),
 	/** Groovy. */
 	GROOVY("groovy"),
+	/** HAML. */
+	HAML("haml"),
+	/** Haskell. */
+	HASKELL("haskell"),
 	/** Haxe. */
 	HAXE("haxe"),
 	/** HTML. */
 	HTML("html"),
+	/** HTML (Ruby). */
+	HTML_RUBY("html_ruby"),
+	/** Ini file. */
+	INI("ini"),
 	/** JADE. */
 	JADE("jade"),
 	/** JAVA. */
 	JAVA("java"),
 	/** Javascript. */
 	JAVASCRIPT("javascript"),
+	/** JSONiq, the JSON Query Language. */
+	JSONIQ("jsoniq"),
 	/** JSON. */
 	JSON("json"),
-	/** JSP. */
+	/** JSP, Java Server Pages. */
 	JSP("jsp"),
 	/** JSX. */
 	JSX("jsx"),
+	/** Julia. */
+	JULIA("julia"),
 	/** LaTeX. */
 	LATEX("latex"),
 	/** Less. */
 	LESS("less"),
 	/** Liquid. */
 	LIQUID("liquid"),
+	/** LISP. */
+	LISP("lisp"),
+	/** Livescript. */
+	LIVESCRIPT("livescript"),
+	/** LogiQL. */
+	LOGIQL("logiql"),
+	/** LSL. */
+	LSL("lsl"),
 	/** Lua. */
 	LUA("lua"),
 	/** Luapage. */
 	LUAPAGE("luapage"),
+	/** Lucene. */
+	LUCENE("lucene"),
+	/** Makefile. */
+	MAKEFILE("makefile"),
 	/** Markdown. */
 	MARKDOWN("markdown"),
+	/** Matlab. */
+	MATLAB("matlab"),
+	/** MUSHCode (High Rules). */
+	MUSHCODE_HIGH_RULES("mushcode_high_rules"),
+	/** MUSHCode. */
+	MUSHCODE("mushcode"),
+	/** MySQL. */
+	MYSQL("mysql"),
+	/** Objective C. */
+	OBJECTIVEC("objectivec"),
 	/** OCaml. */
 	OCAML("ocaml"),
+	/** Pascal. */
+	PASCAL("pascal"),
 	/** Perl. */
 	PERL("perl"),
 	/** PgSQL. */
@@ -88,30 +156,62 @@ public enum AceEditorMode {
 	PHP("php"),
 	/** PowerShell. */
 	POWERSHELL("powershell"),
+	/** Prolog. */
+	PROLOG("prolog"),
+	/** Java properties file. */
+	PROPERTIES("properties"),
 	/** Python. */
 	PYTHON("python"),
+	/** RDoc (Ruby documentation). */
+	RDOC("rdoc"),
+	/** RHTML. */
+	RHTML("rhtml"),
+	/** R. */
+	R("r"),
 	/** Ruby. */
 	RUBY("ruby"),
+	/** Rust. */
+	RUST("rust"),
+	/** SASS. */
+	SASS("sass"),
 	/** Scad. */
 	SCAD("scad"),
 	/** Scala. */
 	SCALA("scala"),
+	/** Scheme. */
+	SCHEME("scheme"),
 	/** SCSS. */
 	SCSS("scss"),
 	/** Sh (Bourne shell). */
 	SH("sh"),
+	/** Snippets. */
+	SNIPPETS("snippets"),
 	/** SQL. */
 	SQL("sql"),
+	/** Stylus. */
+	STYLUS("stylus"),
 	/** SVG. */
 	SVG("svg"),
 	/** Tcl. */
 	TCL("tcl"),
+	/** TeX. */
+	TEX("tex"),
 	/** Text. */
 	TEXT("text"),
 	/** Textile. */
 	TEXTILE("textile"),
+	/** TOML. */
+	TOML("toml"),
+	/** TWIG. */
+	TWIG("twig"),
 	/** TypeScript. */
 	TYPESCRIPT("typescript"),
+	/** VBScript. */
+	VBSCRIPT("vbscript"),
+	/** Velocity. */
+	VELOCITY("velocity"),
+	/** Verilog. */
+	VERILOG("verilog"),
 	/** XML. */
 	XML("xml"),
 	/** XQuery. */
