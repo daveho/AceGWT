@@ -23,7 +23,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RequiresResize;
 
 /**
@@ -45,47 +45,19 @@ public class AceEditor extends Composite implements RequiresResize {
 	 * Preferred constructor.
 	 */
 	public AceEditor() {
-		this(true);
+		elementId = "_aceGWT" + nextId;
+		nextId++;
+		FlowPanel div = new FlowPanel();
+		div.getElement().setId(elementId);
+		initWidget(div);
 	}
 
 	/**
-	 * Constructor allowing the old-style initialization where it is
-	 * assumed that the <code>.ace_editor</code> CSS class is set
-	 * to <code>position: relative;</code>.  Don't use this
-	 * constructor unless you did something special to redefine the
-	 * <code>.ace_editor</code> CSS class.
-	 *
-	 * @param positionAbsolute true if the <code>.ace_editor</code> CSS class
-	 *        is set with <code>position: absolute;</code>, which is
-	 *        the default in the Ace CSS rules; false if <code>.ace_editor</code>
-	 *        is set to use <code>position: relative;</code>
+	 * Do not use this constructor: just use the default constructor.
 	 */
-	public AceEditor(final boolean positionAbsolute) {
-		elementId = "_aceGWT" + nextId;
-		nextId++;
-
-		HTML html;
-
-		if (!positionAbsolute) {
-			// Create a single div with width/height 100% with the generated
-			// element id.  The ACE editor will replace this div.
-			// Note that the .ace_editor style must be set with
-			// "position: relative !important;" for this this to work.
-			html = new HTML("<div style=\"width: 100%; height: 100%;\" id=\"" + elementId + "\"></div>");
-		} else {
-			// Create a div with "position: relative;" that will expand to fill its parent.
-			// Then nest a div with the generated element id inside it.
-			// The ACE editor will replace the inner div.  Because ACE defaults
-			// to absolute positioning, we can set left/right/top/bottom to 0,
-			// causing ACE to completely expand to fill the outer div.
-			html = new HTML(
-					"<div style=\"width: 100%; height: 100%; position: relative;\">" +
-					"<div style=\"top: 0px; bottom: 0px; left: 0px; right: 0px;\" id=\"" + elementId + "\"></div>" +
-					"</div>"
-					);
-		}
-
-		initWidget(html);
+	@Deprecated
+	public AceEditor(boolean unused) {
+		this();
 	}
 
 	/**
