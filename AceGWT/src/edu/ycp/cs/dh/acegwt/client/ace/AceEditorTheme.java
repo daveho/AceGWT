@@ -27,6 +27,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
  */
 public enum AceEditorTheme {
 	AMBIANCE("ambiance"),
+	CHAOS("chaos"),
 	CHROME("chrome"),
 	CLOUDS("clouds"),
 	CLOUDS_MIDNIGHT("clouds_midnight"),
@@ -46,6 +47,7 @@ public enum AceEditorTheme {
 	PASTEL_ON_DARK("pastel_on_dark"),
 	SOLARIZED_DARK("solarized_dark"),
 	SOLARIZED_LIGHT("solarized_light"),
+	TERMINAL("terminal"),
 	TEXTMATE("textmate"),
 	TOMORROW_NIGHT_BLUE("tomorrow_night_blue"),
 	TOMORROW_NIGHT_BRIGHT("tomorrow_night_bright"),
