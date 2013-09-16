@@ -25,6 +25,7 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.RequiresResize;
 
 /**
@@ -32,7 +33,7 @@ import com.google.gwt.user.client.ui.RequiresResize;
  *
  * @see <a href="http://ace.ajax.org/">Ajax.org Code Editor</a>
  */
-public class AceEditor extends Composite implements RequiresResize {
+public class AceEditor extends Composite implements RequiresResize, HasText {
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
 
