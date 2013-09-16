@@ -70,7 +70,7 @@ public class AceEditor extends Composite implements RequiresResize {
 	 * before calling this method.
 	 */
 	public native void startEditor() /*-{
-		var editor = $wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::::divElement);
+		var editor = $wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::divElement);
 		editor.getSession().setUseWorker(false);
 		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor = editor;
 
