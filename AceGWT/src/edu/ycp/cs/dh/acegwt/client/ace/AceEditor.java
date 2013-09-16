@@ -23,6 +23,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
@@ -33,7 +34,7 @@ import com.google.gwt.user.client.ui.RequiresResize;
  *
  * @see <a href="http://ace.ajax.org/">Ajax.org Code Editor</a>
  */
-public class AceEditor extends Composite implements RequiresResize, HasText {
+public class AceEditor extends Composite implements RequiresResize, HasText, TakesValue<String> {
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
 
@@ -375,5 +376,15 @@ public class AceEditor extends Composite implements RequiresResize, HasText {
 	@Override
 	public void onResize() {
 		redisplay();
+	}
+
+	@Override
+	public void setValue(String value) {
+		this.setText(value);
+	}
+
+	@Override
+	public String getValue() {
+		return this.getText();
 	}
 }
