@@ -22,6 +22,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RequiresResize;
@@ -40,6 +41,8 @@ public class AceEditor extends Composite implements RequiresResize {
 	private JavaScriptObject editor;
 
 	private JsArray<AceAnnotation> annotations = JavaScriptObject.createArray().cast();
+	
+	private Element divElement;
 
 	/**
 	 * Preferred constructor.
@@ -50,6 +53,7 @@ public class AceEditor extends Composite implements RequiresResize {
 		FlowPanel div = new FlowPanel();
 		div.getElement().setId(elementId);
 		initWidget(div);
+		divElement =  div.getElement();
 	}
 
 	/**
@@ -66,7 +70,7 @@ public class AceEditor extends Composite implements RequiresResize {
 	 * before calling this method.
 	 */
 	public native void startEditor() /*-{
-		var editor = $wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId);
+		var editor = $wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::::divElement);
 		editor.getSession().setUseWorker(false);
 		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor = editor;
 
