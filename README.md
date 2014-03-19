@@ -1,6 +1,6 @@
 # AceGWT
 
-An integration of the [Ajax.org Cloud9 Editor (ACE)](http://ace.c9.io/) into [GWT](http://www.gwtproject.org/).
+An integration of the [Ace Editor](http://ace.c9.io/) into [GWT](http://www.gwtproject.org/).
 
 See the [wiki](https://github.com/daveho/AceGWT/wiki) has more information, including:
 
