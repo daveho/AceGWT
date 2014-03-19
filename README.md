@@ -2,7 +2,7 @@
 
 An integration of the [Ace Editor](http://ace.c9.io/) into [GWT](http://www.gwtproject.org/).
 
-See the [wiki](https://github.com/daveho/AceGWT/wiki) has more information, including:
+The [wiki](https://github.com/daveho/AceGWT/wiki) has more information, including:
 
 * [Documentation](https://github.com/daveho/AceGWT/wiki/Documentation) on using AceGWT in your application
 * [Screenshots](https://github.com/daveho/AceGWT/wiki/Screenshots)
