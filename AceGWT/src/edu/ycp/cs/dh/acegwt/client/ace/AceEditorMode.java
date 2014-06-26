@@ -34,6 +34,8 @@ public enum AceEditorMode {
 	ADA("ada"),
 	/** Apache configuration. */
 	APACHE_CONF("apache_conf"),
+	/** Applescript. */
+	APPLESCRIPT("applescript"),
 	/** ASCIIDOC. */
 	ASCIIDOC("asciidoc"),
 	/** Assembly (x86). */
@@ -70,6 +72,8 @@ public enum AceEditorMode {
 	DJANGO("django"),
 	/** D. */
 	D("d"),
+	/** Docker files. */
+	DOCKERFILE("dockerfile"),
 	/** Dot. */
 	DOT("dot"),
 	/** EJS (Embedded Javascript). */
@@ -234,6 +238,8 @@ public enum AceEditorMode {
 	TWIG("twig"),
 	/** TypeScript. */
 	TYPESCRIPT("typescript"),
+	/** Vala. */
+	VALA("vala"),
 	/** VBScript. */
 	VBSCRIPT("vbscript"),
 	/** Velocity. */
