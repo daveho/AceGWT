@@ -360,7 +360,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 
 	/**
-	 * Remove commands, that may not me required, from the editor
+	 * Remove commands, that may not be required, from the editor
 	 *
 	 * @param command to be removed, one of
 	 *          "gotoline", "findnext", "findprevious", "find", "replace", "replaceall"
@@ -387,4 +387,20 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	public String getValue() {
 		return this.getText();
 	}
+	
+	/**
+	 * Set whether or not autocomplete is enabled.
+	 * 
+	 * @param b true if autocomplete should be enabled, false if not
+	 */
+	public native void setAutocompleteEnabled(boolean b) /*-{
+		// See: https://github.com/ajaxorg/ace/wiki/How-to-enable-Autocomplete-in-the-Ace-editor
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		if (b) {
+			$wnd.ace.require("ace/ext/language_tools");
+			editor.setOptions({ enableBasicAutocompletion: true });
+		} else {
+			editor.setOptions({ enableBasicAutocompletion: false });
+		}
+	}-*/;
 }

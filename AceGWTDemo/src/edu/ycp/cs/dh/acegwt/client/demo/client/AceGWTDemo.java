@@ -132,7 +132,7 @@ public class AceGWTDemo implements EntryPoint {
 				editor1.setTabSize(Integer.parseInt(tabSizeTextBox.getText()));
 			}
 		});
-		buttonPanel.add(new InlineLabel("Tab size: "));
+		buttonPanel.add(new InlineLabel("Tab size"));
 		buttonPanel.add(tabSizeTextBox);
 		buttonPanel.add(setTabSizeButton);
 		
@@ -146,7 +146,7 @@ public class AceGWTDemo implements EntryPoint {
 				editor1.gotoLine(Integer.parseInt(gotoLineTextBox.getText()));
 			}
 		});
-		buttonPanel.add(new InlineLabel("Go to line: "));
+		buttonPanel.add(new InlineLabel("Go to line"));
 		buttonPanel.add(gotoLineTextBox);
 		buttonPanel.add(gotoLineButton);
 		
@@ -162,7 +162,7 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(hScrollBarAlwaysVisibleBox);
 		
 		// checkbox to show/hide gutter
-		final CheckBox showGutterBox = new CheckBox("Show gutter: ");
+		final CheckBox showGutterBox = new CheckBox("Show gutter");
 		showGutterBox.setValue(true);
 		showGutterBox.addClickHandler(new ClickHandler() {
 			@Override
@@ -173,7 +173,7 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(showGutterBox);
 		
 		// checkbox to set/unset readonly mode
-		final CheckBox readOnlyBox = new CheckBox("Read only: ");
+		final CheckBox readOnlyBox = new CheckBox("Read only");
 		readOnlyBox.setValue(false);
 		readOnlyBox.addClickHandler(new ClickHandler() {
 			@Override
@@ -184,7 +184,7 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(readOnlyBox);
 		
 		// checkbox to show/hide print margin
-		final CheckBox showPrintMarginBox = new CheckBox("Show print margin: ");
+		final CheckBox showPrintMarginBox = new CheckBox("Show print margin");
 		showPrintMarginBox.setValue(true);
 		showPrintMarginBox.addClickHandler(new ClickHandler() {
 			@Override
@@ -193,6 +193,17 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(showPrintMarginBox);
+		
+		// checkbox to enable/disable autocomplete
+		final CheckBox enableAutocompleteBox = new CheckBox("Enable autocomplete");
+		enableAutocompleteBox.setValue(false);
+		enableAutocompleteBox.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.setAutocompleteEnabled(enableAutocompleteBox.getValue());
+			}
+		});
+		buttonPanel.add(enableAutocompleteBox);
 		
 		mainPanel.add(buttonPanel);
 		
