@@ -12,6 +12,10 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+26 June 2014:
+
+* Updated to latest version of Ace. A handful of new modes and themes added.  Autocomplete is now supported.
+
 18 March 2014:
 
 * Updated to latest version of Ace.  Various new editor modes and themes added.  Also, AceGWT now packages the minified versions of the Ace JavaScript files, which should reduce load time.
