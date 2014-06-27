@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -40,7 +41,8 @@ public class AceGWTDemo implements EntryPoint {
 			"}\n";
 	
 	private static class MyCompletionProvider implements AceCompletionProvider {
-		@Override
+		@Override		
+
 		public void getProposals(AceEditor editor, AceEditorCursorPosition pos, String prefix, AceCompletionCallback callback) {
 			GWT.log("sending completion proposals");
 			callback.invokeWithCompletions(new AceCompletion[]{
@@ -172,7 +174,7 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(gotoLineButton);
 		
 		// checkbox to set whether or not horizontal scrollbar is always visible
-		final CheckBox hScrollBarAlwaysVisibleBox = new CheckBox("H scrollbar: ");
+		final CheckBox hScrollBarAlwaysVisibleBox = new CheckBox("H scrollbar");
 		hScrollBarAlwaysVisibleBox.setValue(true);
 		hScrollBarAlwaysVisibleBox.addClickHandler(new ClickHandler() {
 			@Override
@@ -225,6 +227,18 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(enableAutocompleteBox);
+		
+		// Test for AceEditor.getRow
+		final Button clickMe = new Button("Click me!");
+		clickMe.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				AceEditorCursorPosition pos = editor1.getCursorPosition();
+				String line = editor1.getLine(pos.getRow());
+				Window.alert("Current line is: " + line);
+			}
+		});
+		buttonPanel.add(clickMe);
 		
 		mainPanel.add(buttonPanel);
 		

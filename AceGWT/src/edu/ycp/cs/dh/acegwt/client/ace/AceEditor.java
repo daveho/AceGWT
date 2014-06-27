@@ -206,6 +206,17 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setValue(text);
 	}-*/;
+	
+	/**
+	 * Get the line of text at the given row number.
+	 * 
+	 * @param row the row number
+	 * @return the line of text at that row number
+	 */
+	public native String getLine(int row) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.getSession().getDocument().getLine(row);
+	}-*/;
 
 	/**
 	 * Insert given text at the cursor.
