@@ -12,6 +12,10 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+27 June 2014:
+
+* Added experimental support for custom autocompleters, based on suggestions from Chris Ainsley.
+
 26 June 2014:
 
 * Updated to latest version of Ace. A handful of new modes and themes added.  Autocomplete is now supported.

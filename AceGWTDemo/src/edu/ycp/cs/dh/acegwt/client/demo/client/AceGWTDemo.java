@@ -1,6 +1,7 @@
 package edu.ycp.cs.dh.acegwt.client.demo.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -14,8 +15,12 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceAnnotationType;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletion;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionCallback;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionProvider;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
+import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
@@ -34,10 +39,23 @@ public class AceGWTDemo implements EntryPoint {
 			"\t}\n" +
 			"}\n";
 	
+	private static class MyCompletionProvider implements AceCompletionProvider {
+		@Override
+		public void getProposals(AceEditor editor, AceEditorCursorPosition pos, String prefix, AceCompletionCallback callback) {
+			GWT.log("sending completion proposals");
+			callback.invokeWithCompletions(new AceCompletion[]{
+					new AceCompletion("first", "firstcompletion", 10, "custom"),
+					new AceCompletion("second", "secondcompletion", 11, "custom"),
+					new AceCompletion("third", "thirdcompletion", 12, "custom"),
+			});
+		}
+	}
+	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		
 		// create first AceEditor widget
 		editor1 = new AceEditor();
 		editor1.setWidth("800px");
@@ -47,6 +65,9 @@ public class AceGWTDemo implements EntryPoint {
 		editor2 = new AceEditor();
 		editor2.setWidth("800px");
 		editor2.setHeight("300px");
+		
+		// Try out custom code completer
+		AceEditor.addCompletionProvider(new MyCompletionProvider());
 		
 		// build the UI
 		buildUI();

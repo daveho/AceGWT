@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2014, David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2014, Chris Ainsley <takapa@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,50 +22,24 @@
 package edu.ycp.cs.dh.acegwt.client.ace;
 
 /**
- * Represents a cursor position.
+ * A provider of custom code-completion proposals.
+ * 
+ * <strong>Warning</strong>: this is an experimental feature of AceGWT.
+ * It is possible that the API will change in an incompatible way
+ * in future releases.
  */
-public class AceEditorCursorPosition {
-	private final int row, column;
-	
+public interface AceCompletionProvider {
 	/**
-	 * Constructor.
+	 * Call to get code completion proposals, which are delivered
+	 * to a callback. Note that it is fine for this method to
+	 * invoke the callback at a later time (for example, on completion
+	 * of RPC.) 
 	 * 
-	 * @param row     row (0 for first row)
-	 * @param column  column (0 for first column)
+	 * @param editor   the {@link AceEditor}
+	 * @param pos      the cursor position
+	 * @param prefix   the word prefix
+	 * @param callback the {@link AceCompletionCallback} to which the
+	 *                 proposals should be delivered
 	 */
-	public AceEditorCursorPosition(int row, int column) {
-		this.row = row;
-		this.column = column;
-	}
-	
-	/**
-	 * @return the row (0 for first row)
-	 */
-	public int getRow() {
-		return row;
-	}
-	
-	/**
-	 * @return the column (0 for first column)
-	 */
-	public int getColumn() {
-		return column;
-	}
-	
-	@Override
-	public String toString() {
-		return row + ":" + column;
-	}
-	
-	/**
-	 * Static creation method.
-	 * This is handy for calling from JSNI code.
-	 * 
-	 * @param row     the row
-	 * @param column  the column
-	 * @return the {@link AceEditorCursorPosition}
-	 */
-	public static AceEditorCursorPosition create(int row, int column) {
-		return new AceEditorCursorPosition(row, column);
-	}
+	public void getProposals(AceEditor editor, AceEditorCursorPosition pos, String prefix, AceCompletionCallback callback);
 }

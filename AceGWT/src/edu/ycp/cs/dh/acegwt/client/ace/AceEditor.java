@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2012, David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2011-2014, David H. Hovemeyer <david.hovemeyer@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -75,6 +75,10 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		var editor = $wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::divElement);
 		editor.getSession().setUseWorker(false);
 		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor = editor;
+		
+		// Store a reference to the (Java) AceEditor object in the
+		// JavaScript editor object.
+		editor._aceGWTAceEditor = this;
 
 		// I have been noticing sporadic failures of the editor
 		// to display properly and receive key/mouse events.
@@ -403,4 +407,36 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 			editor.setOptions({ enableBasicAutocompletion: false });
 		}
 	}-*/;
+	
+	/**
+	 * Add an {@link AceCompletionProvider} to provide
+	 * custom code completions.
+	 * 
+	 * <strong>Warning</strong>: this is an experimental feature of AceGWT.
+	 * It is possible that the API will change in an incompatible way
+	 * in future releases.
+	 * 
+	 * @param provider the {@link AceCompletionProvider}
+	 */
+	public native static void addCompletionProvider(AceCompletionProvider provider) /*-{
+		var langTools = $wnd.ace.require("ace/ext/language_tools");
+		var completer = {
+			getCompletions: function(editor, session, pos, prefix, callback) {
+				var callbackWrapper =
+					@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::wrapCompletionCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(callback);
+				var aceEditor = editor._aceGWTAceEditor;
+				provider.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionProvider::getProposals(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;Ledu/ycp/cs/dh/acegwt/client/ace/AceEditorCursorPosition;Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceCompletionCallback;)(
+					aceEditor,
+					@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::create(II)( pos.row, pos.column ),
+					prefix,
+					callbackWrapper
+				);
+			}
+		};
+		langTools.addCompleter(completer);
+	}-*/;
+	
+	private static AceCompletionCallback wrapCompletionCallback(JavaScriptObject jsCallback) {
+		return new AceCompletionCallbackImpl(jsCallback);
+	}
 }

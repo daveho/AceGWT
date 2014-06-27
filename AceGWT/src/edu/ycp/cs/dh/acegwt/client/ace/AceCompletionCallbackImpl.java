@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2014, David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2014, Chris Ainsley <takapa@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,51 +21,32 @@
 
 package edu.ycp.cs.dh.acegwt.client.ace;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+
 /**
- * Represents a cursor position.
+ * Implementation of {@link AceCompletionCallback}
+ * that delegates to a native JavaScript Ace code completion
+ * callback.
  */
-public class AceEditorCursorPosition {
-	private final int row, column;
+class AceCompletionCallbackImpl implements AceCompletionCallback {
+	private JavaScriptObject jsCallback;
 	
-	/**
-	 * Constructor.
-	 * 
-	 * @param row     row (0 for first row)
-	 * @param column  column (0 for first column)
-	 */
-	public AceEditorCursorPosition(int row, int column) {
-		this.row = row;
-		this.column = column;
-	}
-	
-	/**
-	 * @return the row (0 for first row)
-	 */
-	public int getRow() {
-		return row;
-	}
-	
-	/**
-	 * @return the column (0 for first column)
-	 */
-	public int getColumn() {
-		return column;
+	public AceCompletionCallbackImpl(JavaScriptObject jsCallback) {
+		this.jsCallback = jsCallback;
 	}
 	
 	@Override
-	public String toString() {
-		return row + ":" + column;
+	public void invokeWithCompletions(AceCompletion[] proposals) {
+		JsArray<JavaScriptObject> jsProposals = JavaScriptObject.createArray().cast();
+		for (AceCompletion proposal : proposals) {
+			jsProposals.push(proposal.toJsObject());
+		}
+		doInvokeWithCompletions(jsProposals);
 	}
 	
-	/**
-	 * Static creation method.
-	 * This is handy for calling from JSNI code.
-	 * 
-	 * @param row     the row
-	 * @param column  the column
-	 * @return the {@link AceEditorCursorPosition}
-	 */
-	public static AceEditorCursorPosition create(int row, int column) {
-		return new AceEditorCursorPosition(row, column);
-	}
+	private native void doInvokeWithCompletions(JsArray<JavaScriptObject> jsProposals) /*-{
+		var callback = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionCallbackImpl::jsCallback;
+		callback(null, jsProposals);
+	}-*/;
 }

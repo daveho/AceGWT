@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2014, David H. Hovemeyer <david.hovemeyer@gmail.com>
+// Copyright (c) 2014, Chris Ainsley <takapa@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,50 +22,13 @@
 package edu.ycp.cs.dh.acegwt.client.ace;
 
 /**
- * Represents a cursor position.
+ * Callback interface for submitting code completion proposals.
  */
-public class AceEditorCursorPosition {
-	private final int row, column;
-	
+public interface AceCompletionCallback {
 	/**
-	 * Constructor.
+	 * Submit code completion proposals.
 	 * 
-	 * @param row     row (0 for first row)
-	 * @param column  column (0 for first column)
+	 * @param proposals the code completion proposals to submit
 	 */
-	public AceEditorCursorPosition(int row, int column) {
-		this.row = row;
-		this.column = column;
-	}
-	
-	/**
-	 * @return the row (0 for first row)
-	 */
-	public int getRow() {
-		return row;
-	}
-	
-	/**
-	 * @return the column (0 for first column)
-	 */
-	public int getColumn() {
-		return column;
-	}
-	
-	@Override
-	public String toString() {
-		return row + ":" + column;
-	}
-	
-	/**
-	 * Static creation method.
-	 * This is handy for calling from JSNI code.
-	 * 
-	 * @param row     the row
-	 * @param column  the column
-	 * @return the {@link AceEditorCursorPosition}
-	 */
-	public static AceEditorCursorPosition create(int row, int column) {
-		return new AceEditorCursorPosition(row, column);
-	}
+	public void invokeWithCompletions(AceCompletion[] proposals);
 }
