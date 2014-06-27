@@ -41,6 +41,7 @@ public class AceCompletion {
 	 * 
 	 * @param name   the name of the completion
 	 * @param value  the text value of the completion
+	 * @param score  the score
 	 * @param meta   the "meta" (category) of the completion
 	 */
 	public AceCompletion(String name, String value, int score, String meta) {
