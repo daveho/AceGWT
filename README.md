@@ -6,7 +6,7 @@ The [wiki](https://github.com/daveho/AceGWT/wiki) has more information, includin
 
 * [Documentation](https://github.com/daveho/AceGWT/wiki/Documentation) on using AceGWT in your application
 * [Screenshots](https://github.com/daveho/AceGWT/wiki/Screenshots)
-* [Status](https://github.com/daveho/AceGWT/wiki): what is implemented and what isn't
+* [Status](https://github.com/daveho/AceGWT/wiki/Status): what is implemented and what isn't
 
 Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
