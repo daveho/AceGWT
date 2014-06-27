@@ -385,6 +385,16 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		editor.commands.removeCommand(command);
 	}-*/;
 
+	/**
+	 * Set whether to use wrap mode or not
+	 *
+	 * @param useSoftTabs true if word wrap should be used, false otherwise
+	 */
+	public native void setUseWrapMode(boolean useWrapMode) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().setUseWrapMode(useWrapMode);
+	}-*/;
+
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.ResizeComposite#onResize()
 	 */
