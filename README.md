@@ -1,6 +1,6 @@
 # AceGWT
 
-An integration of the [Ace Editor](http://ace.c9.io/) into [GWT](http://www.gwtproject.org/).
+An integration of the [Ace Editor](http://ace.c9.io/) into [GWT](http://www.gwtproject.org/).  If you want to embed a powerful text editor in a GWT application, AceGWT might be just what you're looking for!
 
 The [wiki](https://github.com/daveho/AceGWT/wiki) has more information, including:
 
