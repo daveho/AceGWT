@@ -23,7 +23,6 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-
 /**
  * A completion proposed by an {@link AceCompletionProvider}. 
  * 
@@ -31,11 +30,39 @@ import com.google.gwt.core.client.JavaScriptObject;
  * It is possible that the API will change in an incompatible way
  * in future releases.
  */
-public abstract class AceCompletion {
+public class AceCompletionValue extends AceCompletion {
+	private final String name;
+	private final String value;
+	private final int score;
+	private final String meta;
+
+	/**
+	 * Constructor. 
+	 * 
+	 * @param name   the name of the completion
+	 * @param value  the text value of the completion
+	 * @param meta   the "meta" (category) of the completion
+	 * @param snippet the "snippet"
+	 */
+	public AceCompletionValue(String name, String value, int score, String meta) {
+		this.name = name;
+		this.value = value;
+		this.score = score;
+		this.meta = meta;
+	}
 	
 	/**
-	 * A completion maps to a generated JavaScript object in a variety of formats depending on the concrete implementation
-	 * @return A non-null JavaScript object.
+	 * Convert to a native JS object in the format expected
+	 * by the Ace code completion callback.
+	 * 
+	 * @return native JS object
 	 */
-	abstract JavaScriptObject toJsObject();
+	native JavaScriptObject toJsObject() /*-{
+		return {
+			name: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::name,
+			value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
+			score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
+			meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta
+		};
+	}-*/;
 }
