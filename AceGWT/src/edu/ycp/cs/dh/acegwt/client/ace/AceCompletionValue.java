@@ -41,14 +41,14 @@ public class AceCompletionValue extends AceCompletion {
 	 * 
 	 * @param name   the name of the completion
 	 * @param value  the text value of the completion
-	 * @param meta   the "meta" (category) of the completion
-	 * @param snippet the "snippet"
+	 * @param score  the score
+	 * @param snippet the "snippet" (called "meta" in Ace?)
 	 */
-	public AceCompletionValue(String name, String value, int score, String meta) {
+	public AceCompletionValue(String name, String value, int score, String snippet) {
 		this.caption = name;
 		this.value = value;
 		this.score = score;
-		this.meta = meta;
+		this.meta = snippet;
 	}
 	
 	/**

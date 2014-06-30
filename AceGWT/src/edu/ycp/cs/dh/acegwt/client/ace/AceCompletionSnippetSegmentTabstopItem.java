@@ -32,7 +32,7 @@ public class AceCompletionSnippetSegmentTabstopItem implements AceCompletionSnip
 	/**
 	 * Text that should fit inside a tabstop, the first tabstop is selected after a substitution, and subsequent tabstops are moved between by
 	 * pressing the tab button. Tabstops are identified using an id.
-	 * @param literalText The literal text that makes up part of the tab stop. This does not need to be escaped, escaping will be handled automatically.
+	 * @param tabstopText The literal text that makes up part of the tab stop. This does not need to be escaped, escaping will be handled automatically.
 	 */
 	public AceCompletionSnippetSegmentTabstopItem(String tabstopText) {
 		this.tabstopText = tabstopText;
