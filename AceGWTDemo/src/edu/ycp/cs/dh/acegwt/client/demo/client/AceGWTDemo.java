@@ -51,9 +51,9 @@ public class AceGWTDemo implements EntryPoint {
 		public void getProposals(AceEditor editor, AceEditorCursorPosition pos, String prefix, AceCompletionCallback callback) {
 			GWT.log("sending completion proposals");
 			callback.invokeWithCompletions(new AceCompletion[]{
-					new AceCompletionValue("first", "firstcompletion", 10, "custom"),
-					new AceCompletionValue("second", "secondcompletion", 11, "custom"),
-					new AceCompletionValue("third", "thirdcompletion", 12, "custom"),
+					new AceCompletionValue("first", "firstcompletion", "custom", 10),
+					new AceCompletionValue("second", "secondcompletion", "custom", 11),
+					new AceCompletionValue("third", "thirdcompletion", "custom", 12),
 					new AceCompletionSnippet("fourth (snippets)",
 							new AceCompletionSnippetSegment[]{
 							new AceCompletionSnippetSegmentLiteral("filler_"),
@@ -66,7 +66,7 @@ public class AceGWTDemo implements EntryPoint {
 							new AceCompletionSnippetSegmentTabstopItem("tabstop}4"),
 							new AceCompletionSnippetSegmentLiteral("_filler_"),
 							new AceCompletionSnippetSegmentTabstopItem("") /* Empty tabstop -- tab to end of replacement text */
-					},14, "csnip")
+					},"csnip", 14)
 			});
 		}
 	}

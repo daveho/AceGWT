@@ -37,20 +37,42 @@ import com.google.gwt.core.client.JavaScriptObject;
  * in future releases.
  */
 public class AceCompletionSnippet extends AceCompletion {
+	
+	
+	/**
+	 * The caption of the completion (this is the left aligned autocompletion name on the left side of items in the dropdown box. If only a single completion is available in a context, then the caption will not be seen.
+	 */
 	private final String caption;
-	private final int score;
-	private final String meta;
+	
+	/**
+	 * The snippet text of the substitution, this should be in the format start-${0:snippetText}-after-${1:nexttabstop}-after. $ and backslash should be escaped with a leading backslash
+	 */
 	private final String snippet;
+	
+	
+	/**
+	 * "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
+	 */
+	private final String meta;
 
 	/**
-	 * Constructor. 
-	 * 
-	 * @param caption   the caption (name) of the completion
-	 * @param snippetSegments  The segments that make up this snippet. None of these segments needs to be escaped, this will be handled automatically.
-	 * @param score the score is used to sort the auto complete suggestions
-	 * @param meta  the "meta" (category) of the completion
+	 * The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
 	 */
-	public AceCompletionSnippet(String caption, AceCompletionSnippetSegment[] snippetSegments, int score, String meta) {
+	private final int score;
+
+
+	/**
+	 * Creates a snippet type substitution. A snippet-type substitution allows for tab-stop regions to be defined, in which text is automatically selected immediately the 
+	 * autocomplete substitution. Multiple regions may be defined to be tabbed through for user editing.<br/><br/>This may be useful if a substiution is a template type subsitution where
+	 * several areas of the template typically need to be edited always after a substitution. Being able to tab through the regions rather than having to manually locate and edit
+	 * is a lot faster when dealing with potentially repeated text editing usage patterns.
+	 * 
+	 * @param caption The caption of the completion (this is the left aligned autocompletion name on the left side of items in the dropdown box. If only a single completion is available in a context, then the caption will not be seen.
+	 * @param snippetSegments  The segments that make up this snippet. None of these segments needs to be escaped, this will be handled automatically.
+	 * @param meta  "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
+	 * @param score The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
+	 */
+	public AceCompletionSnippet(String caption, AceCompletionSnippetSegment[] snippetSegments, String meta, int score) {
 		this.caption = caption;
 		this.score = score;
 		this.meta = meta;
@@ -70,12 +92,18 @@ public class AceCompletionSnippet extends AceCompletion {
 	}
 	
 	/**
-	 * Constructor. 
+	 * Creates a snippet type substitution. A snippet-type substitution allows for tab-stop regions to be defined, in which text is automatically selected immediately the 
+	 * autocomplete substitution. Multiple regions may be defined to be tabbed through for user editing.<br/><br/>This may be useful if a substiution is a template type subsitution where
+	 * several areas of the template typically need to be edited always after a substitution. Being able to tab through the regions rather than having to manually locate and edit
+	 * is a lot faster when dealing with potentially repeated text editing usage patterns.
 	 * 
-	 * @param caption   the caption (name) of the completion
-	 * @param snippet  the snippet text of the substitution, this should be in the format start-${0:snippetText}-after-${1:nexttabstop}-after. $ and backslash should be escaped with a leading backslash
-	 * @param score the score is used to sort the auto complete suggestions
-	 * @param meta  the "meta" (category) of the completion
+	 * <br/><br/>
+	 * <strong>NOTE :: This is the advanced version of the completion snippet, where escaping and tokenization must be done manually.<br/><br/>It is recommended to use the alternative {@link #AceCompletionSnippet(String, AceCompletionSnippetSegment[], String, int)} constructor for 99% of use-cases. This raw version is provided as a convenience.</strong>
+	 * 
+	 * @param caption The caption of the completion (this is the left aligned autocompletion name on the left side of items in the dropdown box. If only a single completion is available in a context, then the caption will not be seen.
+	 * @param snippet  the snippet text of the substitution, this should be in the format start-${0:snippetText}-after-${1:nexttabstop}-after. $ and backslash and rbrace should be escaped with a leading backslash
+	 * @param meta  "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
+	 * @param score The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
 	 */
 	public AceCompletionSnippet(String caption, String snippet, int score, String meta) {
 		this.caption = caption;

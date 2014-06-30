@@ -31,24 +31,41 @@ import com.google.gwt.core.client.JavaScriptObject;
  * in future releases.
  */
 public class AceCompletionValue extends AceCompletion {
+	
+	/**
+	 * The caption of the completion (this is the left aligned autocompletion name on the left side of items in the dropdown box. If only a single completion is available in a context, then the caption will not be seen.
+	 */
 	private final String caption;
+	
+	/**
+	 * The text value of the completion. This does not need to be escaped.
+	 */
 	private final String value;
-	private final int score;
+	
+	
+	/**
+	 * "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
+	 */
 	private final String meta;
 
 	/**
+	 * The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
+	 */
+	private final int score;
+	
+	/**
 	 * Constructor. 
 	 * 
-	 * @param name   the name of the completion
-	 * @param value  the text value of the completion
-	 * @param score  the score
-	 * @param snippet the "snippet" (called "meta" in Ace?)
+	 * @param caption The caption of the completion (this is the left aligned autocompletion name on the left side of items in the dropdown box. If only a single completion is available in a context, then the caption will not be seen.
+	 * @param value  The text value of the completion. This does not need to be escaped.
+	 * @param meta "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
+	 * @param score  The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
 	 */
-	public AceCompletionValue(String name, String value, int score, String snippet) {
+	public AceCompletionValue(String name, String value, String meta, int score) {
 		this.caption = name;
 		this.value = value;
 		this.score = score;
-		this.meta = snippet;
+		this.meta = meta;
 	}
 	
 	/**
