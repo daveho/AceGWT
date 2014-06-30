@@ -19,6 +19,11 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceAnnotationType;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletion;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionProvider;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippetSegment;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippetSegmentLiteral;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippetSegmentTabstopItem;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition;
@@ -46,9 +51,22 @@ public class AceGWTDemo implements EntryPoint {
 		public void getProposals(AceEditor editor, AceEditorCursorPosition pos, String prefix, AceCompletionCallback callback) {
 			GWT.log("sending completion proposals");
 			callback.invokeWithCompletions(new AceCompletion[]{
-					new AceCompletion("first", "firstcompletion", 10, "custom"),
-					new AceCompletion("second", "secondcompletion", 11, "custom"),
-					new AceCompletion("third", "thirdcompletion", 12, "custom"),
+					new AceCompletionValue("first", "firstcompletion", 10, "custom"),
+					new AceCompletionValue("second", "secondcompletion", 11, "custom"),
+					new AceCompletionValue("third", "thirdcompletion", 12, "custom"),
+					new AceCompletionSnippet("fourth (snippets)",
+							new AceCompletionSnippetSegment[]{
+							new AceCompletionSnippetSegmentLiteral("filler_"),
+							new AceCompletionSnippetSegmentTabstopItem("tabstop1"),
+							new AceCompletionSnippetSegmentLiteral("_\\filler_"), // putting backslash in here to prove escaping is working
+							new AceCompletionSnippetSegmentTabstopItem("tabstop2"),
+							new AceCompletionSnippetSegmentLiteral("_$filler_"), // putting dollar in here to prove escaping is working
+							new AceCompletionSnippetSegmentTabstopItem("tabstop3"),
+							new AceCompletionSnippetSegmentLiteral("\nnextlinefiller_"),
+							new AceCompletionSnippetSegmentTabstopItem("tabstop}4"),
+							new AceCompletionSnippetSegmentLiteral("_filler_"),
+							new AceCompletionSnippetSegmentTabstopItem("") /* Empty tabstop -- tab to end of replacement text */
+					},14, "csnip")
 			});
 		}
 	}

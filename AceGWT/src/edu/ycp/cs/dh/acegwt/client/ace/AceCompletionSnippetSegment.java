@@ -21,21 +21,15 @@
 
 package edu.ycp.cs.dh.acegwt.client.ace;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 
 /**
- * A completion proposed by an {@link AceCompletionProvider}. 
- * 
- * <strong>Warning</strong>: this is an experimental feature of AceGWT.
- * It is possible that the API will change in an incompatible way
- * in future releases.
- */
-public abstract class AceCompletion {
+ * A segment of a completion snippet
+ * */
+public interface AceCompletionSnippetSegment  {
 	
 	/**
-	 * A completion maps to a generated JavaScript object in a variety of formats depending on the concrete implementation
-	 * @return A non-null JavaScript object.
+	 * Gets the escaped and prepared textual representation of this snippet segment (backslash and dollar are escaped in general and the dollar is used for certain special tokens)
+	 * @return the prepared textual representation of this snippet segment
 	 */
-	abstract JavaScriptObject toJsObject();
+	public String getPreparedText(int tabStopNumber);
 }

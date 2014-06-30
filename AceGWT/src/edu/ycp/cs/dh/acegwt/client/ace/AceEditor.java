@@ -429,6 +429,18 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		}
 	}-*/;
 	
+	
+	/**
+	 * Removes all existing completers from the langtools<br/><br/>
+	 * This can be used to disable all completers including local completers, which can be very useful
+	 * when completers are used on very large files (as the local completer tokenizes every word to put in the selected list).<br/><br/> 
+	 * <strong>NOTE:</strong> This method may be removed, and replaced with another solution. It works at point of check-in, but treat this as unstable for now.
+	 */
+	public native static void removeAllExistingCompleters() /*-{
+		var langTools = $wnd.ace.require("ace/ext/language_tools");
+		langTools.removeCompleters();
+    }-*/;
+	
 	/**
 	 * Add an {@link AceCompletionProvider} to provide
 	 * custom code completions.
