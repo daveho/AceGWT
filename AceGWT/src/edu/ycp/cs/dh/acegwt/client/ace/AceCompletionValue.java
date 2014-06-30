@@ -31,7 +31,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * in future releases.
  */
 public class AceCompletionValue extends AceCompletion {
-	private final String name;
+	private final String caption;
 	private final String value;
 	private final int score;
 	private final String meta;
@@ -45,7 +45,7 @@ public class AceCompletionValue extends AceCompletion {
 	 * @param snippet the "snippet"
 	 */
 	public AceCompletionValue(String name, String value, int score, String meta) {
-		this.name = name;
+		this.caption = name;
 		this.value = value;
 		this.score = score;
 		this.meta = meta;
@@ -59,7 +59,7 @@ public class AceCompletionValue extends AceCompletion {
 	 */
 	native JavaScriptObject toJsObject() /*-{
 		return {
-			name: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::name,
+			caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
 			value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
 			score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
 			meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta
