@@ -21,21 +21,34 @@
 
 package edu.ycp.cs.dh.acegwt.client.ace;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 
 /**
- * A completion proposed by an {@link AceCompletionProvider}. 
- * 
- * <strong>Warning</strong>: this is an experimental feature of AceGWT.
- * It is possible that the API will change in an incompatible way
- * in future releases.
- */
-public abstract class AceCompletion {
+ * A segment of a completion snippet
+ * */
+public class AceCompletionSnippetSegmentTabstopItem implements AceCompletionSnippetSegment {
 	
+	private String tabstopText;
+
 	/**
-	 * A completion maps to a generated JavaScript object in a variety of formats depending on the concrete implementation
-	 * @return A non-null JavaScript object.
+	 * Text that should fit inside a tabstop, the first tabstop is selected after a substitution, and subsequent tabstops are moved between by
+	 * pressing the tab button. Tabstops are identified using an id.
+	 * @param literalText The literal text that makes up part of the tab stop. This does not need to be escaped, escaping will be handled automatically.
 	 */
-	abstract JavaScriptObject toJsObject();
+	public AceCompletionSnippetSegmentTabstopItem(String tabstopText) {
+		this.tabstopText = tabstopText;
+	}
+	
+	@Override
+	public String getPreparedText(int tabstopNumber) {
+		
+		// Special characters need escaping so that we can support tokens, see demo to see how this works in practice
+		
+		final String escapedText =
+				tabstopText
+					.replace("\\", "\\\\") // backslash becomes double backslash 
+					.replace("$", "\\$")   // dollar becomes backslash dollar
+					.replace("}", "\\}");  // right brace becones backslash right brace
+		return "${" + tabstopNumber + ":" + escapedText + "}";
+	}
+	
 }

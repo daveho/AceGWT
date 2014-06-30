@@ -21,21 +21,27 @@
 
 package edu.ycp.cs.dh.acegwt.client.ace;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 
 /**
- * A completion proposed by an {@link AceCompletionProvider}. 
- * 
- * <strong>Warning</strong>: this is an experimental feature of AceGWT.
- * It is possible that the API will change in an incompatible way
- * in future releases.
- */
-public abstract class AceCompletion {
+ * A segment of a completion snippet
+ * */
+public class AceCompletionSnippetSegmentLiteral implements AceCompletionSnippetSegment {
 	
+	private String literalText;
+
 	/**
-	 * A completion maps to a generated JavaScript object in a variety of formats depending on the concrete implementation
-	 * @return A non-null JavaScript object.
+	 * The literal text that makes up part of the snippet segment
+	 * @param literalText The literal text that makes up part of the snippet. This does not need to be escaped, escaping will be handled automatically.
 	 */
-	abstract JavaScriptObject toJsObject();
+	public AceCompletionSnippetSegmentLiteral(String literalText) {
+		this.literalText = literalText;
+	}
+
+	@Override
+	public String getPreparedText(int tabstopNumber) {
+		final String escapedText = literalText.replace("\\", "\\\\").replace("$", "\\$");
+		return escapedText;
+	}
+	
+	
 }
