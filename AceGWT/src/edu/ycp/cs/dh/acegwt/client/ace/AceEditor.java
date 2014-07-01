@@ -242,6 +242,37 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	private AceEditorCursorPosition getCursorPositionImpl(final double row, final double column) {
 		return new AceEditorCursorPosition((int) row, (int) column);
 	}
+	
+	/**
+	 * Gets the given document position as a zero-based index.
+	 * 
+	 * @param position the position to obtain the absolute index of (base zero)
+	 * @return An index to the current location in the document
+	 */
+	public int getIndexFromPosition(AceEditorCursorPosition position) {
+		return getIndexFromPositionImpl(position.toJsObject());
+	}
+	
+	private native int getIndexFromPositionImpl(JavaScriptObject jsPosition) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.getSession().getDocument().positionToIndex(jsPosition);
+	}-*/;
+	
+	/**
+	 * Gets a document position from a supplied zero-based index.
+	 * 
+	 * @oaran index (base zero)
+	 * @return A position object showing the row and column of the supplied index in the document
+	 */
+	public native AceEditorCursorPosition getPositionFromIndex(int index) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var jsPosition = editor.getSession().getDocument().indexToPosition(index);
+		return @edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::create(II)(
+			jsPosition.row,
+			jsPosition.column
+		);
+	}-*/;
+
 
 	/**
 	 * Set whether or not soft tabs should be used.

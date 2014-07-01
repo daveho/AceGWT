@@ -37,6 +37,7 @@ public class AceGWTDemo implements EntryPoint {
 	private AceEditor editor1;
 	private AceEditor editor2;
 	private InlineLabel rowColLabel;
+	private InlineLabel absolutePositionLabel;
 	
 	private static final String JAVA_TEXT =
 			"public class Hello {\n" +
@@ -137,6 +138,10 @@ public class AceGWTDemo implements EntryPoint {
 		// Label to display current row/column
 		rowColLabel = new InlineLabel("");
 		mainPanel.add(rowColLabel);
+		
+		// Label to display current absolute position
+		absolutePositionLabel = new InlineLabel("");
+		mainPanel.add(absolutePositionLabel);
 		
 		// Create some buttons for testing various editor APIs
 		HorizontalPanel buttonPanel = new HorizontalPanel();
@@ -253,7 +258,8 @@ public class AceGWTDemo implements EntryPoint {
 			public void onClick(ClickEvent event) {
 				AceEditorCursorPosition pos = editor1.getCursorPosition();
 				String line = editor1.getLine(pos.getRow());
-				Window.alert("Current line is: " + line);
+				AceEditorCursorPosition pos10 = editor1.getPositionFromIndex(10);
+				Window.alert("Index 10=" + pos10 + ", cur line=" + line);
 			}
 		});
 		buttonPanel.add(clickMe);
@@ -267,6 +273,11 @@ public class AceGWTDemo implements EntryPoint {
 	}
 
 	private void updateEditor1CursorPosition() {
-		rowColLabel.setText(editor1.getCursorPosition().toString());
+		AceEditorCursorPosition cursorPosition = editor1.getCursorPosition();
+		rowColLabel.setText(cursorPosition.toString());
+		
+		
+		int absPos = editor1.getIndexFromPosition(cursorPosition);
+		absolutePositionLabel.setText(String.valueOf(absPos));
 	}
 }

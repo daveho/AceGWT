@@ -20,6 +20,8 @@
 
 package edu.ycp.cs.dh.acegwt.client.ace;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * Represents a cursor position.
  */
@@ -67,4 +69,17 @@ public class AceEditorCursorPosition {
 	public static AceEditorCursorPosition create(int row, int column) {
 		return new AceEditorCursorPosition(row, column);
 	}
+	
+	/**
+	 * Convert to a native Ace JavaScript position object
+	 * (with integer-valued <code>row</code> and <code>column</code> fields.)
+	 * 
+	 * @return native Ace JavaScript position object
+	 */
+	public native JavaScriptObject toJsObject() /*-{
+		return {
+			row: this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::row,
+			column: this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::column
+		};
+	}-*/;
 }
