@@ -261,7 +261,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	/**
 	 * Gets a document position from a supplied zero-based index.
 	 * 
-	 * @oaran index (base zero)
+	 * @param index (base zero)
 	 * @return A position object showing the row and column of the supplied index in the document
 	 */
 	public native AceEditorCursorPosition getPositionFromIndex(int index) /*-{
