@@ -54,6 +54,11 @@ public class AceCompletionValue extends AceCompletion {
 	private final int score;
 	
 	/**
+	 * The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
+	 */
+	private final String tooltip;
+	
+	/**
 	 * Constructor. 
 	 * 
 	 * @param caption The caption of the completion (this is the left aligned autocompletion name on the left side of items in the dropdown box. If only a single completion is available in a context, then the caption will not be seen.
@@ -64,7 +69,25 @@ public class AceCompletionValue extends AceCompletion {
 	public AceCompletionValue(String name, String value, String meta, int score) {
 		this.caption = name;
 		this.value = value;
+		this.meta = meta;
+		this.tooltip = null;
 		this.score = score;
+	}
+	
+	/**
+	 * Constructor. 
+	 * 
+	 * @param caption The caption of the completion (this is the left aligned autocompletion name on the left side of items in the dropdown box. If only a single completion is available in a context, then the caption will not be seen.
+	 * @param value  The text value of the completion. This does not need to be escaped.
+	 * @param meta "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
+	 * @param tooltip "tooltip" is an escaped html tooltip to be displayed when the completion option is displayed, this can be null. 
+	 * @param score  The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
+	 */
+	public AceCompletionValue(String name, String value, String meta, String tooltip, int score) {
+		this.caption = name;
+		this.value = value;
+		this.score = score;
+		this.tooltip = tooltip;
 		this.meta = meta;
 	}
 	
@@ -75,11 +98,22 @@ public class AceCompletionValue extends AceCompletion {
 	 * @return native JS object
 	 */
 	native JavaScriptObject toJsObject() /*-{
-		return {
-			caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
-			value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
-			score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
-			meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta
-		};
+		
+		if (this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::tooltip != null) {
+			return {
+				caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
+				value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
+				score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
+				meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta,
+			    aceGwtHtmlTooltip: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::tooltip
+			};
+		} else {
+			return {
+				caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
+				value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
+				score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
+				meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta
+			};
+		}
 	}-*/;
 }
