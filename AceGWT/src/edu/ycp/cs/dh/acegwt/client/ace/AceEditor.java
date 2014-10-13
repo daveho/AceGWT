@@ -22,6 +22,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
@@ -45,6 +46,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	private JsArray<AceAnnotation> annotations = JavaScriptObject.createArray().cast();
 	
 	private Element divElement;
+	
+	private JsArrayInteger makerIDs  = JavaScriptObject.createArray().cast();
+	
 
 	/**
 	 * Preferred constructor.
@@ -507,21 +511,46 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		langTools.addCompleter(completer);
 	}-*/;
 	
-	public native int addMarker(AceRange range, String clazz, AceMarkerType type, boolean inFront) /*-{
+	/**
+	 * Adds a static marker into this editor.
+	 * @param range		an {@link AceRange}.
+	 * @param clazz		a CSS class that must be applied to the marker.
+	 * @param type		an {@link AceMarkerType}.
+	 * @param inFront	set to 'true' if the marker must be in front of the text, 'false' otherwise.
+	 * @return	The marker ID. This id can be then use to remove a marker from the editor.
+	 */
+	public native int addMarker(AceRange range, String clazz, AceMarkerType type, Boolean inFront) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-		range.start = editor.getSession().doc.createAnchor(range.start);
-		range.end = editor.getSession().doc.createAnchor(range.end);
 		return editor.getSession().addMarker(range, clazz, type.@edu.ycp.cs.dh.acegwt.client.ace.AceMarkerType::getName()(), inFront);
 	}-*/;
 	
-	public native int removeMarker(int markerId) /*-{
+	/**
+	 * Adds a floating marker into this editor (the marker follows lines changes as insertions, suppressions...).
+	 * @param range 	an {@link AceRange}.
+	 * @param clazz		a CSS class that must be applied to the marker.
+	 * @param type		an {@link AceMarkerType}.
+	 * @return			The marker ID. This id can be then use to remove a marker from the editor.
+	 */
+	public native int addFloatingMarker(AceRange range, String clazz, AceMarkerType type) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-		return editor.getSession().removeMarker(markerId);
+		range.start = editor.getSession().doc.createAnchor(range.start);
+		range.end = editor.getSession().doc.createAnchor(range.end);
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::addMarker(Ledu/ycp/cs/dh/acegwt/client/ace/AceRange;Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceMarkerType;Ljava/lang/Boolean;)
+		(
+			range,
+			clazz,
+			type,
+			null
+		);
 	}-*/;
 	
-	public native JsArray<AceMarker> getMarkers(boolean inFront) /*-{
+	/**
+	 * Removes the marker with the specified ID.
+	 * @param markerId	the marker ID.
+	 */
+	public native void removeMarker(int markerId) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-		return editor.getSession().getMarkers(inFront);
+		editor.getSession().removeMarker(markerId);
 	}-*/;
 	
 	private static AceCompletionCallback wrapCompletionCallback(JavaScriptObject jsCallback) {

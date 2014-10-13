@@ -24,9 +24,9 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * 
+ * Represents an Ace Range Object.
  */
-public class AceRange extends JavaScriptObject {
+public final class AceRange extends JavaScriptObject {
 	
 	protected AceRange() {
 	}
@@ -34,9 +34,31 @@ public class AceRange extends JavaScriptObject {
 	public static AceRange create(int startRow, int startColumn, int endRow, int endColumn) {
 		return toJsObject(startRow, startColumn, endRow, endColumn).cast();
 	}
+
+	/**
+	 * Detaches both, start and end from this {@link AceRange}.
+	 */
+	public void detach() {
+		detachStart();
+		detachEnd();
+	}
 	
 	/**
-	 * @return native JS object
+	 * Detaches the start anchor from this {@link AceRange}.
+	 */
+	public native void detachStart() /*-{
+		this.start.detach();
+	}-*/;
+
+	/**
+	 * Detaches the end achor from this {@link AceRange}.
+	 */
+	public native void detachEnd() /*-{
+		this.end.detach();
+	}-*/;
+	
+	/**
+	 * @return creates a new Range object.
 	 */
 	static native JavaScriptObject toJsObject(int startRow, int startColumn, int endRow, int endColumn) /*-{
 		var Range = $wnd.require('ace/range').Range;
