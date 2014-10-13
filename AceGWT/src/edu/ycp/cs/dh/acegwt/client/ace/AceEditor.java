@@ -197,6 +197,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		return editor.getSession().getValue();
 	}-*/;
 
+	
 	/**
 	 * Set the complete text in the editor from a String.
 	 *
@@ -252,12 +253,12 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	public int getIndexFromPosition(AceEditorCursorPosition position) {
 		return getIndexFromPositionImpl(position.toJsObject());
 	}
-	
+
 	private native int getIndexFromPositionImpl(JavaScriptObject jsPosition) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.getSession().getDocument().positionToIndex(jsPosition);
 	}-*/;
-	
+
 	/**
 	 * Gets a document position from a supplied zero-based index.
 	 * 
@@ -272,7 +273,6 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 			jsPosition.column
 		);
 	}-*/;
-
 
 	/**
 	 * Set whether or not soft tabs should be used.
@@ -469,8 +469,10 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 */
 	public native static void removeAllExistingCompleters() /*-{
 		var langTools = $wnd.ace.require("ace/ext/language_tools");
-		langTools.removeCompleters();
+		langTools.setCompleters([]);
     }-*/;
+	
+
 	
 	/**
 	 * Add an {@link AceCompletionProvider} to provide
@@ -495,7 +497,12 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 					prefix,
 					callbackWrapper
 				);
-			}
+			},
+		    getDocTooltip: function(item) {
+		    	if ( (!item.docHTML) && item.aceGwtHtmlTooltip != null) {
+		        	item.docHTML = item.aceGwtHtmlTooltip;
+		    	}
+		    }
 		};
 		langTools.addCompleter(completer);
 	}-*/;
@@ -518,6 +525,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}-*/;
 	
 	private static AceCompletionCallback wrapCompletionCallback(JavaScriptObject jsCallback) {
+		
 		return new AceCompletionCallbackImpl(jsCallback);
 	}
 }

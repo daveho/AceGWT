@@ -59,6 +59,11 @@ public class AceCompletionSnippet extends AceCompletion {
 	 * The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
 	 */
 	private final int score;
+	
+	/**
+	 * The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
+	 */
+	private final String tooltip;
 
 
 	/**
@@ -72,10 +77,11 @@ public class AceCompletionSnippet extends AceCompletion {
 	 * @param meta  "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
 	 * @param score The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
 	 */
-	public AceCompletionSnippet(String caption, AceCompletionSnippetSegment[] snippetSegments, String meta, int score) {
+	public AceCompletionSnippet(String caption, AceCompletionSnippetSegment[] snippetSegments, String meta, String htmlTooltip, int score) {
 		this.caption = caption;
 		this.score = score;
 		this.meta = meta;
+		this.tooltip = htmlTooltip;
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -105,11 +111,12 @@ public class AceCompletionSnippet extends AceCompletion {
 	 * @param meta  "meta" means the category of the substitution (this appears right aligned on the dropdown list). This is freeform description and can contain anything but typically a very short category description (9 chars or less) such as "function" or "param" or "template".
 	 * @param score The score is the value assigned to the autocompletion option. Scores with a higher value will appear closer to the top. Items with an identical score are sorted alphbetically by caption in the drop down.
 	 */
-	public AceCompletionSnippet(String caption, String snippet, int score, String meta) {
+	public AceCompletionSnippet(String caption, String snippet, int score, String meta, String htmlTooltip) {
 		this.caption = caption;
 		this.score = score;
 		this.meta = meta;
 		this.snippet = snippet;
+		this.tooltip = htmlTooltip;
 	}
 	
 	
@@ -127,7 +134,8 @@ public class AceCompletionSnippet extends AceCompletion {
 			caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::caption,
 			snippet: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::snippet,
 			score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::score,
-			meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::meta
+			meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::meta,
+			aceGwtHtmlTooltip: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::tooltip
 		};
 	}-*/;
 }

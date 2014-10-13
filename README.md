@@ -12,6 +12,11 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+12 October 2014:
+
+* Updated to latest version of Ace from [here](https://github.com/ajaxorg/ace-builds/tree/master/src), plus applied a small fix which has been submitted as a [push request](https://github.com/ajaxorg/ace/pull/2189) (code changes in this push request already applied to code in this repository).
+* Added autocomplete tooltip support based on latest updates to Ace Editor ([forum](https://groups.google.com/forum/#!topic/ace-discuss/M4vw4XdVzBU), push request [2148](https://github.com/ajaxorg/ace/pull/2148)).
+
 27 June 2014:
 
 * Added experimental support for custom autocompleters, based on suggestions from Chris Ainsley.
