@@ -500,6 +500,23 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		langTools.addCompleter(completer);
 	}-*/;
 	
+	public native int addMarker(AceRange range, String clazz, AceMarkerType type, boolean inFront) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		range.start = editor.getSession().doc.createAnchor(range.start);
+		range.end = editor.getSession().doc.createAnchor(range.end);
+		return editor.getSession().addMarker(range, clazz, type.@edu.ycp.cs.dh.acegwt.client.ace.AceMarkerType::getName()(), inFront);
+	}-*/;
+	
+	public native int removeMarker(int markerId) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.getSession().removeMarker(markerId);
+	}-*/;
+	
+	public native JsArray<AceMarker> getMarkers(boolean inFront) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.getSession().getMarkers(inFront);
+	}-*/;
+	
 	private static AceCompletionCallback wrapCompletionCallback(JavaScriptObject jsCallback) {
 		return new AceCompletionCallbackImpl(jsCallback);
 	}
