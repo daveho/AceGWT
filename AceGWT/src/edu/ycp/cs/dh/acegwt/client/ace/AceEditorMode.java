@@ -26,8 +26,6 @@ package edu.ycp.cs.dh.acegwt.client.ace;
  * before a mode can be set.
  */
 public enum AceEditorMode {
-	/** Acceleo (MTL */
-	ACCELEO("acceleo"),
 	/** ABAP (Advanced Business Application Programming). */
 	ABAP("abap"),
 	/** Actionscript. */
