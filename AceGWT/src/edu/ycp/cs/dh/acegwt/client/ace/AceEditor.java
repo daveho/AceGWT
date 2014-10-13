@@ -22,7 +22,6 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
@@ -47,9 +46,6 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	
 	private Element divElement;
 	
-	private JsArrayInteger makerIDs  = JavaScriptObject.createArray().cast();
-	
-
 	/**
 	 * Preferred constructor.
 	 */
