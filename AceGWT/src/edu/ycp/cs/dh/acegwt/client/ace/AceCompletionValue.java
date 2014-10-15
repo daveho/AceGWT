@@ -99,21 +99,14 @@ public class AceCompletionValue extends AceCompletion {
 	 */
 	native JavaScriptObject toJsObject() /*-{
 		
-		if (this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::tooltip != null) {
+		
 			return {
 				caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
 				value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
 				score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
 				meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta,
-			    aceGwtHtmlTooltip: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::tooltip
+			    aceGwtHtmlTooltip: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::tooltip
 			};
-		} else {
-			return {
-				caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
-				value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
-				score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
-				meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta
-			};
-		}
+
 	}-*/;
 }
