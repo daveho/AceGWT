@@ -26,14 +26,18 @@ public final class AceRange extends JavaScriptObject {
 	 * Detaches the start anchor from this {@link AceRange}.
 	 */
 	public native void detachStart() /*-{
-		this.start.detach();
+		if (typeof this.start != 'undefined' && typeof this.start != 'object') {
+			this.start.detach();
+		}
 	}-*/;
 
 	/**
 	 * Detaches the end achor from this {@link AceRange}.
 	 */
 	public native void detachEnd() /*-{
-		this.end.detach();
+		if (typeof this.end != 'undefined' && typeof this.end != 'object') {
+			this.end.detach();
+		}
 	}-*/;
 	
 	/**
