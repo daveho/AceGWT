@@ -29,6 +29,8 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
+import edu.ycp.cs.dh.acegwt.client.ace.AceMarkerType;
+import edu.ycp.cs.dh.acegwt.client.ace.AceRange;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -67,7 +69,7 @@ public class AceGWTDemo implements EntryPoint {
 							new AceCompletionSnippetSegmentTabstopItem("tabstop}4"),
 							new AceCompletionSnippetSegmentLiteral("_filler_"),
 							new AceCompletionSnippetSegmentTabstopItem("") /* Empty tabstop -- tab to end of replacement text */
-					},"csnip", 14)
+					},"csnip", "Write a new snippet in your editor", 14)
 			});
 		}
 	}
@@ -263,6 +265,23 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(clickMe);
+		
+		// Test for AceEditor Markers removal
+		final Button removeMarks = new Button("Add/Remove Markers");
+		removeMarks.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				if (editor1.getMarkers().isEmpty()) {
+					// add some markers
+					editor1.addMarker(AceRange.create(0, 0, 1, 41), "ace_selection", AceMarkerType.FULL_LINE, false);
+					editor1.addFloatingMarker(AceRange.create(2, 2, 2, 38), "ace_selected-word", AceMarkerType.TEXT);
+				} else {
+					Window.alert("Removing " + editor1.getMarkers() + " markers");
+					editor1.removeAllMarkers();
+				}
+			}
+		});
+		buttonPanel.add(removeMarks);
 		
 		mainPanel.add(buttonPanel);
 		
