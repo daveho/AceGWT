@@ -584,6 +584,10 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		range.detach();
 	}
 	
+	/**
+	 * Prepare a wrapper around Ace Selection object.
+	 * @return a wrapper around Ace Selection object
+	 */
 	public AceSelection getSelection() {
 		if (selection == null)
 			selection = new AceSelection(getSelectionJS());
