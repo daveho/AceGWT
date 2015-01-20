@@ -66,6 +66,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 
 	/**
 	 * Do not use this constructor: just use the default constructor.
+	 * @param unused this parameter is ignored
 	 */
 	@Deprecated
 	public AceEditor(boolean unused) {
@@ -186,6 +187,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 
 	/**
 	 * Set font size.
+	 * @param fontSize the font size to set, e.g., "16px"
 	 */
 	public native void setFontSize(String fontSize) /*-{
 		var elementId = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId;
@@ -363,7 +365,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}-*/;
 
 	/**
-	 * Add an annotation to a the local <code>annotations</code> JsArray<AceAnnotation>, but does not set it on the editor
+	 * Add an annotation to a the local <code>annotations</code> JsArray&lt;AceAnnotation&gt;, but does not set it on the editor
 	 *
 	 * @param row to which the annotation should be added
 	 * @param column to which the annotation applies
@@ -386,7 +388,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 
 
 	/**
-	 * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray<AceAnnotation>
+	 * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray&lt;AceAnnotation&gt;
 	 */
 	public native void clearAnnotations() /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
@@ -468,9 +470,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	
 	
 	/**
-	 * Removes all existing completers from the langtools<br/><br/>
+	 * Removes all existing completers from the langtools<br><br>
 	 * This can be used to disable all completers including local completers, which can be very useful
-	 * when completers are used on very large files (as the local completer tokenizes every word to put in the selected list).<br/><br/> 
+	 * when completers are used on very large files (as the local completer tokenizes every word to put in the selected list).<br><br> 
 	 * <strong>NOTE:</strong> This method may be removed, and replaced with another solution. It works at point of check-in, but treat this as unstable for now.
 	 */
 	public native static void removeAllExistingCompleters() /*-{
