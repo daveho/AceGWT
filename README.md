@@ -12,6 +12,10 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+20 January 2015:
+
+* Support for selection change events, courtesy of [Roman Sutormin](https://github.com/rsutormin).
+
 12 October 2014:
 
 * Updated to latest version of Ace from [here](https://github.com/ajaxorg/ace-builds/tree/master/src), plus applied a small fix which has been submitted as a [push request](https://github.com/ajaxorg/ace/pull/2189) (code changes in this push request already applied to code in this repository).
