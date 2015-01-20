@@ -50,6 +50,8 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	
 	private HashMap<Integer, AceRange> markers = new HashMap<Integer, AceRange>();
 	
+	private AceSelection selection = null;
+	
 	/**
 	 * Preferred constructor.
 	 */
@@ -582,6 +584,21 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		range.detach();
 	}
 	
+	/**
+	 * Prepare a wrapper around Ace Selection object.
+	 * @return a wrapper around Ace Selection object
+	 */
+	public AceSelection getSelection() {
+		if (selection == null)
+			selection = new AceSelection(getSelectionJS());
+		return selection;
+	}
+	
+	private native JavaScriptObject getSelectionJS() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.getSession().getSelection();
+	}-*/;
+
 	private static AceCompletionCallback wrapCompletionCallback(JavaScriptObject jsCallback) {
 		
 		return new AceCompletionCallbackImpl(jsCallback);

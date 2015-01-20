@@ -31,6 +31,8 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 import edu.ycp.cs.dh.acegwt.client.ace.AceMarkerType;
 import edu.ycp.cs.dh.acegwt.client.ace.AceRange;
+import edu.ycp.cs.dh.acegwt.client.ace.AceSelection;
+import edu.ycp.cs.dh.acegwt.client.ace.AceSelectionListener;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -105,6 +107,12 @@ public class AceGWTDemo implements EntryPoint {
 		editor1.addOnCursorPositionChangeHandler(new AceEditorCallback() {
 			@Override
 			public void invokeAceCallback(JavaScriptObject obj) {
+				updateEditor1CursorPosition();
+			}
+		});
+		editor1.getSelection().addSelectionListener(new AceSelectionListener() {
+			@Override
+			public void onChangeSelection(AceSelection selection) {
 				updateEditor1CursorPosition();
 			}
 		});
@@ -293,10 +301,19 @@ public class AceGWTDemo implements EntryPoint {
 
 	private void updateEditor1CursorPosition() {
 		AceEditorCursorPosition cursorPosition = editor1.getCursorPosition();
-		rowColLabel.setText(cursorPosition.toString());
+		String selectionAnchorPosText = "";
+		if (!editor1.getSelection().isEmpty()) {
+			selectionAnchorPosText += editor1.getSelection().getSelectionAnchor() + " - ";
+		}
+		rowColLabel.setText(selectionAnchorPosText + cursorPosition.toString());
 		
 		
+		String selectionAnchorIndText = "";
+		if (!editor1.getSelection().isEmpty()) {
+			selectionAnchorIndText += editor1.getIndexFromPosition(
+					editor1.getSelection().getSelectionAnchor()) + " - ";
+		}
 		int absPos = editor1.getIndexFromPosition(cursorPosition);
-		absolutePositionLabel.setText(String.valueOf(absPos));
+		absolutePositionLabel.setText(selectionAnchorIndText + String.valueOf(absPos));
 	}
 }
