@@ -24,6 +24,7 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippetSegment;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippetSegmentLiteral;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippetSegmentTabstopItem;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue;
+import edu.ycp.cs.dh.acegwt.client.ace.AceDefaultCommandLine;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition;
@@ -42,6 +43,7 @@ public class AceGWTDemo implements EntryPoint {
 	private AceEditor editor2;
 	private InlineLabel rowColLabel;
 	private InlineLabel absolutePositionLabel;
+	private TextBox commandLine;
 	
 	private static final String JAVA_TEXT =
 			"public class Hello {\n" +
@@ -125,6 +127,7 @@ public class AceGWTDemo implements EntryPoint {
 		editor1.addAnnotation(0, 1, "What's up?", AceAnnotationType.WARNING);
 		editor1.addAnnotation(2, 1, "This code is lame", AceAnnotationType.ERROR);
 		editor1.setAnnotations();
+		editor1.initializeCommandLine(new AceDefaultCommandLine(commandLine));
 		
 		// start the second editor and set its theme and mode
 		editor2.startEditor();
@@ -292,7 +295,13 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(removeMarks);
 		
 		mainPanel.add(buttonPanel);
-		
+
+		HorizontalPanel buttonPanel2 = new HorizontalPanel();
+		buttonPanel2.add(new InlineLabel("Command line"));
+		commandLine = new TextBox();
+		buttonPanel2.add(commandLine);
+		mainPanel.add(buttonPanel2);
+
 		mainPanel.add(editor2);
 		mainPanel.add(new Label("Label below!"));
 		

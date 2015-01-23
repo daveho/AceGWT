@@ -52,6 +52,8 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	
 	private AceSelection selection = null;
 	
+	private AceCommandLine commandLine = null;
+	
 	/**
 	 * Preferred constructor.
 	 */
@@ -414,6 +416,63 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 
 	/**
+	 * Execute a command with no arguments. See {@link AceCommand} 
+	 * values for example.
+	 * @param command the command (one of the values in the
+	 *             {@link AceCommand} enumeration)
+	 */
+	public void execCommand(AceCommand command) {
+		execCommand(command, null);
+	}
+
+	/**
+	 * Execute a command with arguments (in case args is not null). 
+	 * See {@link AceCommand} values for example.
+	 * @param command the command (one of the values in the
+	 *             {@link AceCommand} enumeration)
+	 * @param args command arguments (string or map)
+	 */
+	public void execCommand(AceCommand command, AceCommandArgs args) {
+		execCommand(command.getName(), args);
+	}
+
+	/**
+	 * Execute a command possibly containing string argument.
+	 * @param command the command which could be one or two words separated 
+	 * 				by whitespaces
+	 */
+	public native void execCommand(String command) /*-{
+		var parts = command.split(/\s+/);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::execCommand(Ljava/lang/String;Ljava/lang/String;)(parts[0], parts[1]);
+	}-*/;
+
+	/**
+	 * Execute a command with arguments (in case args is not null). 
+	 * @param command one word command
+	 * @param args command argument
+	 */
+	public void execCommand(String command, String arg) {
+		execCommandHidden(command, arg);
+	}
+
+	/**
+	 * Execute a command with arguments (in case args is not null). 
+	 * @param command one word command
+	 * @param args command arguments of type {@link AceCommandArgs}
+	 */
+	public void execCommand(String command, AceCommandArgs args) {
+		execCommandHidden(command, args);
+	}
+
+	private native void execCommandHidden(String command, Object args) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		if (args && typeof args !== "string")
+			args = args.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandArgs::getValue()();
+		editor.commands.exec(command, editor, args);
+		editor.focus();
+	}-*/;
+
+	/**
 	 * Remove commands, that may not be required, from the editor
 	 *
 	 * @param command to be removed, one of
@@ -601,6 +660,22 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		return editor.getSession().getSelection();
 	}-*/;
 
+	/**
+	 * Bind command line and editor. For default implementation of command line 
+	 * you can use <code> AceCommandLine cmdLine = new AceDefaultCommandLine(textBox) </code>
+	 * where textBox could be for instance standard GWT TextBox or TextArea.
+	 * @param cmdLine implementation of command line
+	 */
+	public void initializeCommandLine(AceCommandLine cmdLine) {
+		this.commandLine = cmdLine;
+		this.commandLine.setCommandLineListener(new AceCommandLineListener() {
+			@Override
+			public void onCommandEntered(String command) {
+				execCommand(command);
+			}
+		});
+	}
+	
 	private static AceCompletionCallback wrapCompletionCallback(JavaScriptObject jsCallback) {
 		
 		return new AceCompletionCallbackImpl(jsCallback);
