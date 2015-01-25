@@ -21,6 +21,7 @@
 package edu.ycp.cs.dh.acegwt.client.ace;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -188,6 +189,15 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}-*/;
 
 	/**
+	 * Give font size
+	 * @return font size
+	 */
+	public native int getFontSize() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.getFontSize();
+	}-*/;
+	
+	/**
 	 * Set font size.
 	 * @param fontSize the font size to set, e.g., "16px"
 	 */
@@ -195,6 +205,15 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		var elementId = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId;
 		var elt = $doc.getElementById(elementId);
 		elt.style.fontSize = fontSize;
+	}-*/;
+
+	/**
+	 * Set integer font size.
+	 * @param fontSize the font size to set, e.g., 16
+	 */
+	public native void setFontSize(int fontSize) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.setFontSize(fontSize);
 	}-*/;
 
 	/**
@@ -483,6 +502,41 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		editor.commands.removeCommand(command);
 	}-*/;
 
+	/**
+	 * Construct java wrapper for registered Ace command.
+	 * @param command name of command
+	 * @return command description
+	 */
+	public native AceCommandDescription getCommandDescription(String command) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var obj = editor.commands.commands[command];
+		if (!obj)
+			return null;
+		return @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::fromJavaScript(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
+	}-*/;
+
+	/**
+	 * List names of all Ace commands.
+	 * @return names of all Ace commands
+	 */
+	public native List<String> listCommands() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var ret = @java.util.ArrayList::new()();
+		for (var command in editor.commands.commands)
+			ret.@java.util.ArrayList::add(Ljava/lang/Object;)(command);
+		return ret;
+	}-*/;
+	
+	/**
+	 * Add user defined command.
+	 * @param description command description
+	 */
+	public native void addCommand(AceCommandDescription description) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var command = description.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::toJavaScript(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;)(this);
+		editor.commands.addCommand(command);
+	}-*/;
+	
 	/**
 	 * Set whether to use wrap mode or not
 	 *

@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceAnnotationType;
+import edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletion;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceCompletionProvider;
@@ -128,7 +129,38 @@ public class AceGWTDemo implements EntryPoint {
 		editor1.addAnnotation(2, 1, "This code is lame", AceAnnotationType.ERROR);
 		editor1.setAnnotations();
 		editor1.initializeCommandLine(new AceDefaultCommandLine(commandLine));
-		
+		editor1.addCommand(new AceCommandDescription("increaseFontSize", 
+				new AceCommandDescription.ExecAction() {
+			@Override
+			public Object exec(AceEditor editor) {
+				int fontSize = editor.getFontSize();
+				editor.setFontSize(fontSize + 1);
+				return null;
+			}
+		}).withBindKey("Ctrl-=|Ctrl-+"));
+		editor1.addCommand(new AceCommandDescription("decreaseFontSize", 
+				new AceCommandDescription.ExecAction() {
+			@Override
+			public Object exec(AceEditor editor) {
+				int fontSize = editor.getFontSize();
+				fontSize = Math.max(fontSize - 1, 1);
+				editor.setFontSize(fontSize);
+				return null;
+			}
+		}).withBindKey("Ctrl+-|Ctrl-_"));
+		editor1.addCommand(new AceCommandDescription("resetFontSize", 
+				new AceCommandDescription.ExecAction() {
+			@Override
+			public Object exec(AceEditor editor) {
+				editor.setFontSize(12);
+				return null;
+			}
+		}).withBindKey("Ctrl+0|Ctrl-Numpad0"));
+		AceCommandDescription gotolineCmd = editor1.getCommandDescription("gotoline");
+		editor1.addCommand(
+				new AceCommandDescription("gotoline2", gotolineCmd.getExec())
+				.withBindKey("Alt-1").withReadOnly(true));
+
 		// start the second editor and set its theme and mode
 		editor2.startEditor();
 		editor2.setTheme(AceEditorTheme.TWILIGHT);
