@@ -21,6 +21,7 @@
 package edu.ycp.cs.dh.acegwt.client.ace;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -51,6 +52,8 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	private HashMap<Integer, AceRange> markers = new HashMap<Integer, AceRange>();
 	
 	private AceSelection selection = null;
+	
+	private AceCommandLine commandLine = null;
 	
 	/**
 	 * Preferred constructor.
@@ -186,6 +189,15 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}-*/;
 
 	/**
+	 * Give font size
+	 * @return font size
+	 */
+	public native int getFontSize() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.getFontSize();
+	}-*/;
+	
+	/**
 	 * Set font size.
 	 * @param fontSize the font size to set, e.g., "16px"
 	 */
@@ -193,6 +205,15 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		var elementId = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId;
 		var elt = $doc.getElementById(elementId);
 		elt.style.fontSize = fontSize;
+	}-*/;
+
+	/**
+	 * Set integer font size.
+	 * @param fontSize the font size to set, e.g., 16
+	 */
+	public native void setFontSize(int fontSize) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.setFontSize(fontSize);
 	}-*/;
 
 	/**
@@ -414,6 +435,63 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 
 	/**
+	 * Execute a command with no arguments. See {@link AceCommand} 
+	 * values for example.
+	 * @param command the command (one of the values in the
+	 *             {@link AceCommand} enumeration)
+	 */
+	public void execCommand(AceCommand command) {
+		execCommand(command, null);
+	}
+
+	/**
+	 * Execute a command with arguments (in case args is not null). 
+	 * See {@link AceCommand} values for example.
+	 * @param command the command (one of the values in the
+	 *             {@link AceCommand} enumeration)
+	 * @param args command arguments (string or map)
+	 */
+	public void execCommand(AceCommand command, AceCommandArgs args) {
+		execCommand(command.getName(), args);
+	}
+
+	/**
+	 * Execute a command possibly containing string argument.
+	 * @param command the command which could be one or two words separated 
+	 * 				by whitespaces
+	 */
+	public native void execCommand(String command) /*-{
+		var parts = command.split(/\s+/);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::execCommand(Ljava/lang/String;Ljava/lang/String;)(parts[0], parts[1]);
+	}-*/;
+
+	/**
+	 * Execute a command with arguments (in case args is not null). 
+	 * @param command one word command
+	 * @param args command argument
+	 */
+	public void execCommand(String command, String arg) {
+		execCommandHidden(command, arg);
+	}
+
+	/**
+	 * Execute a command with arguments (in case args is not null). 
+	 * @param command one word command
+	 * @param args command arguments of type {@link AceCommandArgs}
+	 */
+	public void execCommand(String command, AceCommandArgs args) {
+		execCommandHidden(command, args);
+	}
+
+	private native void execCommandHidden(String command, Object args) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		if (args && typeof args !== "string")
+			args = args.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandArgs::getValue()();
+		editor.commands.exec(command, editor, args);
+		editor.focus();
+	}-*/;
+
+	/**
 	 * Remove commands, that may not be required, from the editor
 	 *
 	 * @param command to be removed, one of
@@ -424,6 +502,41 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		editor.commands.removeCommand(command);
 	}-*/;
 
+	/**
+	 * Construct java wrapper for registered Ace command.
+	 * @param command name of command
+	 * @return command description
+	 */
+	public native AceCommandDescription getCommandDescription(String command) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var obj = editor.commands.commands[command];
+		if (!obj)
+			return null;
+		return @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::fromJavaScript(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
+	}-*/;
+
+	/**
+	 * List names of all Ace commands.
+	 * @return names of all Ace commands
+	 */
+	public native List<String> listCommands() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var ret = @java.util.ArrayList::new()();
+		for (var command in editor.commands.commands)
+			ret.@java.util.ArrayList::add(Ljava/lang/Object;)(command);
+		return ret;
+	}-*/;
+	
+	/**
+	 * Add user defined command.
+	 * @param description command description
+	 */
+	public native void addCommand(AceCommandDescription description) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var command = description.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::toJavaScript(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;)(this);
+		editor.commands.addCommand(command);
+	}-*/;
+	
 	/**
 	 * Set whether to use wrap mode or not
 	 *
@@ -601,6 +714,22 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		return editor.getSession().getSelection();
 	}-*/;
 
+	/**
+	 * Bind command line and editor. For default implementation of command line 
+	 * you can use <code> AceCommandLine cmdLine = new AceDefaultCommandLine(textBox) </code>
+	 * where textBox could be for instance standard GWT TextBox or TextArea.
+	 * @param cmdLine implementation of command line
+	 */
+	public void initializeCommandLine(AceCommandLine cmdLine) {
+		this.commandLine = cmdLine;
+		this.commandLine.setCommandLineListener(new AceCommandLineListener() {
+			@Override
+			public void onCommandEntered(String command) {
+				execCommand(command);
+			}
+		});
+	}
+	
 	private static AceCompletionCallback wrapCompletionCallback(JavaScriptObject jsCallback) {
 		
 		return new AceCompletionCallbackImpl(jsCallback);
