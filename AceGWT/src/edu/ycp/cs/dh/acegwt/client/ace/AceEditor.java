@@ -226,7 +226,24 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		return editor.getSession().getValue();
 	}-*/;
 
-	
+	/**
+	 * Causes the editor to gain input focus.
+	 */
+	public native void focus() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.focus();
+	}-*/;
+
+	/**
+	 * Retrieves the number of lines in the editor.
+	 * 
+	 * @return The number of lines in the editor.
+	 */
+	public native int getLineCount() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.session.getLength();
+	}-*/;
+
 	/**
 	 * Set the complete text in the editor from a String.
 	 *
