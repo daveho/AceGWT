@@ -45,66 +45,86 @@ public class AceGWTDemo implements EntryPoint {
 	private InlineLabel rowColLabel;
 	private InlineLabel absolutePositionLabel;
 	private TextBox commandLine;
-	
-	private static final String JAVA_TEXT =
-			"public class Hello {\n" +
-			"\tpublic static void main(String[] args) {\n" +
-			"\t\tSystem.out.println(\"Hello, world!\");\n" +
-			"\t}\n" +
-			"}\n";
-	
-	private static class MyCompletionProvider implements AceCompletionProvider {
-		@Override		
 
-		public void getProposals(AceEditor editor, AceEditorCursorPosition pos, String prefix, AceCompletionCallback callback) {
+	private static final String JAVA_TEXT = "public class Hello {\n"
+			+ "\tpublic static void main(String[] args) {\n"
+			+ "\t\tSystem.out.println(\"Hello, world!\");\n" + "\t}\n" + "}\n";
+
+	private static class MyCompletionProvider implements AceCompletionProvider {
+		@Override
+		public void getProposals(AceEditor editor, AceEditorCursorPosition pos,
+				String prefix, AceCompletionCallback callback) {
 			GWT.log("sending completion proposals");
-			callback.invokeWithCompletions(new AceCompletion[]{
-					new AceCompletionValue("first", "firstcompletion", "custom", 10),
-					new AceCompletionValue("second", "secondcompletion", "custom", 11),
-					new AceCompletionValue("third", "thirdcompletion", "custom", 12),
+			callback.invokeWithCompletions(new AceCompletion[] {
+					new AceCompletionValue("first", "firstcompletion",
+							"custom", 10),
+					new AceCompletionValue("second", "secondcompletion",
+							"custom", 11),
+					new AceCompletionValue("third", "thirdcompletion",
+							"custom", 12),
 					new AceCompletionSnippet("fourth (snippets)",
-							new AceCompletionSnippetSegment[]{
-							new AceCompletionSnippetSegmentLiteral("filler_"),
-							new AceCompletionSnippetSegmentTabstopItem("tabstop1"),
-							new AceCompletionSnippetSegmentLiteral("_\\filler_"), // putting backslash in here to prove escaping is working
-							new AceCompletionSnippetSegmentTabstopItem("tabstop2"),
-							new AceCompletionSnippetSegmentLiteral("_$filler_"), // putting dollar in here to prove escaping is working
-							new AceCompletionSnippetSegmentTabstopItem("tabstop3"),
-							new AceCompletionSnippetSegmentLiteral("\nnextlinefiller_"),
-							new AceCompletionSnippetSegmentTabstopItem("tabstop}4"),
-							new AceCompletionSnippetSegmentLiteral("_filler_"),
-							new AceCompletionSnippetSegmentTabstopItem("") /* Empty tabstop -- tab to end of replacement text */
-					},"csnip", "Write a new snippet in your editor", 14)
-			});
+							new AceCompletionSnippetSegment[] {
+									new AceCompletionSnippetSegmentLiteral(
+											"filler_"),
+									new AceCompletionSnippetSegmentTabstopItem(
+											"tabstop1"),
+									new AceCompletionSnippetSegmentLiteral(
+											"_\\filler_"), // putting backslash
+															// in here to prove
+															// escaping is
+															// working
+									new AceCompletionSnippetSegmentTabstopItem(
+											"tabstop2"),
+									new AceCompletionSnippetSegmentLiteral(
+											"_$filler_"), // putting dollar in
+															// here to prove
+															// escaping is
+															// working
+									new AceCompletionSnippetSegmentTabstopItem(
+											"tabstop3"),
+									new AceCompletionSnippetSegmentLiteral(
+											"\nnextlinefiller_"),
+									new AceCompletionSnippetSegmentTabstopItem(
+											"tabstop}4"),
+									new AceCompletionSnippetSegmentLiteral(
+											"_filler_"),
+									new AceCompletionSnippetSegmentTabstopItem(
+											"") /*
+												 * Empty tabstop -- tab to end
+												 * of replacement text
+												 */
+							}, "csnip", "Write a new snippet in your editor",
+							14) });
 		}
 	}
-	
+
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
+
 		// create first AceEditor widget
 		editor1 = new AceEditor();
 		editor1.setWidth("800px");
 		editor1.setHeight("300px");
-		
+
 		// create second AceEditor widget
 		editor2 = new AceEditor();
 		editor2.setWidth("800px");
 		editor2.setHeight("300px");
-		
+
 		// Try out custom code completer
 		AceEditor.addCompletionProvider(new MyCompletionProvider());
-		
+
 		// build the UI
 		buildUI();
-		
+
 		// start the first editor and set its theme and mode
-		editor1.startEditor(); // must be called before calling setTheme/setMode/etc.
+		editor1.startEditor(); // must be called before calling
+								// setTheme/setMode/etc.
 		editor1.setTheme(AceEditorTheme.ECLIPSE);
 		editor1.setMode(AceEditorMode.JAVA);
-		
+
 		// use cursor position change events to keep a label updated
 		// with the current row/col
 		editor1.addOnCursorPositionChangeHandler(new AceEditorCallback() {
@@ -120,46 +140,47 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		updateEditor1CursorPosition(); // initial update
-		
+
 		// set some initial text in editor 1
 		editor1.setText(JAVA_TEXT);
-		
+
 		// add some annotations
 		editor1.addAnnotation(0, 1, "What's up?", AceAnnotationType.WARNING);
-		editor1.addAnnotation(2, 1, "This code is lame", AceAnnotationType.ERROR);
+		editor1.addAnnotation(2, 1, "This code is lame",
+				AceAnnotationType.ERROR);
 		editor1.setAnnotations();
 		editor1.initializeCommandLine(new AceDefaultCommandLine(commandLine));
-		editor1.addCommand(new AceCommandDescription("increaseFontSize", 
+		editor1.addCommand(new AceCommandDescription("increaseFontSize",
 				new AceCommandDescription.ExecAction() {
-			@Override
-			public Object exec(AceEditor editor) {
-				int fontSize = editor.getFontSize();
-				editor.setFontSize(fontSize + 1);
-				return null;
-			}
-		}).withBindKey("Ctrl-=|Ctrl-+"));
-		editor1.addCommand(new AceCommandDescription("decreaseFontSize", 
+					@Override
+					public Object exec(AceEditor editor) {
+						int fontSize = editor.getFontSize();
+						editor.setFontSize(fontSize + 1);
+						return null;
+					}
+				}).withBindKey("Ctrl-=|Ctrl-+"));
+		editor1.addCommand(new AceCommandDescription("decreaseFontSize",
 				new AceCommandDescription.ExecAction() {
-			@Override
-			public Object exec(AceEditor editor) {
-				int fontSize = editor.getFontSize();
-				fontSize = Math.max(fontSize - 1, 1);
-				editor.setFontSize(fontSize);
-				return null;
-			}
-		}).withBindKey("Ctrl+-|Ctrl-_"));
-		editor1.addCommand(new AceCommandDescription("resetFontSize", 
+					@Override
+					public Object exec(AceEditor editor) {
+						int fontSize = editor.getFontSize();
+						fontSize = Math.max(fontSize - 1, 1);
+						editor.setFontSize(fontSize);
+						return null;
+					}
+				}).withBindKey("Ctrl+-|Ctrl-_"));
+		editor1.addCommand(new AceCommandDescription("resetFontSize",
 				new AceCommandDescription.ExecAction() {
-			@Override
-			public Object exec(AceEditor editor) {
-				editor.setFontSize(12);
-				return null;
-			}
-		}).withBindKey("Ctrl+0|Ctrl-Numpad0"));
-		AceCommandDescription gotolineCmd = editor1.getCommandDescription("gotoline");
-		editor1.addCommand(
-				new AceCommandDescription("gotoline2", gotolineCmd.getExec())
-				.withBindKey("Alt-1").withReadOnly(true));
+					@Override
+					public Object exec(AceEditor editor) {
+						editor.setFontSize(12);
+						return null;
+					}
+				}).withBindKey("Ctrl+0|Ctrl-Numpad0"));
+		AceCommandDescription gotolineCmd = editor1
+				.getCommandDescription("gotoline");
+		editor1.addCommand(new AceCommandDescription("gotoline2", gotolineCmd
+				.getExec()).withBindKey("Alt-1").withReadOnly(true));
 
 		// start the second editor and set its theme and mode
 		editor2.startEditor();
@@ -168,40 +189,39 @@ public class AceGWTDemo implements EntryPoint {
 	}
 
 	/**
-	 * This method builds the UI.
-	 * It creates UI widgets that exercise most/all of the AceEditor methods,
-	 * so it's a bit of a kitchen sink.
+	 * This method builds the UI. It creates UI widgets that exercise most/all
+	 * of the AceEditor methods, so it's a bit of a kitchen sink.
 	 */
 	private void buildUI() {
 		VerticalPanel mainPanel = new VerticalPanel();
 		mainPanel.setWidth("100%");
-		
+
 		mainPanel.add(new Label("Label above!"));
-		
+
 		mainPanel.add(editor1);
-		
+
 		// Label to display current row/column
 		rowColLabel = new InlineLabel("");
 		mainPanel.add(rowColLabel);
-		
+
 		// Label to display current absolute position
 		absolutePositionLabel = new InlineLabel("");
 		mainPanel.add(absolutePositionLabel);
-		
+
 		// Create some buttons for testing various editor APIs
 		HorizontalPanel buttonPanel = new HorizontalPanel();
-		
+
 		// Add button to insert text at current cursor position
 		Button insertTextButton = new Button("Insert");
 		insertTextButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				//Window.alert("Cursor at: " + editor1.getCursorPosition());
+				// Window.alert("Cursor at: " + editor1.getCursorPosition());
 				editor1.insertAtCursor("inserted text!");
 			}
 		});
 		buttonPanel.add(insertTextButton);
-		
+
 		// Add check box to enable/disable soft tabs
 		final CheckBox softTabsBox = new CheckBox("Soft tabs");
 		softTabsBox.setValue(true); // I think soft tabs is the default
@@ -212,7 +232,7 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(softTabsBox);
-		
+
 		// add text box and button to set tab size
 		final TextBox tabSizeTextBox = new TextBox();
 		tabSizeTextBox.setWidth("4em");
@@ -226,7 +246,7 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(new InlineLabel("Tab size"));
 		buttonPanel.add(tabSizeTextBox);
 		buttonPanel.add(setTabSizeButton);
-		
+
 		// add text box and button to go to a given line
 		final TextBox gotoLineTextBox = new TextBox();
 		gotoLineTextBox.setWidth("4em");
@@ -240,18 +260,19 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel.add(new InlineLabel("Go to line"));
 		buttonPanel.add(gotoLineTextBox);
 		buttonPanel.add(gotoLineButton);
-		
+
 		// checkbox to set whether or not horizontal scrollbar is always visible
 		final CheckBox hScrollBarAlwaysVisibleBox = new CheckBox("H scrollbar");
 		hScrollBarAlwaysVisibleBox.setValue(true);
 		hScrollBarAlwaysVisibleBox.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				editor1.setHScrollBarAlwaysVisible(hScrollBarAlwaysVisibleBox.getValue());
+				editor1.setHScrollBarAlwaysVisible(hScrollBarAlwaysVisibleBox
+						.getValue());
 			}
 		});
 		buttonPanel.add(hScrollBarAlwaysVisibleBox);
-		
+
 		// checkbox to show/hide gutter
 		final CheckBox showGutterBox = new CheckBox("Show gutter");
 		showGutterBox.setValue(true);
@@ -262,7 +283,7 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(showGutterBox);
-		
+
 		// checkbox to set/unset readonly mode
 		final CheckBox readOnlyBox = new CheckBox("Read only");
 		readOnlyBox.setValue(false);
@@ -273,7 +294,7 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(readOnlyBox);
-		
+
 		// checkbox to show/hide print margin
 		final CheckBox showPrintMarginBox = new CheckBox("Show print margin");
 		showPrintMarginBox.setValue(true);
@@ -284,9 +305,10 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(showPrintMarginBox);
-		
+
 		// checkbox to enable/disable autocomplete
-		final CheckBox enableAutocompleteBox = new CheckBox("Enable autocomplete");
+		final CheckBox enableAutocompleteBox = new CheckBox(
+				"Enable autocomplete");
 		enableAutocompleteBox.setValue(false);
 		enableAutocompleteBox.addClickHandler(new ClickHandler() {
 			@Override
@@ -295,7 +317,7 @@ public class AceGWTDemo implements EntryPoint {
 			}
 		});
 		buttonPanel.add(enableAutocompleteBox);
-		
+
 		// Test for AceEditor.getRow
 		final Button clickMe = new Button("Click me!");
 		clickMe.addClickHandler(new ClickHandler() {
@@ -303,12 +325,13 @@ public class AceGWTDemo implements EntryPoint {
 			public void onClick(ClickEvent event) {
 				AceEditorCursorPosition pos = editor1.getCursorPosition();
 				String line = editor1.getLine(pos.getRow());
-				AceEditorCursorPosition pos10 = editor1.getPositionFromIndex(10);
+				AceEditorCursorPosition pos10 = editor1
+						.getPositionFromIndex(10);
 				Window.alert("Index 10=" + pos10 + ", cur line=" + line);
 			}
 		});
 		buttonPanel.add(clickMe);
-		
+
 		// Test for AceEditor Markers removal
 		final Button removeMarks = new Button("Add/Remove Markers");
 		removeMarks.addClickHandler(new ClickHandler() {
@@ -316,16 +339,19 @@ public class AceGWTDemo implements EntryPoint {
 			public void onClick(ClickEvent event) {
 				if (editor1.getMarkers().isEmpty()) {
 					// add some markers
-					editor1.addMarker(AceRange.create(0, 0, 1, 41), "ace_selection", AceMarkerType.FULL_LINE, false);
-					editor1.addFloatingMarker(AceRange.create(2, 2, 2, 38), "ace_selected-word", AceMarkerType.TEXT);
+					editor1.addMarker(AceRange.create(0, 0, 1, 41),
+							"ace_selection", AceMarkerType.FULL_LINE, false);
+					editor1.addFloatingMarker(AceRange.create(2, 2, 2, 38),
+							"ace_selected-word", AceMarkerType.TEXT);
 				} else {
-					Window.alert("Removing " + editor1.getMarkers() + " markers");
+					Window.alert("Removing " + editor1.getMarkers()
+							+ " markers");
 					editor1.removeAllMarkers();
 				}
 			}
 		});
 		buttonPanel.add(removeMarks);
-		
+
 		mainPanel.add(buttonPanel);
 
 		HorizontalPanel buttonPanel2 = new HorizontalPanel();
@@ -334,9 +360,42 @@ public class AceGWTDemo implements EntryPoint {
 		buttonPanel2.add(commandLine);
 		mainPanel.add(buttonPanel2);
 
+		// Demo button for get number of lines
+		final Button appendLineCount = new Button("Append Line Count");
+		appendLineCount.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				final String message = editor2.getText() + "There are "
+						+ editor1.getLineCount() + " lines in the main editor.";
+				editor2.setText(message);
+			}
+
+		});
+		buttonPanel2.add(appendLineCount);
+
+		final Button flipFocus = new Button("Focus 1st Editor");
+		flipFocus.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.focus();
+			}
+
+		});
+		buttonPanel2.add(flipFocus);
+
+		final Button flipFocus2 = new Button("Focus 2nd Editor");
+		flipFocus2.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor2.focus();
+			}
+
+		});
+		buttonPanel2.add(flipFocus2);
+
 		mainPanel.add(editor2);
 		mainPanel.add(new Label("Label below!"));
-		
+
 		RootPanel.get().add(mainPanel);
 	}
 
@@ -344,17 +403,18 @@ public class AceGWTDemo implements EntryPoint {
 		AceEditorCursorPosition cursorPosition = editor1.getCursorPosition();
 		String selectionAnchorPosText = "";
 		if (!editor1.getSelection().isEmpty()) {
-			selectionAnchorPosText += editor1.getSelection().getSelectionAnchor() + " - ";
+			selectionAnchorPosText += editor1.getSelection()
+					.getSelectionAnchor() + " - ";
 		}
 		rowColLabel.setText(selectionAnchorPosText + cursorPosition.toString());
-		
-		
+
 		String selectionAnchorIndText = "";
 		if (!editor1.getSelection().isEmpty()) {
-			selectionAnchorIndText += editor1.getIndexFromPosition(
-					editor1.getSelection().getSelectionAnchor()) + " - ";
+			selectionAnchorIndText += editor1.getIndexFromPosition(editor1
+					.getSelection().getSelectionAnchor()) + " - ";
 		}
 		int absPos = editor1.getIndexFromPosition(cursorPosition);
-		absolutePositionLabel.setText(selectionAnchorIndText + String.valueOf(absPos));
+		absolutePositionLabel.setText(selectionAnchorIndText
+				+ String.valueOf(absPos));
 	}
 }
