@@ -1,4 +1,4 @@
-define("ace/ext/menu_tools/element_generator",["require","exports","module"], function(require, exports, module) {
+ace.define("ace/ext/menu_tools/element_generator",["require","exports","module"], function(require, exports, module) {
 'use strict';
 module.exports.createOption = function createOption (obj) {
     var attribute;
@@ -54,7 +54,7 @@ module.exports.createSelection = function createSelection (id, values, clss) {
 
 });
 
-define("ace/ext/modelist",["require","exports","module"], function(require, exports, module) {
+ace.define("ace/ext/modelist",["require","exports","module"], function(require, exports, module) {
 "use strict";
 
 var modes = [];
@@ -113,8 +113,12 @@ var supportedModes = {
     Diff:        ["diff|patch"],
     Dockerfile:  ["^Dockerfile"],
     Dot:         ["dot"],
+    Dummy:       ["dummy"],
+    DummySyntax: ["dummy"],
     Eiffel:      ["e"],
     EJS:         ["ejs"],
+    Elixir:      ["ex|exs"],
+    Elm:         ["elm"],
     Erlang:      ["erl|hrl"],
     Forth:       ["frt|fs|ldr"],
     FTL:         ["ftl"],
@@ -153,6 +157,7 @@ var supportedModes = {
     Lucene:      ["lucene"],
     Makefile:    ["^Makefile|^GNUmakefile|^makefile|^OCamlMakefile|make"],
     Markdown:    ["md|markdown"],
+    Mask:        ["mask"],
     MATLAB:      ["matlab"],
     MEL:         ["mel"],
     MUSHCode:    ["mc|mush"],
@@ -233,7 +238,7 @@ module.exports = {
 
 });
 
-define("ace/ext/themelist",["require","exports","module","ace/lib/fixoldbrowsers"], function(require, exports, module) {
+ace.define("ace/ext/themelist",["require","exports","module","ace/lib/fixoldbrowsers"], function(require, exports, module) {
 "use strict";
 require("ace/lib/fixoldbrowsers");
 
@@ -288,7 +293,7 @@ exports.themes = themeData.map(function(data) {
 
 });
 
-define("ace/ext/menu_tools/add_editor_menu_options",["require","exports","module","ace/ext/modelist","ace/ext/themelist"], function(require, exports, module) {
+ace.define("ace/ext/menu_tools/add_editor_menu_options",["require","exports","module","ace/ext/modelist","ace/ext/themelist"], function(require, exports, module) {
 'use strict';
 module.exports.addEditorMenuOptions = function addEditorMenuOptions (editor) {
     var modelist = require('../modelist');
@@ -342,7 +347,7 @@ module.exports.addEditorMenuOptions = function addEditorMenuOptions (editor) {
 
 });
 
-define("ace/ext/menu_tools/get_set_functions",["require","exports","module"], function(require, exports, module) {
+ace.define("ace/ext/menu_tools/get_set_functions",["require","exports","module"], function(require, exports, module) {
 'use strict';
 module.exports.getSetFunctions = function getSetFunctions (editor) {
     var out = [];
@@ -384,7 +389,7 @@ module.exports.getSetFunctions = function getSetFunctions (editor) {
 
 });
 
-define("ace/ext/menu_tools/generate_settings_menu",["require","exports","module","ace/ext/menu_tools/element_generator","ace/ext/menu_tools/add_editor_menu_options","ace/ext/menu_tools/get_set_functions"], function(require, exports, module) {
+ace.define("ace/ext/menu_tools/generate_settings_menu",["require","exports","module","ace/ext/menu_tools/element_generator","ace/ext/menu_tools/add_editor_menu_options","ace/ext/menu_tools/get_set_functions"], function(require, exports, module) {
 'use strict';
 var egen = require('./element_generator');
 var addEditorMenuOptions = require('./add_editor_menu_options').addEditorMenuOptions;
@@ -404,6 +409,12 @@ module.exports.generateSettingsMenu = function generateSettingsMenu (editor) {
         elements.forEach(function(element) {
             topmenu.appendChild(element);
         });
+        
+        var el = topmenu.appendChild(document.createElement('div'));
+        var version = "1.1.8";
+        el.style.padding = "1em";
+        el.textContent = "Ace version " + version;
+        
         return topmenu;
     }
     function createNewEntry(obj, clss, item, val) {
@@ -503,7 +514,7 @@ module.exports.generateSettingsMenu = function generateSettingsMenu (editor) {
 
 });
 
-define("ace/ext/menu_tools/overlay_page",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
+ace.define("ace/ext/menu_tools/overlay_page",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
 'use strict';
 var dom = require("../../lib/dom");
 var cssText = "#ace_settingsmenu, #kbshortcutmenu {\
@@ -604,7 +615,7 @@ module.exports.overlayPage = function overlayPage(editor, contentElement, top, r
 
 });
 
-define("ace/ext/settings_menu",["require","exports","module","ace/ext/menu_tools/generate_settings_menu","ace/ext/menu_tools/overlay_page","ace/editor"], function(require, exports, module) {
+ace.define("ace/ext/settings_menu",["require","exports","module","ace/ext/menu_tools/generate_settings_menu","ace/ext/menu_tools/overlay_page","ace/editor"], function(require, exports, module) {
 "use strict";
 var generateSettingsMenu = require('./menu_tools/generate_settings_menu').generateSettingsMenu;
 var overlayPage = require('./menu_tools/overlay_page').overlayPage;
@@ -620,8 +631,7 @@ module.exports.init = function(editor) {
     };
 };
 });
-;
                 (function() {
-                    window.require(["ace/ext/settings_menu"], function() {});
+                    ace.require(["ace/ext/settings_menu"], function() {});
                 })();
             

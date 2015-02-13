@@ -1,4 +1,4 @@
-define("ace/ext/modelist",["require","exports","module"], function(require, exports, module) {
+ace.define("ace/ext/modelist",["require","exports","module"], function(require, exports, module) {
 "use strict";
 
 var modes = [];
@@ -57,8 +57,12 @@ var supportedModes = {
     Diff:        ["diff|patch"],
     Dockerfile:  ["^Dockerfile"],
     Dot:         ["dot"],
+    Dummy:       ["dummy"],
+    DummySyntax: ["dummy"],
     Eiffel:      ["e"],
     EJS:         ["ejs"],
+    Elixir:      ["ex|exs"],
+    Elm:         ["elm"],
     Erlang:      ["erl|hrl"],
     Forth:       ["frt|fs|ldr"],
     FTL:         ["ftl"],
@@ -97,6 +101,7 @@ var supportedModes = {
     Lucene:      ["lucene"],
     Makefile:    ["^Makefile|^GNUmakefile|^makefile|^OCamlMakefile|make"],
     Markdown:    ["md|markdown"],
+    Mask:        ["mask"],
     MATLAB:      ["matlab"],
     MEL:         ["mel"],
     MUSHCode:    ["mc|mush"],
@@ -176,8 +181,7 @@ module.exports = {
 };
 
 });
-;
                 (function() {
-                    window.require(["ace/ext/modelist"], function() {});
+                    ace.require(["ace/ext/modelist"], function() {});
                 })();
             

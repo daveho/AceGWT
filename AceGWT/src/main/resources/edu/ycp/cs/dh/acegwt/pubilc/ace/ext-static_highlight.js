@@ -1,4 +1,4 @@
-define("ace/ext/static_highlight",["require","exports","module","ace/edit_session","ace/layer/text","ace/config","ace/lib/dom"], function(require, exports, module) {
+ace.define("ace/ext/static_highlight",["require","exports","module","ace/edit_session","ace/layer/text","ace/config","ace/lib/dom"], function(require, exports, module) {
 "use strict";
 
 var EditSession = require("../edit_session").EditSession;
@@ -148,8 +148,7 @@ highlight.renderSync = function(input, mode, theme, lineStart, disableGutter) {
 module.exports = highlight;
 module.exports.highlight =highlight;
 });
-;
                 (function() {
-                    window.require(["ace/ext/static_highlight"], function() {});
+                    ace.require(["ace/ext/static_highlight"], function() {});
                 })();
             

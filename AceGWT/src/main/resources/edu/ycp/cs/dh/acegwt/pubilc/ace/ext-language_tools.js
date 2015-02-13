@@ -1,4 +1,4 @@
-define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/event_emitter","ace/lib/lang","ace/range","ace/anchor","ace/keyboard/hash_handler","ace/tokenizer","ace/lib/dom","ace/editor"], function(require, exports, module) {
+ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/event_emitter","ace/lib/lang","ace/range","ace/anchor","ace/keyboard/hash_handler","ace/tokenizer","ace/lib/dom","ace/editor"], function(require, exports, module) {
 "use strict";
 var oop = require("./lib/oop");
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
@@ -901,7 +901,7 @@ var Editor = require("./editor").Editor;
 
 });
 
-define("ace/autocomplete/popup",["require","exports","module","ace/edit_session","ace/virtual_renderer","ace/editor","ace/range","ace/lib/event","ace/lib/lang","ace/lib/dom"], function(require, exports, module) {
+ace.define("ace/autocomplete/popup",["require","exports","module","ace/edit_session","ace/virtual_renderer","ace/editor","ace/range","ace/lib/event","ace/lib/lang","ace/lib/dom"], function(require, exports, module) {
 "use strict";
 
 var EditSession = require("../edit_session").EditSession;
@@ -1080,6 +1080,8 @@ var AcePopup = function(parentNode) {
     popup.session.$computeWidth = function() {
         return this.screenWidth = 0;
     };
+
+    popup.$blockScrolling = Infinity;
     popup.isOpen = false;
     popup.isTopdown = false;
 
@@ -1111,6 +1113,7 @@ var AcePopup = function(parentNode) {
     popup.on("changeSelection", function() {
         if (popup.isOpen)
             popup.setRow(popup.selection.lead.row);
+        popup.renderer.scrollCursorIntoView();
     });
 
     popup.hide = function() {
@@ -1206,7 +1209,7 @@ exports.AcePopup = AcePopup;
 
 });
 
-define("ace/autocomplete/util",["require","exports","module"], function(require, exports, module) {
+ace.define("ace/autocomplete/util",["require","exports","module"], function(require, exports, module) {
 "use strict";
 
 exports.parForEach = function(array, fn, callback) {
@@ -1251,7 +1254,7 @@ exports.retrieveFollowingIdentifier = function(text, pos, regex) {
 
 });
 
-define("ace/autocomplete",["require","exports","module","ace/keyboard/hash_handler","ace/autocomplete/popup","ace/autocomplete/util","ace/lib/event","ace/lib/lang","ace/lib/dom","ace/snippets"], function(require, exports, module) {
+ace.define("ace/autocomplete",["require","exports","module","ace/keyboard/hash_handler","ace/autocomplete/popup","ace/autocomplete/util","ace/lib/event","ace/lib/lang","ace/lib/dom","ace/snippets"], function(require, exports, module) {
 "use strict";
 
 var HashHandler = require("./keyboard/hash_handler").HashHandler;
@@ -1265,6 +1268,7 @@ var snippetManager = require("./snippets").snippetManager;
 var Autocomplete = function() {
     this.autoInsert = true;
     this.autoSelect = true;
+    this.exactMatch = false;
     this.keyboardHandler = new HashHandler();
     this.keyboardHandler.bindKeys(this.commands);
 
@@ -1276,7 +1280,7 @@ var Autocomplete = function() {
     this.changeTimer = lang.delayedCall(function() {
         this.updateCompletions(true);
     }.bind(this));
-    
+
     this.tooltipTimer = lang.delayedCall(this.updateDocTooltip.bind(this), 50);
 };
 
@@ -1290,11 +1294,12 @@ var Autocomplete = function() {
             e.stop();
         }.bind(this));
         this.popup.focus = this.editor.focus.bind(this.editor);
+        this.popup.on("show", this.tooltipTimer.bind(null, null));
         this.popup.on("select", this.tooltipTimer.bind(null, null));
         this.popup.on("changeHoverMarker", this.tooltipTimer.bind(null, null));
         return this.popup;
     };
-    
+
     this.getPopup = function() {
         return this.popup || this.$init();
     };
@@ -1340,7 +1345,7 @@ var Autocomplete = function() {
             this.gatherCompletionsId += 1;
             this.popup.hide();
         }
-        
+
         if (this.base)
             this.base.detach();
         this.activated = false;
@@ -1361,7 +1366,7 @@ var Autocomplete = function() {
     this.blurListener = function(e) {
         var el = document.activeElement;
         var text = this.editor.textInput.getElement()
-        if (el != text && el.parentNode != this.popup.container 
+        if (el != text && el.parentNode != this.popup.container
             && el != this.tooltipNode && e.relatedTarget != this.tooltipNode
             && e.relatedTarget != text
         ) {
@@ -1398,7 +1403,7 @@ var Autocomplete = function() {
             return false;
 
         if (data.completer && data.completer.insertMatch) {
-            data.completer.insertMatch(this.editor);
+            data.completer.insertMatch(this.editor, data);
         } else {
             if (this.completions.filterText) {
                 var ranges = this.editor.selection.getAllRanges();
@@ -1447,7 +1452,7 @@ var Autocomplete = function() {
 
         this.base = session.doc.createAnchor(pos.row, pos.column - prefix.length);
         this.base.$insertRight = true;
-        
+
         var matches = [];
         var total = editor.completers.length;
         editor.completers.forEach(function(completer, i) {
@@ -1513,13 +1518,17 @@ var Autocomplete = function() {
 
             var prefix = results.prefix;
             var matches = results && results.matches;
-            
+
             if (!matches || !matches.length)
                 return detachIfFinished();
             if (prefix.indexOf(results.prefix) !== 0 || _id != this.gatherCompletionsId)
                 return;
 
             this.completions = new FilteredList(matches);
+
+            if (this.exactMatch)
+                this.completions.exactMatch = true;
+
             this.completions.setFilter(prefix);
             var filtered = this.completions.filtered;
             if (!filtered.length)
@@ -1536,7 +1545,7 @@ var Autocomplete = function() {
     this.cancelContextMenu = function() {
         this.editor.$mouseHandler.cancelContextMenu();
     };
-    
+
     this.updateDocTooltip = function() {
         var popup = this.popup;
         var all = popup.data;
@@ -1551,40 +1560,38 @@ var Autocomplete = function() {
         });
         if (!doc)
             doc = selected;
-        
+
         if (typeof doc == "string")
-            doc = {tooltipText: doc}
+            doc = {docText: doc}
         if (!doc || !(doc.docHTML || doc.docText))
             return this.hideDocTooltip();
         this.showDocTooltip(doc);
     };
-    
+
     this.showDocTooltip = function(item) {
         if (!this.tooltipNode) {
-            this.tooltipNode = item.docHTML ? dom.createElement("div") : dom.createElement("pre");
+            this.tooltipNode = dom.createElement("div");
             this.tooltipNode.className = "ace_tooltip ace_doc-tooltip";
             this.tooltipNode.style.margin = 0;
             this.tooltipNode.style.pointerEvents = "auto";
             this.tooltipNode.tabIndex = -1;
             this.tooltipNode.onblur = this.blurListener.bind(this);
-
         }
-        
+
         var tooltipNode = this.tooltipNode;
         if (item.docHTML) {
             tooltipNode.innerHTML = item.docHTML;
         } else if (item.docText) {
             tooltipNode.textContent = item.docText;
         }
-         
+
         if (!tooltipNode.parentNode)
-            document.body.appendChild(tooltipNode);        
+            document.body.appendChild(tooltipNode);
         var popup = this.popup;
         var rect = popup.container.getBoundingClientRect();
         tooltipNode.style.top = popup.container.style.top;
         tooltipNode.style.bottom = popup.container.style.bottom;
-        tooltipNode.style.backgroundImage = "none";
-        tooltipNode.style.backgroundColor = "#FFFFEE";
+
         if (window.innerWidth - rect.right < 320) {
             tooltipNode.style.right = window.innerWidth - rect.left + "px";
             tooltipNode.style.left = "";
@@ -1593,12 +1600,8 @@ var Autocomplete = function() {
             tooltipNode.style.right = "";
         }
         tooltipNode.style.display = "block";
-        tooltipNode.style.maxWidth = "500px";
-        tooltipNode.style.whiteSpace = "normal";
-        tooltipNode.style.wordWrap = "normal"; // Need to investigate how to wrap on words and for max width to be enforced at the same time .... 
-        tooltipNode.style.textAlign = "left";
     };
-    
+
     this.hideDocTooltip = function() {
         this.tooltipTimer.cancel();
         if (!this.tooltipNode) return;
@@ -1606,7 +1609,7 @@ var Autocomplete = function() {
         if (!this.editor.isFocused() && document.activeElement == el)
             this.editor.focus();
         this.tooltipNode = null;
-        if (el.parentNode) 
+        if (el.parentNode)
             el.parentNode.removeChild(el);
     };
 
@@ -1617,7 +1620,7 @@ Autocomplete.startCommand = {
     exec: function(editor) {
         if (!editor.completer)
             editor.completer = new Autocomplete();
-        editor.completer.autoInsert = 
+        editor.completer.autoInsert =
         editor.completer.autoSelect = true;
         editor.completer.showPopup(editor);
         editor.completer.cancelContextMenu();
@@ -1629,6 +1632,7 @@ var FilteredList = function(array, filterText, mutateData) {
     this.all = array;
     this.filtered = array;
     this.filterText = filterText || "";
+    this.exactMatch = false;
 };
 (function(){
     this.setFilter = function(str) {
@@ -1663,20 +1667,26 @@ var FilteredList = function(array, filterText, mutateData) {
             var matchMask = 0;
             var penalty = 0;
             var index, distance;
-            for (var j = 0; j < needle.length; j++) {
-                var i1 = caption.indexOf(lower[j], lastIndex + 1);
-                var i2 = caption.indexOf(upper[j], lastIndex + 1);
-                index = (i1 >= 0) ? ((i2 < 0 || i1 < i2) ? i1 : i2) : i2;
-                if (index < 0)
+
+            if (this.exactMatch) {
+                if (needle !== caption.substr(0, needle.length))
                     continue loop;
-                distance = index - lastIndex - 1;
-                if (distance > 0) {
-                    if (lastIndex === -1)
-                        penalty += 10;
-                    penalty += distance;
+            }else{
+                for (var j = 0; j < needle.length; j++) {
+                    var i1 = caption.indexOf(lower[j], lastIndex + 1);
+                    var i2 = caption.indexOf(upper[j], lastIndex + 1);
+                    index = (i1 >= 0) ? ((i2 < 0 || i1 < i2) ? i1 : i2) : i2;
+                    if (index < 0)
+                        continue loop;
+                    distance = index - lastIndex - 1;
+                    if (distance > 0) {
+                        if (lastIndex === -1)
+                            penalty += 10;
+                        penalty += distance;
+                    }
+                    matchMask = matchMask | (1 << index);
+                    lastIndex = index;
                 }
-                matchMask = matchMask | (1 << index);
-                lastIndex = index;
             }
             item.matchMask = matchMask;
             item.exactMatch = penalty ? 0 : 1;
@@ -1692,7 +1702,7 @@ exports.FilteredList = FilteredList;
 
 });
 
-define("ace/autocomplete/text_completer",["require","exports","module","ace/range"], function(require, exports, module) {
+ace.define("ace/autocomplete/text_completer",["require","exports","module","ace/range"], function(require, exports, module) {
     var Range = require("../range").Range;
     
     var splitRegex = /[^a-zA-Z_0-9\$\-\u00C0-\u1FFF\u2C00-\uD7FF\w]+/;
@@ -1736,7 +1746,7 @@ define("ace/autocomplete/text_completer",["require","exports","module","ace/rang
     };
 });
 
-define("ace/ext/language_tools",["require","exports","module","ace/snippets","ace/autocomplete","ace/config","ace/lib/lang","ace/autocomplete/util","ace/autocomplete/text_completer","ace/editor","ace/config"], function(require, exports, module) {
+ace.define("ace/ext/language_tools",["require","exports","module","ace/snippets","ace/autocomplete","ace/config","ace/lib/lang","ace/autocomplete/util","ace/autocomplete/text_completer","ace/editor","ace/config"], function(require, exports, module) {
 "use strict";
 
 var snippetManager = require("../snippets").snippetManager;
@@ -1748,6 +1758,9 @@ var util = require("../autocomplete/util");
 var textCompleter = require("../autocomplete/text_completer");
 var keyWordCompleter = {
     getCompletions: function(editor, session, pos, prefix, callback) {
+        if (session.$mode.completer) {
+            return session.$mode.completer.getCompletions(editor, session, pos, prefix, callback);
+        }
         var state = editor.session.getState(pos.row);
         var completions = session.$mode.getCompletions(state, session, pos, prefix);
         callback(null, completions);
@@ -1799,9 +1812,7 @@ exports.snippetCompleter = snippetCompleter;
 var expandSnippet = {
     name: "expandSnippet",
     exec: function(editor) {
-        var success = snippetManager.expandWithTab(editor);
-        if (!success)
-            editor.execCommand("indent");
+        return snippetManager.expandWithTab(editor);
     },
     bindKey: "Tab"
 };
@@ -1917,8 +1928,7 @@ require("../config").defineOptions(Editor.prototype, "editor", {
     }
 });
 });
-;
                 (function() {
-                    window.require(["ace/ext/language_tools"], function() {});
+                    ace.require(["ace/ext/language_tools"], function() {});
                 })();
             
