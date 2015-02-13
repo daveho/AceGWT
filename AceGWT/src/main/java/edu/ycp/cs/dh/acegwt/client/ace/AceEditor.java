@@ -160,7 +160,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	public native void setModeByName(String shortModeName) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var modeName = "ace/mode/" + shortModeName;
-		var TheMode = $wnd.require(modeName).Mode;
+		var TheMode = $wnd.ace.require(modeName).Mode;
 		editor.getSession().setMode(new TheMode());
 	}-*/;
 
@@ -386,7 +386,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}-*/;
 
 	/**
-	 * Add an annotation to a the local <code>annotations</code> JsArray&lt;AceAnnotation&gt;, but does not set it on the editor
+	 * Add an annotation to a the local <code>annotations</code> JsArray<AceAnnotation>, but does not set it on the editor
 	 *
 	 * @param row to which the annotation should be added
 	 * @param column to which the annotation applies
@@ -409,7 +409,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 
 
 	/**
-	 * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray&lt;AceAnnotation&gt;
+	 * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray<AceAnnotation>
 	 */
 	public native void clearAnnotations() /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;

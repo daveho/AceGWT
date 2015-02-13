@@ -152,6 +152,8 @@ public enum AceEditorMode {
 	MARKDOWN("markdown"),
 	/** Matlab. */
 	MATLAB("matlab"),
+	/** Mask. */
+	MASK("mask"),
 	/** Mel. */
 	MEL("mel"),
 	/** MUSHCode (High Rules). */
