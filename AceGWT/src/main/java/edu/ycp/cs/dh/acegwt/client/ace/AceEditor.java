@@ -106,13 +106,31 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * Calling this method works around the problem by forcing
 	 * the underlying editor to redisplay itself fully. (?)
 	 */
-	public native void redisplay() /*-{
+	public native void redisplay( boolean focused ) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.onResize(true);
 		editor.renderer.updateFull();
 		editor.resize();
-		editor.focus();
+        if ( focused ) {
+            editor.focus();
+        }
 	}-*/;
+
+	public void redisplay() {
+		redisplay( true );
+	}
+
+	/**
+	 * Setting focus to the editor.
+	 */
+	public native void setFocus( boolean focused ) /*-{
+        var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+        if ( focused ) {
+            editor.focus();
+        } else {
+            editor.blur();
+        }
+    }-*/;
 
 	/**
 	 * Cleans up the entire editor.
