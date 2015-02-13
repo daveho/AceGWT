@@ -16,7 +16,7 @@ public interface AceResources extends ClientBundle {
     TextResource ace();
 
     @Source("edu/ycp/cs/dh/acegwt/pubilc/ace-min/ext-beautify.js")
-    TextResource extBeautify();
+    TextResource ext_beautify();
 
     @Source("edu/ycp/cs/dh/acegwt/pubilc/ace-min/ext-chromevox.js")
     TextResource ext_chromevox();
