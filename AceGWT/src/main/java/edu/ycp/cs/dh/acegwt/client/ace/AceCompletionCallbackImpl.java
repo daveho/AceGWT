@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -46,7 +46,7 @@ class AceCompletionCallbackImpl implements AceCompletionCallback {
 	}
 	
 	private native void doInvokeWithCompletions(JsArray<JavaScriptObject> jsProposals) /*-{
-		var callback = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionCallbackImpl::jsCallback;
+		var callback = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionCallbackImpl::jsCallback;
 		callback(null, jsProposals);
 	}-*/;
 }

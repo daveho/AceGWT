@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 import java.util.HashMap;
 import java.util.List;
@@ -82,9 +82,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * before calling this method.
 	 */
 	public native void startEditor() /*-{
-		var editor = $wnd.ace.edit(this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::divElement);
+		var editor = $wnd.ace.edit(this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::divElement);
 		editor.getSession().setUseWorker(false);
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor = editor;
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor = editor;
 		
 		// Store a reference to the (Java) AceEditor object in the
 		// JavaScript editor object.
@@ -95,7 +95,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		// Try to force the editor to resize and display itself fully.  See:
 		//    https://groups.google.com/group/ace-discuss/browse_thread/thread/237262b521dcea33
 		editor.resize();
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::redisplay();
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::redisplay();
 	}-*/;
 
 	/**
@@ -107,7 +107,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * the underlying editor to redisplay itself fully. (?)
 	 */
 	public native void redisplay() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.onResize(true);
 		editor.renderer.updateFull();
 		editor.resize();
@@ -118,7 +118,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * Cleans up the entire editor.
 	 */
 	public native void destroy() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.destroy();
 	}-*/;
 
@@ -138,7 +138,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param themeName the theme name (e.g., "twilight")
 	 */
 	public native void setThemeByName(String themeName) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.setTheme("ace/theme/" + themeName);
 	}-*/;
 
@@ -158,7 +158,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param shortModeName name of mode (e.g., "eclipse")
 	 */
 	public native void setModeByName(String shortModeName) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var modeName = "ace/mode/" + shortModeName;
 		var TheMode = $wnd.require(modeName).Mode;
 		editor.getSession().setMode(new TheMode());
@@ -170,9 +170,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param callback the change event handler
 	 */
 	public native void addOnChangeHandler(AceEditorCallback callback) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().on("change", function(e) {
-			callback.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
+			callback.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
 		});
 	}-*/;
 
@@ -182,9 +182,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param callback the cursor position change event handler
 	 */
 	public native void addOnCursorPositionChangeHandler(AceEditorCallback callback) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().selection.on("changeCursor", function(e) {
-			callback.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
+			callback.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
 		});
 	}-*/;
 
@@ -193,7 +193,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return font size
 	 */
 	public native int getFontSize() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.getFontSize();
 	}-*/;
 	
@@ -202,7 +202,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param fontSize the font size to set, e.g., "16px"
 	 */
 	public native void setFontSize(String fontSize) /*-{
-		var elementId = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId;
+		var elementId = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId;
 		var elt = $doc.getElementById(elementId);
 		elt.style.fontSize = fontSize;
 	}-*/;
@@ -212,7 +212,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param fontSize the font size to set, e.g., 16
 	 */
 	public native void setFontSize(int fontSize) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.setFontSize(fontSize);
 	}-*/;
 
@@ -222,7 +222,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return the text in the editor
 	 */
 	public native String getText() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.getSession().getValue();
 	}-*/;
 
@@ -233,7 +233,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param text the text to set in the editor
 	 */
 	public native void setText(String text) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setValue(text);
 	}-*/;
 	
@@ -244,7 +244,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return the line of text at that row number
 	 */
 	public native String getLine(int row) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.getSession().getDocument().getLine(row);
 	}-*/;
 
@@ -254,7 +254,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param text text to insert at the cursor
 	 */
 	public native void insertAtCursor(String text) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.insert(text);
 	}-*/;
 
@@ -264,9 +264,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return the current cursor position
 	 */
 	public native AceEditorCursorPosition getCursorPosition() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var pos = editor.getCursorPosition();
-		return this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::getCursorPositionImpl(DD)(pos.row, pos.column);
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::getCursorPositionImpl(DD)(pos.row, pos.column);
 	}-*/;
 
 	private AceEditorCursorPosition getCursorPositionImpl(final double row, final double column) {
@@ -284,7 +284,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 
 	private native int getIndexFromPositionImpl(JavaScriptObject jsPosition) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.getSession().getDocument().positionToIndex(jsPosition);
 	}-*/;
 
@@ -295,9 +295,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return A position object showing the row and column of the supplied index in the document
 	 */
 	public native AceEditorCursorPosition getPositionFromIndex(int index) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var jsPosition = editor.getSession().getDocument().indexToPosition(index);
-		return @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::create(II)(
+		return @edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::create(II)(
 			jsPosition.row,
 			jsPosition.column
 		);
@@ -309,7 +309,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param useSoftTabs true if soft tabs should be used, false otherwise
 	 */
 	public native void setUseSoftTabs(boolean useSoftTabs) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setUseSoftTabs(useSoftTabs);
 	}-*/;
 
@@ -319,7 +319,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param tabSize the tab size to set
 	 */
 	public native void setTabSize(int tabSize) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setTabSize(tabSize);
 	}-*/;
 
@@ -329,7 +329,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param line the line to go to
 	 */
 	public native void gotoLine(int line) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.gotoLine(line);
 	}-*/;
 
@@ -340,7 +340,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 *                                visible, false if it is hidden when not needed
 	 */
 	public native void setHScrollBarAlwaysVisible(boolean hScrollBarAlwaysVisible) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setHScrollBarAlwaysVisible(hScrollBarAlwaysVisible);
 	}-*/;
 
@@ -350,7 +350,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param showGutter true if the gutter should be shown, false if it should be hidden
 	 */
 	public native void setShowGutter(boolean showGutter) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setShowGutter(showGutter);
 	}-*/;
 
@@ -361,7 +361,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 *                 editor should be set to read-write
 	 */
 	public native void setReadOnly(boolean readOnly) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.setReadOnly(readOnly);
 	}-*/;
 
@@ -371,7 +371,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param highlightSelectedWord true to highlight currently selected word, false otherwise
 	 */
 	public native void setHighlightSelectedWord(boolean highlightSelectedWord) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.setHighlightSelectedWord(highlightSelectedWord);
 	}-*/;
 
@@ -381,7 +381,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param showPrintMargin true if the print margin should be shown, false otherwise
 	 */
 	public native void setShowPrintMargin(boolean showPrintMargin) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setShowPrintMargin(showPrintMargin);
 	}-*/;
 
@@ -402,8 +402,8 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * Set any annotations which have been added via <code>addAnnotation</code> on the editor
 	 */
 	public native void setAnnotations() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-		var annotations = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::annotations;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var annotations = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::annotations;
 		editor.getSession().setAnnotations(annotations);
 	}-*/;
 
@@ -412,9 +412,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * Clear any annotations from the editor and reset the local <code>annotations</code> JsArray&lt;AceAnnotation&gt;
 	 */
 	public native void clearAnnotations() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().clearAnnotations();
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::resetAnnotations()();
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::resetAnnotations()();
 	}-*/;
 
 	/**
@@ -462,7 +462,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 */
 	public native void execCommand(String command) /*-{
 		var parts = command.split(/\s+/);
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::execCommand(Ljava/lang/String;Ljava/lang/String;)(parts[0], parts[1]);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::execCommand(Ljava/lang/String;Ljava/lang/String;)(parts[0], parts[1]);
 	}-*/;
 
 	/**
@@ -484,9 +484,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 
 	private native void execCommandHidden(String command, Object args) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		if (args && typeof args !== "string")
-			args = args.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandArgs::getValue()();
+			args = args.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandArgs::getValue()();
 		editor.commands.exec(command, editor, args);
 		editor.focus();
 	}-*/;
@@ -498,7 +498,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 *          "gotoline", "findnext", "findprevious", "find", "replace", "replaceall"
 	 */
 	public native void removeCommandByName(String command) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.commands.removeCommand(command);
 	}-*/;
 
@@ -508,11 +508,11 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return command description
 	 */
 	public native AceCommandDescription getCommandDescription(String command) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var obj = editor.commands.commands[command];
 		if (!obj)
 			return null;
-		return @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::fromJavaScript(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
+		return @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::fromJavaScript(Lcom/google/gwt/core/client/JavaScriptObject;)(obj);
 	}-*/;
 
 	/**
@@ -520,7 +520,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return names of all Ace commands
 	 */
 	public native List<String> listCommands() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var ret = @java.util.ArrayList::new()();
 		for (var command in editor.commands.commands)
 			ret.@java.util.ArrayList::add(Ljava/lang/Object;)(command);
@@ -532,8 +532,8 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param description command description
 	 */
 	public native void addCommand(AceCommandDescription description) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-		var command = description.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::toJavaScript(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;)(this);
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var command = description.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::toJavaScript(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;)(this);
 		editor.commands.addCommand(command);
 	}-*/;
 	
@@ -543,7 +543,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param useWrapMode true if word wrap should be used, false otherwise
 	 */
 	public native void setUseWrapMode(boolean useWrapMode) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().setUseWrapMode(useWrapMode);
 	}-*/;
 
@@ -572,7 +572,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 */
 	public native void setAutocompleteEnabled(boolean b) /*-{
 		// See: https://github.com/ajaxorg/ace/wiki/How-to-enable-Autocomplete-in-the-Ace-editor
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		if (b) {
 			$wnd.ace.require("ace/ext/language_tools");
 			editor.setOptions({ enableBasicAutocompletion: true });
@@ -610,11 +610,11 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		var completer = {
 			getCompletions: function(editor, session, pos, prefix, callback) {
 				var callbackWrapper =
-					@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::wrapCompletionCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(callback);
+					@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::wrapCompletionCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(callback);
 				var aceEditor = editor._aceGWTAceEditor;
-				provider.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionProvider::getProposals(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;Ledu/ycp/cs/dh/acegwt/client/ace/AceEditorCursorPosition;Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceCompletionCallback;)(
+				provider.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionProvider::getProposals(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;Ledu/ycp/cs/dh/acegwt/client/ace/AceEditorCursorPosition;Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceCompletionCallback;)(
 					aceEditor,
-					@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::create(II)( pos.row, pos.column ),
+					@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCursorPosition::create(II)( pos.row, pos.column ),
 					prefix,
 					callbackWrapper
 				);
@@ -637,9 +637,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return	The marker ID. This id can be then use to remove a marker from the editor.
 	 */
 	public native int addMarker(AceRange range, String clazz, AceMarkerType type, boolean inFront) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
-		var markerID = editor.getSession().addMarker(range, clazz, type.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceMarkerType::getName()(), inFront);
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::addMarker(ILedu/ycp/cs/dh/acegwt/client/ace/AceRange;)(markerID, range);
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var markerID = editor.getSession().addMarker(range, clazz, type.@edu.ycp.cs.dh.acegwt.client.ace.AceMarkerType::getName()(), inFront);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::addMarker(ILedu/ycp/cs/dh/acegwt/client/ace/AceRange;)(markerID, range);
 		return markerID;
 	}-*/;
 	
@@ -651,10 +651,10 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @return			The marker ID. This id can be then use to remove a marker from the editor.
 	 */
 	public native int addFloatingMarker(AceRange range, String clazz, AceMarkerType type) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		range.start = editor.getSession().doc.createAnchor(range.start);
 		range.end = editor.getSession().doc.createAnchor(range.end);
-		return this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::addMarker(Ledu/ycp/cs/dh/acegwt/client/ace/AceRange;Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceMarkerType;Z)
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::addMarker(Ledu/ycp/cs/dh/acegwt/client/ace/AceRange;Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceMarkerType;Z)
 		(
 			range,
 			clazz,
@@ -668,9 +668,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 * @param markerId	the marker ID.
 	 */
 	public native void removeMarker(int markerId) /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.getSession().removeMarker(markerId);
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::removeRegisteredMarker(I)(markerId);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::removeRegisteredMarker(I)(markerId);
 	}-*/;
 	
 	/**
@@ -710,7 +710,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 	
 	private native JavaScriptObject getSelectionJS() /*-{
-		var editor = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.getSession().getSelection();
 	}-*/;
 

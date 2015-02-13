@@ -1,4 +1,4 @@
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 /**
  *	This enumeration represents the selection/marker types.

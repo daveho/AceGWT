@@ -1,4 +1,4 @@
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class AceSelection {
 	
 	private static native void registerRootListener(JavaScriptObject selection, AceSelectionListener rootListener) /*-{
 		selection.addEventListener("changeSelection", function() {
-			rootListener.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelectionListener::onChangeSelection(Ledu/ycp/cs/dh/acegwt/client/ace/AceSelection;)(null);
+			rootListener.@edu.ycp.cs.dh.acegwt.client.ace.AceSelectionListener::onChangeSelection(Ledu/ycp/cs/dh/acegwt/client/ace/AceSelection;)(null);
 		});
 	}-*/;
 
@@ -56,7 +56,7 @@ public class AceSelection {
 	 * @return true in case selection is empty
 	 */
 	public native boolean isEmpty() /*-{
-		return this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.isEmpty();
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.isEmpty();
 	}-*/;
 	
 	/**
@@ -64,7 +64,7 @@ public class AceSelection {
 	 * @return true in case selection contains several lines
 	 */
 	public native boolean isMultiLine() /*-{
-		return this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.isMultiLine();
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.isMultiLine();
 	}-*/;
 
 	private AceEditorCursorPosition getCursorPositionImpl(final double row, final double column) {
@@ -76,8 +76,8 @@ public class AceSelection {
 	 * @return position of leading end of selection
 	 */
 	public native AceEditorCursorPosition getSelectionLead() /*-{
-		var pos = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.getSelectionLead();
-		return this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::getCursorPositionImpl(DD)(pos.row, pos.column);
+		var pos = this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.getSelectionLead();
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::getCursorPositionImpl(DD)(pos.row, pos.column);
 	}-*/;
 	
 	/**
@@ -85,8 +85,8 @@ public class AceSelection {
 	 * @return starting position of selection
 	 */
 	public native AceEditorCursorPosition getSelectionAnchor() /*-{
-		var pos = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.getSelectionAnchor();
-		return this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::getCursorPositionImpl(DD)(pos.row, pos.column);
+		var pos = this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.getSelectionAnchor();
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::getCursorPositionImpl(DD)(pos.row, pos.column);
 	}-*/;
 	
 	/**
@@ -94,21 +94,21 @@ public class AceSelection {
 	 * @return true in case selection leading position is located before anchor position
 	 */
 	public native boolean isBackwards() /*-{
-		return this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.isBackwards();
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.isBackwards();
 	}-*/;
 
 	/**
 	 * Clear selection.
 	 */
 	public native void clearSelection() /*-{
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.clearSelection();
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.clearSelection();
 	}-*/;
 	
 	/**
 	 * Select the whole text.
 	 */
 	public native void selectAll() /*-{
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.selectAll();
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.selectAll();
 	}-*/;
 
 	/**
@@ -119,15 +119,15 @@ public class AceSelection {
 	 * @param toColumn column of selection leading position
 	 */
 	public native void select(int fromRow, int fromColumn, int toRow, int toColumn) /*-{
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.setSelectionAnchor(fromRow, fromColumn);
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.selectTo(toRow, toColumn);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.setSelectionAnchor(fromRow, fromColumn);
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection.selectTo(toRow, toColumn);
 	}-*/;
 
 	/**
 	 * Select line where cursor is located.
 	 */
 	public native void selectLine() /*-{
-		var s = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection;
+		var s = this.@edu.ycp.cs.dh.acegwt.client.ace.AceSelection::selection;
 		var pos = s.getSelectionLead();
 		var len = s.doc.getLine(pos.row).length;
 		s.setSelectionAnchor(pos.row, 0);

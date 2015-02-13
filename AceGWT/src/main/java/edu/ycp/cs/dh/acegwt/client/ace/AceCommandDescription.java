@@ -1,4 +1,4 @@
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -199,29 +199,29 @@ public class AceCommandDescription {
 	 */
 	public static native AceCommandDescription fromJavaScript(JavaScriptObject obj) /*-{
 		var name = obj.name;
-		var exec = @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::createJavaScriptWrapper(Ljava/lang/Object;)(obj.exec);
-		var ret = @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::new(Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$ExecAction;)(name, exec);
-		var bindKey = @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::fromJavaScript(Ljava/lang/Object;)(obj.bindKey);
+		var exec = @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::createJavaScriptWrapper(Ljava/lang/Object;)(obj.exec);
+		var ret = @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::new(Ljava/lang/String;Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$ExecAction;)(name, exec);
+		var bindKey = @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::fromJavaScript(Ljava/lang/Object;)(obj.bindKey);
 		if (bindKey)
-			ret.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withBindKey(Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$KeyBinding;)(bindKey);
+			ret.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withBindKey(Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$KeyBinding;)(bindKey);
 		var readOnly = obj.readOnly;
 		if (readOnly)
-			ret.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withReadOnly(Z)(readOnly);
+			ret.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withReadOnly(Z)(readOnly);
 		var passEvent = obj.passEvent;
 		if (passEvent)
-			ret.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withPassEvent(Z)(passEvent);
-		var scrollIntoView = @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.ScrollIntoView::fromString(Ljava/lang/String;)(obj.scrollIntoView);
+			ret.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withPassEvent(Z)(passEvent);
+		var scrollIntoView = @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.ScrollIntoView::fromString(Ljava/lang/String;)(obj.scrollIntoView);
 		if (scrollIntoView)
-			ret.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withScrollIntoView(Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$ScrollIntoView;)(scrollIntoView);
+			ret.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withScrollIntoView(Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$ScrollIntoView;)(scrollIntoView);
 		var objMultiSelectAction = obj.multiSelectAction;
 		var multiSelectAction = null;
 		if (typeof objMultiSelectAction === "string")
-			multiSelectAction = @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.MultiSelectAction::fromString(Ljava/lang/String;)(objMultiSelectAction);
+			multiSelectAction = @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.MultiSelectAction::fromString(Ljava/lang/String;)(objMultiSelectAction);
 		if (multiSelectAction)
-			ret.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withMultiSelectAction(Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$MultiSelectAction;)(multiSelectAction);
+			ret.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withMultiSelectAction(Ledu/ycp/cs/dh/acegwt/client/ace/AceCommandDescription$MultiSelectAction;)(multiSelectAction);
 		var aceCommandGroup = obj.aceCommandGroup;
 		if (aceCommandGroup)
-			ret.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withAceCommandGroup(Ljava/lang/String;)(aceCommandGroup);
+			ret.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::withAceCommandGroup(Ljava/lang/String;)(aceCommandGroup);
 		return ret;
 	}-*/;
 
@@ -240,7 +240,7 @@ public class AceCommandDescription {
 	}
 	
 	private static native Object invokeJavaScriptCommand(Object jsFunction, AceEditor javaWrapper) /*-{
-		var jsEditor = javaWrapper.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var jsEditor = javaWrapper.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return jsFunction(jsEditor);
 	}-*/;
 
@@ -251,27 +251,27 @@ public class AceCommandDescription {
 	 */
 	public native JavaScriptObject toJavaScript(AceEditor editor) /*-{
 		var ret = {};
-		ret['name'] = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::name;
-		var javaExec = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::exec;
+		ret['name'] = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::name;
+		var javaExec = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::exec;
 		ret['exec'] = function() {
-			javaExec.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.ExecAction::exec(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;)(editor);
+			javaExec.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.ExecAction::exec(Ledu/ycp/cs/dh/acegwt/client/ace/AceEditor;)(editor);
 		};
-		var bindKey = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::bindKey;
+		var bindKey = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::bindKey;
 		if (bindKey)
-			ret['bindKey'] = bindKey.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::toJavaScript()();
-		var readOnly = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::readOnly;
+			ret['bindKey'] = bindKey.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::toJavaScript()();
+		var readOnly = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::readOnly;
 		if (readOnly)
 			ret['readOnly'] = readOnly;
-		var passEvent = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::passEvent;
+		var passEvent = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::passEvent;
 		if (passEvent) 
 			ret['passEvent'] = passEvent;
-		var scrollIntoView = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::scrollIntoView;
+		var scrollIntoView = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::scrollIntoView;
 		if (scrollIntoView)
-			ret['scrollIntoView'] = scrollIntoView.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.ScrollIntoView::name()();
-		var multiSelectAction = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::multiSelectAction;
+			ret['scrollIntoView'] = scrollIntoView.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.ScrollIntoView::name()();
+		var multiSelectAction = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::multiSelectAction;
 		if (multiSelectAction)
-			ret['multiSelectAction'] = multiSelectAction.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.MultiSelectAction::name()();
-		var aceCommandGroup = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::aceCommandGroup;
+			ret['multiSelectAction'] = multiSelectAction.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.MultiSelectAction::name()();
+		var aceCommandGroup = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription::aceCommandGroup;
 		if (aceCommandGroup)
 			ret['aceCommandGroup'] = aceCommandGroup;
 		return ret;
@@ -329,16 +329,16 @@ public class AceCommandDescription {
 			if (!obj)
 				return null;
 			if (typeof obj === "string")
-				return @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::new(Ljava/lang/String;)(obj);
-			return @main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::new(Ljava/lang/String;Ljava/lang/String;)(obj.win, obj.mac);
+				return @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::new(Ljava/lang/String;)(obj);
+			return @edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::new(Ljava/lang/String;Ljava/lang/String;)(obj.win, obj.mac);
 		}-*/;
 
 		private native Object toJavaScript() /*-{
-			var ret = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::allPlatforms;
+			var ret = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::allPlatforms;
 			if (ret)
 				return ret;
-			var win = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::exceptMac;
-			var mac = this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::mac;
+			var win = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::exceptMac;
+			var mac = this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandDescription.KeyBinding::mac;
 			return {win: win, mac: mac};
 		}-*/;
 	}

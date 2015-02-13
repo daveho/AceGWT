@@ -1,4 +1,4 @@
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 /**
  * Interface exposing command line functions used by editor. This way of

@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -133,11 +133,11 @@ public class AceCompletionSnippet extends AceCompletion {
 	 */
 	native JavaScriptObject toJsObject() /*-{
 		return {
-			caption: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::caption,
-			snippet: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::snippet,
-			score: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::score,
-			meta: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::meta,
-			aceGwtHtmlTooltip: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::tooltip
+			caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::caption,
+			snippet: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::snippet,
+			score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::score,
+			meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::meta,
+			aceGwtHtmlTooltip: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionSnippet::tooltip
 		};
 	}-*/;
 }

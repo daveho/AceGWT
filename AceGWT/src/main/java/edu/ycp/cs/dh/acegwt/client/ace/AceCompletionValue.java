@@ -19,7 +19,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -101,11 +101,11 @@ public class AceCompletionValue extends AceCompletion {
 		
 		
 			return {
-				caption: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
-				value: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
-				score: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
-				meta: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta,
-			    aceGwtHtmlTooltip: this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::tooltip
+				caption: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::caption,
+				value: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::value,
+				score: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::score,
+				meta: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::meta,
+			    aceGwtHtmlTooltip: this.@edu.ycp.cs.dh.acegwt.client.ace.AceCompletionValue::tooltip
 			};
 
 	}-*/;

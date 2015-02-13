@@ -1,4 +1,4 @@
-package main.java.edu.ycp.cs.dh.acegwt.client.ace;
+package edu.ycp.cs.dh.acegwt.client.ace;
 
 import java.util.Map;
 
@@ -29,11 +29,11 @@ public class AceCommandArgs {
 	
 	/**
 	 * Add key-value pair to map.
-	 * @param argName
+	 * @param argKey
 	 * @param argValue
 	 */
 	public native AceCommandArgs with(String argKey, String argValue) /*-{
-		this.@main.java.edu.ycp.cs.dh.acegwt.client.ace.AceCommandArgs::value[argKey] = argValue;
+		this.@edu.ycp.cs.dh.acegwt.client.ace.AceCommandArgs::value[argKey] = argValue;
 		return this;
 	}-*/;
 	
