@@ -336,6 +336,39 @@ public class AceGWTDemo implements EntryPoint {
 
 		mainPanel.add(editor2);
 		mainPanel.add(new Label("Label below!"));
+
+		// Demo button for get number of lines
+		final Button appendLineCount = new Button("Append Line Count");
+		appendLineCount.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				final String message = editor2.getText() + "There are "
+						+ editor1.getLineCount() + " lines in the main editor.";
+				editor2.setText(message);
+			}
+
+		});
+		buttonPanel2.add(appendLineCount);
+
+		final Button flipFocus = new Button("Focus 1st Editor");
+		flipFocus.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.focus();
+			}
+
+		});
+		buttonPanel2.add(flipFocus);
+
+		final Button flipFocus2 = new Button("Focus 2nd Editor");
+		flipFocus2.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor2.focus();
+			}
+
+		});
+		buttonPanel2.add(flipFocus2);
 		
 		RootPanel.get().add(mainPanel);
 	}
