@@ -33,14 +33,8 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>*.js</include>
                     <include>**/*.js</include>
-
-                    <include>*.gwt.xml</include>
                     <include>**/*.gwt.xml</include>
-
-                    <include>*.properties</include>
-                    <include>**/*.properties</include>
                 </includes>
             </resource>
         </resources>
