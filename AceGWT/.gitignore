@@ -1,2 +1,5 @@
 doc
 /.gwt
+
+.iml
+.idea/*
