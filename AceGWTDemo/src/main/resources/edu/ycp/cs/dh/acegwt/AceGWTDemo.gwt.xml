@@ -14,7 +14,7 @@
   <inherits name='edu.ycp.cs.dh.acegwt.AceGWT'/>
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='main.java.edu.ycp.cs.dh.acegwt.client.AceGWTDemo'/>
+  <entry-point class='edu.ycp.cs.dh.acegwt.client.AceGWTDemo'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>

@@ -99,7 +99,24 @@
                     <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
                     <gen>${project.build.directory}/generated-sources/gen</gen>
                     <extraJvmArgs>-Xmx1024M -Xms1024m -XX:PermSize=128m -XX:MaxPermSize=512m</extraJvmArgs>
-                    <!--<extraJvmArgs>-Xmx1024M -Xms128m -XX:PermSize=512m -XX:MaxPermSize=1024m</extraJvmArgs>-->
+                </configuration>
+            </plugin>
+
+            <!-- Copy static web files before executing gwt:run -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <webappDirectory>${webappDirectory}</webappDirectory>
                 </configuration>
             </plugin>
         </plugins>
