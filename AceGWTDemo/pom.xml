@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>AceGWT :: Library</name>
+    <name>AceGWT :: Demo</name>
 
-    <artifactId>acegwt</artifactId>
+    <artifactId>acegwt.demo</artifactId>
     <version>${project.version}</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <parent>
         <groupId>edu.ycp.cs.dh</groupId>
@@ -21,18 +21,19 @@
 
         <resources>
             <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>*.java</include>
-                    <include>**/*.java</include>
-                </includes>
-            </resource>
-
-            <resource>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.js</include>
                     <include>**/*.gwt.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.js</include>
+                    <include>**/*.css</include>
+                    <include>**/*.html</include>
                 </includes>
             </resource>
         </resources>
@@ -75,6 +76,31 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>${project.gwt.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!-- Plugin configuration. There are many available options, see
+                  gwt-maven-plugin documentation at codehaus.org -->
+                <configuration>
+                    <extra>${webappDirectory}</extra>
+                    <style>pretty</style>
+                    <runTarget>AceGWTDemo.html</runTarget>
+                    <hostedWebapp>${webappDirectory}</hostedWebapp>
+                    <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
+                    <gen>${project.build.directory}/generated-sources/gen</gen>
+                    <extraJvmArgs>-Xmx1024M -Xms1024m -XX:PermSize=128m -XX:MaxPermSize=512m</extraJvmArgs>
+                    <!--<extraJvmArgs>-Xmx1024M -Xms128m -XX:PermSize=512m -XX:MaxPermSize=1024m</extraJvmArgs>-->
+                </configuration>
             </plugin>
         </plugins>
     </build>

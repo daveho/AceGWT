@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>edu.ycp.cs.dh</groupId>
+    <artifactId>acegwt.root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>AceGWT</name>
+    <url>https://github.com/daveho/AceGWT</url>
+
+    <profiles>
+
+        <profile>
+            <id>AceGWT</id>
+            <modules>
+                <module>AceGWT</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>AceGWT Demo</id>
+            <modules>
+                <module>AceGWTDemo</module>
+            </modules>
+        </profile>
+
+    </profiles>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.gwt.version>2.5.0</project.gwt.version>
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <version>${project.gwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${project.gwt.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>
