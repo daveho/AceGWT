@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'edu.ycp.cs.dh.acegwt'
+version = '0.0.1-SNAPSHOT'
+if (project.hasProperty('build_version')) {
+    version = build_version
+}
+if (!project.hasProperty('gwt_version')) {
+    ext.gwt_version = '2.7.0'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "com.google.gwt:gwt-servlet:${gwt_version}"
+    compile "com.google.gwt:gwt-user:${gwt_version}"
+    compile "com.google.gwt:gwt-codeserver:${gwt_version}"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'AceGWT/src'
+        }
+    }
+}
+
+processResources {
+    from sourceSets.main.java.srcDirs
+    into sourceSets.main.output.classesDir
+}
+
+if (project.hasProperty('repository_url')) {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: repository_url)
+            }
+        }
+    }
+}
