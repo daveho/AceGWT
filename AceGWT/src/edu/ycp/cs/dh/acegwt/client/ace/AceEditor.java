@@ -160,7 +160,7 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	public native void setModeByName(String shortModeName) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		var modeName = "ace/mode/" + shortModeName;
-		var TheMode = $wnd.require(modeName).Mode;
+		var TheMode = $wnd.ace.require(modeName).Mode;
 		editor.getSession().setMode(new TheMode());
 	}-*/;
 
