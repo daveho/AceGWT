@@ -1,66 +1,27 @@
-define('ace/mode/latex', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/tokenizer', 'ace/mode/latex_highlight_rules', 'ace/mode/folding/latex', 'ace/range'], function(require, exports, module) {
-
-
-var oop = require("../lib/oop");
-var TextMode = require("./text").Mode;
-var Tokenizer = require("../tokenizer").Tokenizer;
-var LatexHighlightRules = require("./latex_highlight_rules").LatexHighlightRules;
-var LatexFoldMode = require("./folding/latex").FoldMode;
-var Range = require("../range").Range;
-
-var Mode = function() {
-    this.$tokenizer = new Tokenizer(new LatexHighlightRules().getRules());
-    this.foldingRules = new LatexFoldMode();
-};
-oop.inherits(Mode, TextMode);
-
-(function() {
-    this.toggleCommentLines = function(state, doc, startRow, endRow) {
-        var outdent = true;
-        var commentRegEx = /^(\s*)\%/;
-
-        for (var i = startRow; i <= endRow; i++) {
-            if (!commentRegEx.test(doc.getLine(i))) {
-                outdent = false;
-                break;
-            }
-        }
-
-        if (outdent) {
-            var deleteRange = new Range(0, 0, 0, 0);
-            for (var i = startRow; i <= endRow; i++) {
-                var line = doc.getLine(i);
-                var m = line.match(commentRegEx);
-                deleteRange.start.row = i;
-                deleteRange.end.row = i;
-                deleteRange.end.column = m[0].length;
-                doc.replace(deleteRange, m[1]);
-            }
-        }
-        else {
-            doc.indentRows(startRow, endRow, "%");
-        }
-    };
-    this.getNextLineIndent = function(state, line, tab) {
-        return this.$getIndent(line);
-    };
-    
-}).call(Mode.prototype);
-
-exports.Mode = Mode;
-
-});
-define('ace/mode/latex_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
-
+define("ace/mode/latex_highlight_rules",["require","exports","module","ace/lib/oop","ace/mode/text_highlight_rules"], function(require, exports, module) {
+"use strict";
 
 var oop = require("../lib/oop");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
-var LatexHighlightRules = function() {   
+var LatexHighlightRules = function() {  
+
     this.$rules = {
         "start" : [{
-            token : "keyword",
-            regex : "\\\\(?:[^a-zA-Z]|[a-zA-Z]+)"
+            token : "comment",
+            regex : "%.*$"
+        }, {
+            token : ["keyword", "lparen", "variable.parameter", "rparen", "lparen", "storage.type", "rparen"],
+            regex : "(\\\\(?:documentclass|usepackage|input))(?:(\\[)([^\\]]*)(\\]))?({)([^}]*)(})"
+        }, {
+            token : ["keyword","lparen", "variable.parameter", "rparen"],
+            regex : "(\\\\label)(?:({)([^}]*)(}))?"
+        }, {
+            token : ["storage.type", "lparen", "variable.parameter", "rparen"],
+            regex : "(\\\\(?:begin|end))({)(\\w*)(})"
+        }, {
+            token : "storage.type",
+            regex : "\\\\[a-zA-Z]+"
         }, {
             token : "lparen",
             regex : "[[({]"
@@ -68,28 +29,46 @@ var LatexHighlightRules = function() {
             token : "rparen",
             regex : "[\\])}]"
         }, {
-            token : "string",
-            regex : "\\$(?:(?:\\\\.)|(?:[^\\$\\\\]))*?\\$"
+            token : "constant.character.escape",
+            regex : "\\\\[^a-zA-Z]?"
         }, {
+            token : "string",
+            regex : "\\${1,2}",
+            next  : "equation"
+        }],
+        "equation" : [{
             token : "comment",
             regex : "%.*$"
+        }, {
+            token : "string",
+            regex : "\\${1,2}",
+            next  : "start"
+        }, {
+            token : "constant.character.escape",
+            regex : "\\\\(?:[^a-zA-Z]|[a-zA-Z]+)"
+        }, {
+            token : "error", 
+            regex : "^\\s*$", 
+            next : "start" 
+        }, {
+            defaultToken : "string"
         }]
+
     };
 };
-
 oop.inherits(LatexHighlightRules, TextHighlightRules);
 
 exports.LatexHighlightRules = LatexHighlightRules;
 
 });
 
-define('ace/mode/folding/latex', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/folding/fold_mode', 'ace/range', 'ace/token_iterator'], function(require, exports, module) {
-
+define("ace/mode/folding/latex",["require","exports","module","ace/lib/oop","ace/mode/folding/fold_mode","ace/range","ace/token_iterator"], function(require, exports, module) {
+"use strict";
 
 var oop = require("../../lib/oop");
 var BaseFoldMode = require("./fold_mode").FoldMode;
 var Range = require("../../range").Range;
-var TokenIterator = require("ace/token_iterator").TokenIterator;
+var TokenIterator = require("../../token_iterator").TokenIterator;
 
 var FoldMode = exports.FoldMode = function() {};
 
@@ -97,7 +76,7 @@ oop.inherits(FoldMode, BaseFoldMode);
 
 (function() {
 
-    this.foldingStartMarker = /^\s*\\(begin)|(section|subsection)\b|{\s*$/;
+    this.foldingStartMarker = /^\s*\\(begin)|(section|subsection|paragraph)\b|{\s*$/;
     this.foldingStopMarker = /^\s*\\(end)\b|^\s*}/;
 
     this.getFoldWidgetRange = function(session, foldStyle, row) {
@@ -129,7 +108,7 @@ oop.inherits(FoldMode, BaseFoldMode);
 
         var stream = new TokenIterator(session, row, column);
         var token = stream.getCurrentToken();
-        if (!token || token.type !== "keyword")
+        if (!token || !(token.type == "storage.type" || token.type == "constant.character.escape"))
             return;
 
         var val = token.value;
@@ -151,7 +130,7 @@ oop.inherits(FoldMode, BaseFoldMode);
 
         stream.step = dir === -1 ? stream.stepBackward : stream.stepForward;
         while(token = stream.step()) {
-            if (token.type !== "keyword")
+            if (!token || !(token.type == "storage.type" || token.type == "constant.character.escape"))
                 continue;
             var level = keywords[token.value];
             if (!level)
@@ -169,16 +148,16 @@ oop.inherits(FoldMode, BaseFoldMode);
         var row = stream.getCurrentTokenRow();
         if (dir === -1)
             return new Range(row, session.getLine(row).length, startRow, startColumn);
-        else
-            return new Range(startRow, startColumn, row, stream.getCurrentTokenColumn());
+        stream.stepBackward();
+        return new Range(startRow, startColumn, row, stream.getCurrentTokenColumn());
     };
 
     this.latexSection = function(session, row, column) {
-        var keywords = ["\\subsection", "\\section", "\\begin", "\\end"];
+        var keywords = ["\\subsection", "\\section", "\\begin", "\\end", "\\paragraph"];
 
         var stream = new TokenIterator(session, row, column);
         var token = stream.getCurrentToken();
-        if (!token || token.type != "keyword")
+        if (!token || token.type != "storage.type")
             return;
 
         var startLevel = keywords.indexOf(token.value);
@@ -186,7 +165,7 @@ oop.inherits(FoldMode, BaseFoldMode);
         var endRow = row;
 
         while(token = stream.stepForward()) {
-            if (token.type !== "keyword")
+            if (token.type !== "storage.type")
                 continue;
             var level = keywords.indexOf(token.value);
 
@@ -213,5 +192,32 @@ oop.inherits(FoldMode, BaseFoldMode);
     };
 
 }).call(FoldMode.prototype);
+
+});
+
+define("ace/mode/latex",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/latex_highlight_rules","ace/mode/folding/latex","ace/range"], function(require, exports, module) {
+"use strict";
+
+var oop = require("../lib/oop");
+var TextMode = require("./text").Mode;
+var LatexHighlightRules = require("./latex_highlight_rules").LatexHighlightRules;
+var LatexFoldMode = require("./folding/latex").FoldMode;
+var Range = require("../range").Range;
+
+var Mode = function() {
+    this.HighlightRules = LatexHighlightRules;
+    this.foldingRules = new LatexFoldMode();
+};
+oop.inherits(Mode, TextMode);
+
+(function() {
+    this.type = "text";
+    
+    this.lineCommentStart = "%";
+
+    this.$id = "ace/mode/latex";
+}).call(Mode.prototype);
+
+exports.Mode = Mode;
 
 });

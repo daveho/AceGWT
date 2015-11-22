@@ -1,9 +1,5 @@
 /gwt-unitCache
 /war/WEB-INF/classes
 /war/WEB-INF/deploy
-/war/acegwtdemo/ace/*
-/war/acegwtdemo/gwt/*
-/war/acegwtdemo/clear.cache.gif
-/war/acegwtdemo/hosted.html
-/war/acegwtdemo/json2_min.js
-/war/acegwtdemo/acegwtdemo.nocache.js
+/war/acegwtdemo
+/.gwt
