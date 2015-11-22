@@ -44,10 +44,10 @@ public enum AceEditorMode {
 	AUTOHOTKEY("autohotkey"),
 	/** Batch file. */
 	BATCHFILE("batchfile"),
-	/** c9search */
-	C9SEARCH("c9search"),
 	/** C/C++. */
 	C_CPP("c_cpp"),
+	/** c9search */
+	C9SEARCH("c9search"),
 	/** Cirru, indentation-based grammar for languages. */
 	CIRRU("cirru"),
 	/** Clojure. */
@@ -64,18 +64,20 @@ public enum AceEditorMode {
 	CSS("css"),
 	/* Curly. */
 	CURLY("curly"),
+	/** D. */
+	D("d"),
 	/** Dart. */
 	DART("Dart"),
 	/** Diff. */
 	DIFF("diff"),
 	/** Django. */
 	DJANGO("django"),
-	/** D. */
-	D("d"),
 	/** Docker files. */
 	DOCKERFILE("dockerfile"),
 	/** Dot. */
 	DOT("dot"),
+	/** EIFFEL (object-oriented programming language). */
+	EIFFEL("eiffel"),
 	/** EJS (Embedded Javascript). */
 	EJS("ejs"),
 	/** Erlang. */
@@ -84,8 +86,12 @@ public enum AceEditorMode {
 	FORTH("forth"),
 	/** FTL. */
 	FTL("ftl"),
+	/** GCODE (numerical control programming language).*/
+	GCODE("gcode"),
 	/** Gherkin: Business Readable, Domain Specific Language. */
 	GHERKIN("gherkin"),
+	/** GITIGNORE. */
+	GITIGNORE("gitignore"),
 	/** GLSL (OpenGL Shading Language). */
 	GLSL("glsl"),
 	/** Go (http://golang.org/). */
@@ -107,19 +113,21 @@ public enum AceEditorMode {
 	/** HTML (Ruby). */
 	HTML_RUBY("html_ruby"),
 	/** Ini file. */
-	INI("ini"),
-	/** JADE. */
-	JADE("jade"),
+	INI("ini"),	
+	/** Io file. */
+	IO("io"),
 	/** Jack. */
 	JACK("jack"),
+	/** JADE. */
+	JADE("jade"),
 	/** JAVA. */
 	JAVA("java"),
 	/** Javascript. */
 	JAVASCRIPT("javascript"),
-	/** JSONiq, the JSON Query Language. */
-	JSONIQ("jsoniq"),
 	/** JSON. */
 	JSON("json"),
+	/** JSONiq, the JSON Query Language. */
+	JSONIQ("jsoniq"),
 	/** JSP, Java Server Pages. */
 	JSP("jsp"),
 	/** JSX. */
@@ -154,10 +162,10 @@ public enum AceEditorMode {
 	MATLAB("matlab"),
 	/** Mel. */
 	MEL("mel"),
-	/** MUSHCode (High Rules). */
-	MUSHCODE_HIGH_RULES("mushcode_high_rules"),
 	/** MUSHCode. */
 	MUSHCODE("mushcode"),
+	/** MUSHCode (High Rules). */
+	MUSHCODE_HIGH_RULES("mushcode_high_rules"),
 	/** MySQL. */
 	MYSQL("mysql"),
 	/** Nix. */
@@ -178,6 +186,8 @@ public enum AceEditorMode {
 	PLAIN_TEXT("plain_text"),
 	/** PowerShell. */
 	POWERSHELL("powershell"),
+	/** Praat. */
+	PRAAT("praat"),
 	/** Prolog. */
 	PROLOG("prolog"),
 	/** Java properties file. */
@@ -186,12 +196,12 @@ public enum AceEditorMode {
 	PROTOBUF("protobuf"),
 	/** Python. */
 	PYTHON("python"),
+	/** R. */
+	R("r"),
 	/** RDoc (Ruby documentation). */
 	RDOC("rdoc"),
 	/** RHTML. */
 	RHTML("rhtml"),
-	/** R. */
-	R("r"),
 	/** Ruby. */
 	RUBY("ruby"),
 	/** Rust. */
@@ -232,6 +242,8 @@ public enum AceEditorMode {
 	TEXT("text"),
 	/** Textile. */
 	TEXTILE("textile"),
+	/** Tmsnippet. */
+	TMSNIPPET("tmsnippet"),
 	/** TOML. */
 	TOML("toml"),
 	/** TWIG. */
