@@ -20,9 +20,6 @@
 
 package edu.ycp.cs.dh.acegwt.client.ace;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
@@ -31,6 +28,11 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.RequiresResize;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A GWT widget for the Ajax.org Code Editor (ACE).
@@ -702,17 +704,18 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	
 	/**
 	 * Gets all the displayed markers.
-	 * @return A Mapping between markerID and the displayed range.
+	 * @return An unmodifiable Mapping between markerID and the displayed range.
 	 */
-	public HashMap<Integer, AceRange> getMarkers() {
-		return this.markers;
+	public Map<Integer, AceRange> getMarkers() {
+		return Collections.unmodifiableMap(this.markers);
 	}
 	
 	/**
 	 * Remove all the displayed markers.
 	 */
 	public void removeAllMarkers() {
-		for (Integer id : this.markers.keySet()) {
+    Integer[] ids = this.markers.keySet().toArray(new Integer[this.markers.size()]);
+		for (Integer id : ids) {
 			removeMarker(id);
 		}
 	}
