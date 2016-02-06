@@ -12,6 +12,10 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+06 February 2016:
+
+* Bugfix for ConcurrentModificationException on removeAllMarkers(), courtesy of [Gottfried Huber](https://github.com/paxdei).
+
 20 January 2015:
 
 * Support for selection change events, courtesy of [Roman Sutormin](https://github.com/rsutormin).
