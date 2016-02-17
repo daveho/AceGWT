@@ -1,2 +1,7 @@
 /AceGWT/war/WEB-INF/classes
 *.swp
+
+# gradle files and directories
+gradle.properties
+.gradle/
+build/
