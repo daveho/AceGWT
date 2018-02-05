@@ -761,4 +761,150 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		
 		return new AceCompletionCallbackImpl(jsCallback);
 	}
+	
+	// http://ace.ajax.org/api/selection.html
+
+	/**
+	 * Move the cursor by.
+	 */
+	public native void moveCursorBy() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorBy();
+	}-*/;
+
+	/**
+	 * Move the cursor down.
+	 */
+	public native void moveCursorDown() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorDown();
+	}-*/;
+	
+	/**
+	 * Move the cursor at the end of the file.
+	 */
+	public native void moveCursorFileEnd() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorFileEnd();
+	}-*/;
+	
+	/**
+	 * Move the cursor at the begining of the file.
+	 */
+	public native void moveCursorFileStart() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorFileStart();
+	}-*/;
+	
+	/**
+	 * Move the cursor left.
+	 */
+	public native void moveCursorLeft() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorLeft();
+	}-*/;
+	
+	/**
+	 * Move the cursor at the end of the line.
+	 */
+	public native void moveCursorLineEnd() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorLineEnd();
+	}-*/;
+	
+	/**
+	 * Move the cursor at the beginning of the line.
+	 */
+		public native void moveCursorLineStart() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorLineStart();
+	}-*/;
+		
+	/**
+	 * Move the cursor a long word left.
+	 */
+	public native void moveCursorLongWordLeft() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorLongWordLeft();
+	}-*/;
+	
+	/**
+	 * Move the cursor a long word right.
+	 */
+	public native void moveCursorLongWordRight() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorLongWordRight();
+	}-*/;
+	
+	/**
+	 * Move the cursor right.
+	 */
+	public native void moveCursorRight() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorRight();
+	}-*/;
+	
+	/**
+	 * Move the cursor a short word left.
+	 */
+	public native void moveCursorShortWordLeft() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorShortWordLeft();
+	}-*/;
+	
+	/**
+	 * Move the cursor a short word right.
+	 */
+	public native void moveCursorShortWordRight() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorShortWordRight();
+	}-*/;
+	
+	/**
+	 * Move the cursor to.
+	 */
+	public native void moveCursorTo() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorTo();
+	}-*/;
+	
+	/**
+	 * Move the cursor to position.
+	 */
+	public native void moveCursorToPosition() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorToPosition();
+	}-*/;
+	
+	/**
+	 * Move the cursor to screen.
+	 */
+	public native void moveCursorToScreen() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorToScreen();
+	}-*/;
+	
+	/**
+	 * Move the cursor up.
+	 */
+	public native void moveCursorUp() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorUp();
+	}-*/;
+	
+	/**
+	 * Move the cursor a word left.
+	 */
+	public native void moveCursorWordLeft() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorWordLeft();
+	}-*/;
+	
+	/**
+	 * Move the cursor a word right.
+	 */
+	public native void moveCursorWordRight() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.selection.moveCursorWordRight();
+	}-*/;
 }
