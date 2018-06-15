@@ -187,7 +187,7 @@
                         (${project.groupId}.${project.artifactId}-${project.version})
                     </message>
                     <noJekyll>true</noJekyll>
-                    <outputDirectory>${project.build.directory}/${github.repository.name}</outputDirectory>
+                    <outputDirectory>${project.build.directory}/${acegwt.repository.name}</outputDirectory>
                     <branch>refs/heads/${project.artifactId}-${project.version}</branch>
                     <includes>
                         <include>**/*</include>
