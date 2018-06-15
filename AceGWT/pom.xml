@@ -37,12 +37,22 @@
         <!-- directory for webapp -->
         <webapp.directory>${project.build.directory}/${project.build.finalName}</webapp.directory>
 
+        <!-- deployment
+            To use your own github repository as maven repository add the following code to your .m2/settings.xml
+
+		    <server>
+                <id>github</id>
+                <username>your-github-username</username>
+      			<password>your-github-password</password>
+    		</server>
+
+    		and change properties values under "AceGWT repository" accordingly
+         -->
+        <github.global.server>github</github.global.server>
+
         <!-- AceGWT repository -->
         <acegwt.repository.name>AceGWT</acegwt.repository.name>
         <acegwt.repository.owner>josepaiva94</acegwt.repository.owner>
-
-        <!-- deployment -->
-        <github.global.server>github</github.global.server>
     </properties>
 
     <distributionManagement>
