@@ -35,8 +35,8 @@
 
     <repositories>
         <repository>
-            <id>acegwt-1.3.3</id>
-            <url>https://raw.github.com/josepaiva94/AceGWT/acegwt-1.3.3</url>
+            <id>acegwt-${acegwt.version}</id>
+            <url>https://raw.github.com/josepaiva94/AceGWT/acegwt-${acegwt.version}</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -79,8 +79,8 @@
         <dependency>
             <groupId>edu.ycp.cs.dh</groupId>
             <artifactId>acegwt</artifactId>
-            <version>1.3.3</version>
-            <scope>provided</scope>
+            <version>${acegwt.version}</version>
+            <!--<scope>provided</scope>-->
         </dependency>
     </dependencies>
 
@@ -137,8 +137,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <moduleName>edu.ycp.cs.dh.acegwt.demo.AceGWTDemo</moduleName>
-                    <moduleShortName>acegwt-demo</moduleShortName>
+                    <moduleShortName>acegwtdemo</moduleShortName>
 
+                    <webappDirectory>${webapp.directory}</webappDirectory>
                     <launcherDir>${webapp.directory}</launcherDir>
                     <warDir>${webapp.directory}</warDir>
 
