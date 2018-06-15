@@ -31,12 +31,16 @@
 
         <!-- directory for webapp -->
         <webapp.directory>${project.build.directory}/${project.build.finalName}</webapp.directory>
+
+        <!-- AceGWT repository -->
+        <acegwt.repository.name>AceGWT</acegwt.repository.name>
+        <acegwt.repository.owner>josepaiva94</acegwt.repository.owner>
     </properties>
 
     <repositories>
         <repository>
             <id>acegwt-${acegwt.version}</id>
-            <url>https://raw.github.com/josepaiva94/AceGWT/acegwt-${acegwt.version}</url>
+            <url>https://raw.github.com/${acegwt.repository.owner}/${acegwt.repository.name}/acegwt-${acegwt.version}</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -80,7 +84,6 @@
             <groupId>edu.ycp.cs.dh</groupId>
             <artifactId>acegwt</artifactId>
             <version>${acegwt.version}</version>
-            <!--<scope>provided</scope>-->
         </dependency>
     </dependencies>
 

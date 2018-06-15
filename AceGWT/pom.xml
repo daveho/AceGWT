@@ -37,17 +37,19 @@
         <!-- directory for webapp -->
         <webapp.directory>${project.build.directory}/${project.build.finalName}</webapp.directory>
 
+        <!-- AceGWT repository -->
+        <acegwt.repository.name>AceGWT</acegwt.repository.name>
+        <acegwt.repository.owner>josepaiva94</acegwt.repository.owner>
+
         <!-- deployment -->
         <github.global.server>github</github.global.server>
-        <github.repository.name>AceGWT</github.repository.name>
-        <github.repository.owner>josepaiva94</github.repository.owner>
     </properties>
 
     <distributionManagement>
         <repository>
             <id>internal.repo</id>
             <name>Temporary Staging Repository</name>
-            <url>file://${project.build.directory}/${github.repository.name}</url>
+            <url>file://${project.build.directory}/${acegwt.repository.name}</url>
         </repository>
     </distributionManagement>
 
@@ -161,7 +163,7 @@
                 <version>${maven-deploy-plugin.version}</version>
                 <configuration>
                     <altDeploymentRepository>
-                        internal.repo::default::file://${project.build.directory}/${github.repository.name}
+                        internal.repo::default::file://${project.build.directory}/${acegwt.repository.name}
                     </altDeploymentRepository>
                 </configuration>
             </plugin>
@@ -180,8 +182,8 @@
                     <includes>
                         <include>**/*</include>
                     </includes>
-                    <repositoryName>${github.repository.name}</repositoryName>
-                    <repositoryOwner>${github.repository.owner}</repositoryOwner>
+                    <repositoryName>${acegwt.repository.name}</repositoryName>
+                    <repositoryOwner>${acegwt.repository.owner}</repositoryOwner>
                 </configuration>
                 <executions>
                     <execution>

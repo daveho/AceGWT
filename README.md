@@ -12,6 +12,11 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+15 June 2018
+
+* Converted the library and demo to Maven, using a github branch as repository
+* Updated to latest version of Ace (1.3.3)
+
 06 February 2016:
 
 * Bugfix for [ConcurrentModificationException on removeAllMarkers()](https://github.com/daveho/AceGWT/pull/25), courtesy of [Gottfried Huber](https://github.com/paxdei).
