@@ -1,2 +1,4 @@
-doc
-/.gwt
+*.iml
+
+target/
+

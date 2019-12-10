@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>edu.ycp.cs.dh</groupId>
+    <artifactId>acegwt-demo</artifactId>
+    <version>0.0.1</version>
+    <packaging>gwt-app</packaging>
+    <name>AceGWTDemo</name>
+    <description>
+        This is a demo project for demonstrating how to use AceGWT.
+    </description>
+
+    <properties>
+        <target.jdk>1.8</target.jdk>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- dependencies -->
+        <gwt.version>2.8.2</gwt.version>
+        <acegwt.version>1.3.3</acegwt.version>
+
+        <!-- plugins -->
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <gwt-maven-plugin.version>1.0-rc-9</gwt-maven-plugin.version>
+
+        <!-- directory for webapp -->
+        <webapp.directory>${project.build.directory}/${project.build.finalName}</webapp.directory>
+
+        <!-- AceGWT repository -->
+        <acegwt.repository.name>AceGWT</acegwt.repository.name>
+        <acegwt.repository.owner>josepaiva94</acegwt.repository.owner>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>acegwt-${acegwt.version}</id>
+            <url>https://raw.github.com/${acegwt.repository.owner}/${acegwt.repository.name}/acegwt-${acegwt.version}</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt</artifactId>
+                <version>${gwt.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-codeserver</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.ycp.cs.dh</groupId>
+            <artifactId>acegwt</artifactId>
+            <version>${acegwt.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <outputDirectory>${webapp.directory}/WEB-INF/classes</outputDirectory>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${target.jdk}</source>
+                    <target>${target.jdk}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-webapp</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/webapp</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${webapp.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- GWT -->
+            <plugin>
+                <groupId>net.ltgt.gwt.maven</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>${gwt-maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <moduleName>edu.ycp.cs.dh.acegwt.demo.AceGWTDemo</moduleName>
+                    <moduleShortName>acegwtdemo</moduleShortName>
+
+                    <webappDirectory>${webapp.directory}</webappDirectory>
+                    <launcherDir>${webapp.directory}</launcherDir>
+                    <warDir>${webapp.directory}</warDir>
+
+                    <startupUrls>
+                        <startupUrl>AceGWTDemo.html</startupUrl>
+                    </startupUrls>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-module</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate-module</goal>
+                            <goal>add-super-sources</goal>
+                            <goal>add-test-super-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+</project>

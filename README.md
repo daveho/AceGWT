@@ -12,6 +12,15 @@ Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
 ## Latest news
 
+15 June 2018
+
+* Converted the library and demo to Maven, using a github branch as repository
+    * Package AceGWT lib `mvn clean gwt:generate-module compile gwt:package-lib`
+    * Deploy AceGWT lib `mvn clean gwt:generate-module compile gwt:package-lib deploy`
+    * Run demo app `mvn clean gwt:generate-module compile gwt:devmode`
+* Updated to latest version of Ace (1.3.3)
+* All courtesy of [José C.Paiva](https://github.com/josepaiva94).
+
 06 February 2016:
 
 * Bugfix for [ConcurrentModificationException on removeAllMarkers()](https://github.com/daveho/AceGWT/pull/25), courtesy of [Gottfried Huber](https://github.com/paxdei).
