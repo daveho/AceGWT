@@ -26,6 +26,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
  * before a theme can be set.
  */
 public enum AceEditorTheme {
+	ADVENTURON("adventuron"),
 	AMBIANCE("ambiance"),
 	CHAOS("chaos"),
 	CHROME("chrome"),
@@ -39,6 +40,7 @@ public enum AceEditorTheme {
 	DAWN("dawn"),
 	DREAMWEAVER("dreamweaver"),
 	ECLIPSE("eclipse"),
+	ECLIPSE_2("eclipse_2"),
 	GITHUB("github"),
 	IDLE_FINGERS("idle_fingers"),
 	KATZENMILCH("katzenmilch"),
@@ -49,7 +51,10 @@ public enum AceEditorTheme {
 	MERBIVORE_SOFT("merbivore_soft"),
 	MONO_INDUSTRIAL("mono_industrial"),
 	MONOKAI("monokai"),
+	MONOKAI_2("monokai_2"),
 	PASTEL_ON_DARK("pastel_on_dark"),
+	PROJECTX("projectx"),
+	RION("rion"),
 	SOLARIZED_DARK("solarized_dark"),
 	SOLARIZED_LIGHT("solarized_light"),
 	TERMINAL("terminal"),

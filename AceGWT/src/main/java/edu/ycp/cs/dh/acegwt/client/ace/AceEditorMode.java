@@ -32,6 +32,7 @@ public enum AceEditorMode {
 	ACTIONSCRIPT("actionscript"),
 	/** Ada. */
 	ADA("ada"),
+	ADVENTURON("adventuron"),
 	/** Apache configuration. */
 	APACHE_CONF("apache_conf"),
 	/** Applescript. */
@@ -192,6 +193,8 @@ public enum AceEditorMode {
 	RHTML("rhtml"),
 	/** R. */
 	R("r"),
+    /** Rion. */
+    RION("rion"),
 	/** Ruby. */
 	RUBY("ruby"),
 	/** Rust. */

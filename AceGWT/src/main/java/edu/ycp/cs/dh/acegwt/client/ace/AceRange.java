@@ -21,6 +21,40 @@ public final class AceRange extends JavaScriptObject {
 		detachStart();
 		detachEnd();
 	}
+
+		
+	
+	/**
+	 * 
+	 * @return Starts at zero
+	 */
+	public native int getStartRow() /*-{
+		return this.start.row;
+}-*/;
+	
+	/**
+	 * 
+	 * @return Starts at zero
+	 */
+	public native int getStartColumn() /*-{
+	return this.start.column;
+}-*/;
+	
+	/**
+	 * @return Starts at zero
+	 */
+	public native int getEndRow() /*-{
+	return this.end.row;
+}-*/;
+	
+	
+	/**
+	 * 
+	 * @return Starts at zero
+	 */
+	public native int getEndColumn() /*-{
+	return this.end.column;
+}-*/;
 	
 	/**
 	 * Detaches the start anchor from this {@link AceRange}.
