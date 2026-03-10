@@ -10,6 +10,12 @@ The [wiki](https://github.com/daveho/AceGWT/wiki) has more information, includin
 
 Also, there is [javadoc](http://daveho.github.io/AceGWT/api/).
 
+## What is included in this forked version
+
+This version has been updated to use GWT 2.11.0 which has switced to using a different Maven repository.
+
+To include this library in your project you need to set up this GitHub repository as a maven repo in your pom.xml file by doing as follows:
+
 ## Latest news
 
 15 June 2018
